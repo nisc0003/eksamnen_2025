@@ -1,0 +1,97 @@
+---
+//@ts-nocheck
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const url =
+    "https://qxzbnouobeqeoleqrllh.supabase.co/rest/v1/AlefarmBrewingEXAM";
+  const key =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4emJub3VvYmVxZW9sZXFybGxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNDQ4MTYsImV4cCI6MjA2MjYyMDgxNn0.XW2IwfWGSgwE375yAIMAo0x-89W7Jq6Jn_n7sg6Ummk";
+
+  const data = await fetch(url, { headers: { apikey: key } }).then((res) =>
+    res.json(),
+  );
+
+  return data.map((product) => ({
+    params: { slug: String(product.id) },
+    props: { id: product.id },
+  }));
+}
+
+const { id } = Astro.props;
+
+const url = `https://qxzbnouobeqeoleqrllh.supabase.co/rest/v1/AlefarmBrewingEXAM?id=eq.${id}`;
+const key =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4emJub3VvYmVxZW9sZXFybGxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNDQ4MTYsImV4cCI6MjA2MjYyMDgxNn0.XW2IwfWGSgwE375yAIMAo0x-89W7Jq6Jn_n7sg6Ummk";
+
+const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
+  res.json(),
+);
+---
+
+<Layout>
+  <section>
+    <img src={`/beer-card_images/${product.img}`} alt={product.title} />
+    <article>
+      <h4>{product.title}</h4>
+      <p>{product.description}</p>
+      <p><strong>{product.ingredient}</strong></p>
+      <p><em>{product.date}</em></p>
+      <div>
+        <p class="price">{product.price},-</p>
+        <button>Add to basket</button>
+      </div>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding-block: 2rem;
+  }
+
+  article {
+    display: grid;
+    gap: 1.5rem;
+    place-content: start;
+    background-color: rgba(255, 251, 244, 1);
+    padding: 3rem;
+  }
+
+  div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: end;
+  }
+
+  .price {
+    font-size: 2rem;
+    font-weight: 600;
+    opacity: 80%;
+    text-align: right;
+  }
+
+  button {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: none;
+    border-radius: 4px;
+    padding: 1rem 5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 10;
+    cursor: pointer;
+    place-self: end;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+    box-shadow: none;
+  }
+</style>

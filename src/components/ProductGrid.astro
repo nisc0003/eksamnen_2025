@@ -1,0 +1,39 @@
+---
+//@ts-nocheck
+import ProductCard from "../components/ProductCard.astro";
+
+// Fetch products
+const url =
+  "https://qxzbnouobeqeoleqrllh.supabase.co/rest/v1/AlefarmBrewingEXAM";
+const key =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4emJub3VvYmVxZW9sZXFybGxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNDQ4MTYsImV4cCI6MjA2MjYyMDgxNn0.XW2IwfWGSgwE375yAIMAo0x-89W7Jq6Jn_n7sg6Ummk";
+
+const options = {
+  headers: { apikey: key },
+};
+const data = await fetch(url, options).then((res) => res.json());
+---
+
+<ul>
+  {
+    data.map((product) => (
+      <ProductCard
+        img={product.img}
+        title={product.title}
+        price={product.price}
+        path={product.id}
+      />
+    ))
+  }
+</ul>
+
+<style>
+  ul {
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-auto-rows: auto;
+    gap: 1rem;
+    list-style-type: none;
+  }
+</style>

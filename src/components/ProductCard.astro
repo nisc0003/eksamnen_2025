@@ -1,0 +1,82 @@
+---
+const { img, title, price, path, id } = Astro.props;
+---
+
+<li>
+  <article>
+    <img src={`/beer-card_images/${img}`} alt={title} />
+    <h2><a href={"/products/" + path}>{title}</a></h2>
+    <p>{price},-</p>
+    <button>Add to basket</button>
+  </article>
+</li>
+
+<style>
+  li {
+    display: contents;
+  }
+  article {
+    position: relative;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    background-color: #fff;
+    border-radius: 10px;
+    padding-block-end: 1rem;
+    filter: drop-shadow(5px 5px 5px #eee);
+  }
+
+  img {
+    object-fit: cover;
+    place-self: center;
+  }
+
+  article:hover img {
+    opacity: 80%;
+  }
+
+  h2,
+  p,
+  button {
+    margin-inline: 1rem;
+  }
+
+  h2 a {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+  }
+
+  h2 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  p {
+    text-align: right;
+    font-weight: 500;
+    opacity: 90%;
+  }
+
+  button {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    padding: 1rem 5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 10;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+</style>

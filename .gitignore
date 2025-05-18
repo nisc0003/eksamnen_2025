@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# ignore beer-card_images folder inside public
+public/beer-card_images/
