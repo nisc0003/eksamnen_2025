@@ -28,4 +28,4 @@ pnpm-debug.log*
 .idea/
 
 # ignore beer-card_images folder inside public
-public/beer-card_images/
+# public/beer-card_images/
