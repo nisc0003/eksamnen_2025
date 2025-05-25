@@ -1,48 +1,61 @@
-# Astro Starter Kit: Basics
+# Astro teknisk dokumentation for Eksamnens gruppeprojekt
 
-```sh
-npm create astro@latest -- --template basics
-```
+Her står vores fælles navngivning, retningslinjer samt filstruktur for dette projekt.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+````
+## 🚀 Projekt struktur
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+Inde i dette atroprojekt vil du se følgende mappeopdelinger, filstruktureringer og navnguivninger.
 
 ```text
 /
 ├── public/
+│   └── beer-card_images/
+│   │   └── (Her gammes billeder til produktkort)
 │   └── favicon.svg
 ├── src/
+│   ├── assets/
+│   │   └── (Her gammes andre relevante assets)
+│   ├── components/
+│   │   └── (Her gammes alle components)
+│   ├── css/
 │   ├── layouts/
 │   │   └── Layout.astro
 │   └── pages/
+│       └── products/
+│       │   └── [slug].astro
 │       └── index.astro
+│       └── products.astro
 └── package.json
+
+````
+
+## Fontvalg og styling
+
+Fonte bliver hentet via google fonts embed kode og derefter bliver indhentet i layout header.
+Overordnet styling eks. globale stylesheet, layout, farver osv. ændres ikke i en individuel branch, medmindre andet bliver aftalt internet mellem gruppens medlemmer.
+
+## Supabase
+
+Siden tager brug af database til indhentning af data på dele af siden.
+eks.
+productcard.astro = hvor vi her mapper et produktkorts enkelte struktur ud.
+
+productgrid.astro = fetcher databasens indhold, tager brug af strukturen gemt i atro.props og mapper dataen ud, så du får flere en et enkelt kort mappet.
+
+## Navngivning
+
+```
+Filer bliver navngivet på baggrund af hvad den enkelte fil/component skal bruges til eller er. Så hvis man eks. sidder og koder et component der skal være headeren. så vil vi her kalde den header.astro.
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Branches og commits
 
-## 🧞 Commands
+Branches bliver navngivet beskrivende med start af eks. bugfix* , feature* eller add\_ efterfuldt af hvad branchen omhandler. eks. hvis jeg skal adde produktkort ville den hedde add_productcard.
 
-All commands are run from the root of the project, from a terminal:
+commits bliver navngivet mere løst men skal starte med added_efterfuldt af hvad det gældende genrelt omhandler. eks. hvis jeg skulle adde styling inde i productkort branchen ville jeg sige added_styling og commite.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Arbejdsflow
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Vi aftaler internt, hvem der arbejder på hvilke komponenter og sider.
+Hver enkelte i gruppen arbejder udelukkende på egne komponenter, og arbejder ikkepå tværs, medmindre andet er aftalt. Alle arbejder fra deres egen branch og aldrig direkte i main eller andres branches, så vi overholder en generel struktureret arbejdsprocess.
