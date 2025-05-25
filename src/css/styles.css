@@ -76,10 +76,16 @@ p {
 }
 a {
   font-family: "inter", sans-serif;
-  font-size: 1rem;
+  text-decoration: none;
+  color: var(--font-color-white);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 li {
   font-family: "inter", sans-serif;
+  text-decoration: none;
+  color: var(--font-color-white);
   font-size: 1rem;
 }
 
@@ -120,6 +126,15 @@ button {
   background-color: rgba(25, 25, 25, 1);
   color: white;
   box-shadow: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.flexcol {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 800px) {

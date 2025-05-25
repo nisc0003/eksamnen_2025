@@ -1,5 +1,7 @@
 ---
-
+import Knap1 from "../assets/1.svg";
+import Knap2 from "../assets/2.svg";
+import "../css/styles.css";
 ---
 
 <header>
@@ -8,28 +10,49 @@
     <ul>
       <li><a href="/">Forside</a></li>
       <li><a href="/products">Shop</a></li>
+      <li><a href="/products">Beer-club</a></li>
+      <li><a href="/">Brewery-tours</a></li>
+      <li><a href="/">Information</a></li>
     </ul>
+    <div class="flex">
+      <img src={Knap1.src} alt="" />
+      <img src={Knap2.src} alt="" />
+    </div>
   </nav>
 </header>
 
 <style>
+  img {
+    height: 1rem;
+  }
+  .flex {
+    display: flex;
+    margin-left: auto;
+    position: absolute;
+    right: 0;
+  }
+
   header {
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     display: grid;
-    place-content: center;
-    background-color: rgba(25, 25, 25, 1);
+    background-color: var(--main-color);
   }
 
   nav {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    position: relative;
   }
 
   ul {
     display: flex;
-    gap: 2rem;
+    place-self: center;
     list-style-type: none;
-    gap: 4rem;
+    gap: 3rem;
+    margin-right: 6rem;
+    margin-left: 6rem;
   }
 
   a.logo {
