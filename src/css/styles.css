@@ -10,76 +10,135 @@ img {
   display: block;
 }
 
+:root {
+  --main-color: #fffbf4;
+  --main-color: #191919;
+  --font-color-white: #ffffff;
+  --font-color-black: #000000;
+  --filter-color_new: #d44e4e;
+  --filter-color_case: #6077ca;
+  --filter-color_club: #4a4dfd;
+  --filter-color_wild-ale: #7fb378;
+  --filter-color_barrel-age: #7fb378;
+  --filter-color_accessories: #6aafb7;
+  scroll-behavior: smooth;
+}
+
 h1 {
-  font-size: 5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 3rem;
+  color: var(--main-color);
+  text-transform: uppercase;
+  font-weight: 800;
 }
 h2 {
-  font-size: 3.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  color: var(--main-color);
+  font-weight: 700;
 }
 h3 {
-  font-size: 2.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  color: var(--main-color);
+  font-weight: 700;
 }
 h4 {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.75rem;
+  color: var(--main-color);
+  font-weight: 600;
 }
 h5 {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
+  color: var(--main-color);
+  font-weight: 600;
 }
 h6 {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.25rem;
+  color: var(--main-color);
+  font-weight: 500;
 }
 p {
+  font-family: "inter", sans-serif;
   font-size: 1rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: white;
-  place-self: center;
+  color: var(--main-color);
+  font-weight: 400;
 }
 .p_m {
-  font-size: 1rem;
+  font-size: 1.125rem;
 }
 .p_b {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 a {
+  font-family: "inter", sans-serif;
   font-size: 1rem;
 }
 li {
+  font-family: "inter", sans-serif;
   font-size: 1rem;
 }
 
-@media (max-width: 800px) {
+button {
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  padding: 1rem 5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cta1 {
+  background-color: rgba(25, 25, 25, 1);
+  color: white;
+  padding: 1rem 5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.cta1:hover {
+  background-color: white;
+  color: rgba(25, 25, 25, 1);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.cta2 {
+  background-color: white;
+  color: rgba(25, 25, 25, 1);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  text-transform: uppercase;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.cta2:hover {
+  background-color: rgba(25, 25, 25, 1);
+  color: white;
+  box-shadow: none;
+}
+
+@media (min-width: 800px) {
   h1 {
     font-size: 5rem;
   }
   h2 {
-    font-size: 3.5rem;
+    font-size: 4rem;
   }
   h3 {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
   h4 {
-    font-size: 1.75rem;
+    font-size: 2.25rem;
   }
   h5 {
     font-size: 1.5rem;
   }
   h6 {
     font-size: 1.25rem;
-  }
-  p {
-    font-size: 1rem;
-  }
-  .p_m {
-    font-size: 1rem;
-  }
-  .p_b {
-    font-size: 1.25rem;
-  }
-  a {
-    font-size: 1rem;
-  }
-  li {
-    font-size: 1rem;
   }
 }

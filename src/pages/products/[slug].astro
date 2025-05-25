@@ -39,7 +39,7 @@ const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
       <p><em>{product.date}</em></p>
       <div>
         <p class="price">{product.price},-</p>
-        <button>Add to basket</button>
+        <button class="cta2">Add to basket</button>
       </div>
     </article>
   </section>
@@ -72,26 +72,5 @@ const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
     font-weight: 600;
     opacity: 80%;
     text-align: right;
-  }
-
-  button {
-    background-color: white;
-    color: rgba(25, 25, 25, 1);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border: none;
-    border-radius: 4px;
-    padding: 1rem 5rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    z-index: 10;
-    cursor: pointer;
-    place-self: end;
-    transition: 0.3s;
-  }
-
-  button:hover {
-    background-color: rgba(25, 25, 25, 1);
-    color: white;
-    box-shadow: none;
   }
 </style>

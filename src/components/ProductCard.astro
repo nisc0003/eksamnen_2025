@@ -7,7 +7,7 @@ const { img, title, price, path, id } = Astro.props;
     <img src={`/beer-card_images/${img}`} alt={title} />
     <h2><a href={"/products/" + path}>{title}</a></h2>
     <p>{price},-</p>
-    <button>Add to basket</button>
+    <button class="cta1">Add to basket</button>
   </article>
 </li>
 
@@ -56,25 +56,5 @@ const { img, title, price, path, id } = Astro.props;
     text-align: right;
     font-weight: 500;
     opacity: 90%;
-  }
-
-  button {
-    background-color: rgba(25, 25, 25, 1);
-    color: white;
-    outline: none;
-    border: none;
-    border-radius: 4px;
-    padding: 1rem 5rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    z-index: 10;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  button:hover {
-    background-color: white;
-    color: rgba(25, 25, 25, 1);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
 </style>
