@@ -12,7 +12,7 @@ img {
 
 :root {
   --main-color: #fffbf4;
-  --main-color: #191919;
+  --second-color: #191919;
   --font-color-white: #ffffff;
   --font-color-black: #000000;
   --filter-color_new: #d44e4e;
@@ -27,44 +27,44 @@ img {
 h1 {
   font-family: "Montserrat", sans-serif;
   font-size: 3rem;
-  color: var(--main-color);
+  color: var(--second-color);
   text-transform: uppercase;
   font-weight: 800;
 }
 h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2.5rem;
-  color: var(--main-color);
+  color: var(--second-color);
   font-weight: 700;
 }
 h3 {
   font-family: "Montserrat", sans-serif;
   font-size: 2rem;
-  color: var(--main-color);
+  color: var(--second-color);
   font-weight: 700;
 }
 h4 {
   font-family: "Montserrat", sans-serif;
   font-size: 1.75rem;
-  color: var(--main-color);
+  color: var(--second-color);
   font-weight: 600;
 }
 h5 {
   font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
-  color: var(--main-color);
+  color: var(--second-color);
   font-weight: 600;
 }
 h6 {
   font-family: "Montserrat", sans-serif;
   font-size: 1.25rem;
-  color: var(--main-color);
+  color: var(--second-color);
   font-weight: 500;
 }
 p {
   font-family: "inter", sans-serif;
   font-size: 1rem;
-  color: var(--main-color);
+  color: var(--second-color);
   font-weight: 400;
 }
 .p_m {
