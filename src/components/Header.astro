@@ -5,7 +5,7 @@ import "../css/styles.css";
 ---
 
 <header>
-  <a href="/" class="logo">Logo</a>
+  <a href="/public/logo_white.svg" class="logo">Logo</a>
   <nav>
     <ul>
       <li><a href="/">Forside</a></li>
@@ -62,9 +62,31 @@ import "../css/styles.css";
   }
 
   li:hover {
-    border: solid white 2px;
+    animation: draw-outline 1s;
+    animation-direction: alternate;
     padding-inline: 0.5rem;
     padding-block: 0.125rem;
+  }
+
+  @keyframes draw-outline {
+    0% {
+    }
+
+    25% {
+      border-top: solid white 2px;
+    }
+
+    50% {
+      border-right: solid white 2px;
+    }
+
+    75% {
+      border-bottom: solid white 2px;
+    }
+
+    100% {
+      border: solid white 2px;
+    }
   }
 
   a.logo {
