@@ -5,7 +5,14 @@ import "../css/styles.css";
 ---
 
 <header>
-  <a href="/public/logo_white.svg" class="logo">Logo</a>
+  <div class="top_header">
+    <a href="/public/logo_white.svg" class="logo">Logo</a>
+    <div class="burger">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
   <nav>
     <ul>
       <li><a href="/">Forside</a></li>
@@ -14,6 +21,7 @@ import "../css/styles.css";
       <li><a href="/">Brewery-tours</a></li>
       <li><a href="/">Information</a></li>
     </ul>
+
     <div class="flex">
       <img src={Knap1.src} alt="" />
       <img src={Knap2.src} alt="" />
@@ -23,76 +31,182 @@ import "../css/styles.css";
 
 <style>
   img {
-    height: 1rem;
+    height: 1.5rem;
   }
-  .flex {
-    display: flex;
-    margin-left: auto;
-    position: absolute;
-    right: 0;
+
+  .top_header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--second-color);
   }
 
   header {
-    padding: 1rem 1rem;
-    display: grid;
-    background-color: var(--second-color);
+    background-color: var(--main-color);
   }
 
   nav {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
-    flex: 1;
-    justify-content: center;
-    position: relative;
   }
 
   ul {
     display: flex;
-    place-self: center;
-    list-style-type: none;
-    gap: 3rem;
-    margin-right: 6rem;
-    margin-left: 6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  li {
-    border: solid var(--second-color) 2px;
-    padding-inline: 0.5rem;
-    padding-block: 0.125rem;
+  ul li:last-child {
+    margin-right: 0;
   }
 
-  li:hover {
-    animation: draw-outline 1s;
-    animation-direction: alternate;
-    padding-inline: 0.5rem;
-    padding-block: 0.125rem;
+  ul a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+    text-align: end;
   }
 
-  @keyframes draw-outline {
-    0% {
+  .burger {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .burger .line {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin-bottom: 5px;
+    transition: 0.2s linear;
+  }
+  .burger {
+    display: none;
+  }
+  @media screen and (max-width: 800px) {
+    ul {
+      display: none;
+    }
+    .burger {
+      display: block;
+    }
+    .burger.active .line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+      transition: 0.2s linear;
     }
 
-    25% {
-      border-top: solid white 2px;
+    .burger.active .line:nth-child(2) {
+      opacity: 0;
+      transition: 0.15s linear;
     }
 
-    50% {
-      border-right: solid white 2px;
+    .burger.active .line:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+      transition: 0.2s linear;
     }
 
-    75% {
-      border-bottom: solid white 2px;
+    nav.active ul {
+      display: block;
+      position: absolute;
+      top: 94px;
+      left: 0;
+      width: 100%;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1;
     }
 
-    100% {
-      border: solid white 2px;
+    nav.active ul li {
+      margin: 10px 20px;
+    }
+
+    nav.active ul a {
+      font-size: 24px;
     }
   }
 
-  a.logo {
-    font-weight: bold;
-    font-size: 3rem;
-    color: white;
-    place-self: center;
+  @media screen and (min-width: 800px) {
+    .flex {
+      margin-left: auto;
+      position: absolute;
+      right: 0;
+    }
+
+    .top_header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: var(--second-color);
+    }
+
+    .logo {
+    }
+    header {
+      padding: 1rem 1rem;
+      display: grid;
+      background-color: var(--second-color);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+      position: relative;
+    }
+
+    ul {
+      display: flex;
+      place-self: center;
+      list-style-type: none;
+      gap: calc(1vw + 2rem);
+      margin-right: 6rem;
+      margin-left: 6rem;
+    }
+
+    li {
+      border: solid var(--second-color) 2px;
+      padding-inline: 0.5rem;
+      padding-block: 0.125rem;
+    }
+
+    li:hover {
+      animation: draw-outline 1s;
+      animation-direction: alternate;
+      padding-inline: 0.5rem;
+      padding-block: 0.125rem;
+    }
+
+    @keyframes draw-outline {
+      0% {
+      }
+
+      25% {
+        border-top: solid white 2px;
+      }
+
+      50% {
+        border-right: solid white 2px;
+      }
+
+      75% {
+        border-bottom: solid white 2px;
+      }
+
+      100% {
+        border: solid white 2px;
+      }
+    }
+
+    a.logo {
+      font-weight: bold;
+      font-size: 3rem;
+      color: white;
+      place-self: center;
+    }
+
+    .burger {
+      display: none;
+    }
   }
 </style>
