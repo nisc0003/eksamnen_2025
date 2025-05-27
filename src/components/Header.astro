@@ -6,7 +6,10 @@ import "../css/styles.css";
 
 <header>
   <div class="top_header">
-    <a href="/public/logo_white.svg" class="logo">Logo</a>
+    <a href="/logo_white.svg" class="logo">
+  <img src="/logo_white.svg" alt="Logo" />
+</a>
+
     <div class="burger">
       <div class="line"></div>
       <div class="line"></div>
@@ -131,12 +134,21 @@ import "../css/styles.css";
       margin-left: auto;
       position: absolute;
       right: 0;
+      gap: 2rem;
     }
 
     .top_header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      /* grid-template-columns: 1fr 1fr; */
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2%;
+      height: 5rem;
       background-color: var(--second-color);
+      img{
+        height: 100%;
+        width: auto;
+      }
     }
 
     .logo {
