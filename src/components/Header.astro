@@ -1,4 +1,5 @@
 ---
+@ts-nocheck
 import Knap1 from "../assets/1.svg";
 import Knap2 from "../assets/2.svg";
 import "../css/styles.css";
@@ -16,7 +17,7 @@ import "../css/styles.css";
       <div class="line"></div>
     </div>
   </div>
-  <nav>
+  <nav class="nav_ul">
     <ul>
       <li><a href="/">Forside</a></li>
       <li><a href="/products">Shop</a></li>
@@ -31,6 +32,8 @@ import "../css/styles.css";
     </div>
   </nav>
 </header>
+
+
 
 <style>
   img {
@@ -133,21 +136,22 @@ import "../css/styles.css";
       transition: 0.2s linear;
     }
 
-    nav.active ul {
+    .nav_ul.active ul {
       display: block;
       position: absolute;
       top: 94px;
       left: 0;
       width: 100%;
-      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); */
+      background-color: black;
       z-index: 1;
     }
 
-    nav.active ul li {
+    .nav_ul.active ul li {
       margin: 10px 20px;
     }
 
-    nav.active ul a {
+    .nav_ul.active ul a {
       font-size: 24px;
     }
   }
@@ -245,3 +249,16 @@ import "../css/styles.css";
     }
   }
 </style>
+
+<script>
+
+    const burger = document.querySelector('.burger');
+    const menu = document.querySelector('nav');
+
+    burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    menu.classList.toggle("active");
+});
+
+
+</script>
