@@ -1,0 +1,131 @@
+---
+
+---
+
+<section class="popup_container">
+  <section class="popup">
+    <div class="popup_header">
+      <h1>er du fyldt 18?</h1>
+    </div>
+    <div class="popup_btns">
+      <button class="yes">
+        <h1>ja</h1>
+      </button>
+
+      <button class="no">
+        <a href="www.google.com">
+          <h1>nej</h1>
+        </a>
+      </button>
+    </div>
+
+    <div class="popup_img">
+      <img src="../public/footer_icons/alkohol.png" alt="" />
+    </div>
+  </section>
+</section>
+
+<style>
+  .popup_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .popup {
+    background-color: white;
+    border-radius: 30px;
+    padding: 2rem;
+    width: 22rem;
+    height: 40rem;
+    display: grid;
+    gap: 1.2rem;
+    box-sizing: border-box;
+  }
+
+  .popup_header {
+    align-self: end; /* Moves it to bottom of its grid cell */
+  }
+
+  /* Header */
+  .popup_header h1 {
+    color: var(--font-color-black);
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  /* Buttons */
+  .popup_btns {
+    align-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  button {
+    height: 3rem; /* Set your desired height */
+    font-size: 1rem; /* Adjust if needed */
+    padding: 0; /* Remove default padding if using fixed height */
+    width: 100%;
+    background-color: var(--second-color);
+  }
+
+  button h1 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--font-color-white);
+  }
+
+  /* Image */
+  .popup_img {
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    align-self: start;
+  }
+
+  .popup_img img {
+    height: 100%; /* Set to whatever you want */
+    width: auto;
+    max-width: 100%;
+    display: block;
+    object-fit: contain; /* Keeps it from stretching weirdly */
+    place-self: center;
+  }
+
+  .hide {
+    display: none;
+  }
+</style>
+
+<script>
+  const yes = document.querySelector(".yes");
+  const popup = document.querySelector(".popup_container");
+
+  // On page load, check localStorage flag
+  window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("ageVerified") === "true") {
+      popup.classList.add("hide");
+    }
+  });
+
+  // When clicking "yes", hide popup and save flag
+  yes.addEventListener("click", () => {
+    localStorage.setItem("ageVerified", "true");
+    popup.classList.add("hide");
+  });
+</script>
