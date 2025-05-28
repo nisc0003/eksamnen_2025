@@ -1,0 +1,57 @@
+---
+import "../css/styles.css";
+import VideoCard from "../components/Video_card.astro";
+---
+
+<section>
+  <h3>Alefarm Brewing</h3>
+  <h5>Hos Alefarm Brygger Vi Craft Beer</h5>
+  <p class="pnr1">
+    Craft beer er øl, der brygges af små, uafhængige bryggerier med <strong
+      >fokus på høj kvalitet</strong
+    >, smag og traditionelle bryggemetoder frem for masseproduktion.
+  </p>
+  <VideoCard />
+  <p class="pnr2">
+    Dette tillader os at <strong>eksperimenterer med ingredienser</strong> og teknikker
+    for at skabe unikke og varierede øltyper, som adskiller sig fra de mere standardiserede
+    industriøl. Craft beer er kendt for sin kreativitet, kompleksitet og <strong
+      >kombination af tradition og innovation.</strong
+    >
+  </p>
+  <h5>Alefarm’s Craft</h5>
+  <p class="pnr3">
+    Alefarm Brewing er et mikrobryggeri, hvor <strong
+      >kvalitet altid vægtes højere end kvantitet</strong
+    >. Bryggeriet drives af passion og en ambition om at bringe nye og spændende
+    øl til markedet. Vi brygger i små mængder med fokus på håndværk og
+    innovation, så vi <strong>altid har noget nyt</strong> at tilbyde.
+  </p>
+</section>
+
+<style>
+  section {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 2rem 4.5rem 6rem 4.5rem;
+  }
+
+  h3 {
+    font-size: 7cqw;
+  }
+
+  h5 {
+    font-size: 3cqw;
+    margin: 1rem auto 1rem 0rem;
+    font-weight: 700;
+  }
+
+  .pnr1 {
+    margin-bottom: 2rem;
+  }
+
+  .pnr2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+</style>
