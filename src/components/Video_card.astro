@@ -1,0 +1,63 @@
+---
+import "../css/styles.css";
+---
+
+<div>
+  <img src="../../public/logo.svg" alt="" />
+  <video controls src="../../public/video_card.mp4"></video>
+  <p class="pnr1">ALEFARMS FILOSOFI</p>
+  <p class="pnr2">Kvalitet over Kvantitet</p>
+</div>
+
+<style>
+  img {
+    width: 4rem;
+    margin: 1rem auto 0.7rem auto;
+  }
+
+  video {
+    margin: auto;
+    width: 60vw;
+    border-radius: 5%;
+
+    display: block;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .pnr1 {
+    margin-top: 0.6rem;
+    font-size: 2.5cqw;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+
+  .pnr2 {
+    font-size: 2.2cqw;
+    font-style: italic;
+  }
+
+  @media screen and (min-width: 900px) {
+    img {
+      width: 5rem;
+    }
+
+    video {
+      width: 25vw;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .pnr1 {
+      font-size: 1cqw;
+    }
+
+    .pnr2 {
+      font-size: 0.7cqw;
+    }
+  }
+</style>
