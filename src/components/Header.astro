@@ -1,5 +1,5 @@
 ---
-@ts-nocheck
+// @ts-nocheck
 import Knap1 from "../assets/1.svg";
 import Knap2 from "../assets/2.svg";
 import "../css/styles.css";
@@ -132,14 +132,15 @@ import "../css/styles.css";
     }
 
     .burger.active .line:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
+      /* transform: rotate(-45deg) translate(5px, -5px); */
+      transform: rotate(-45deg) translate(14px,-12px);
       transition: 0.2s linear;
     }
 
     .nav_ul.active ul {
       display: block;
       position: absolute;
-      top: 94px;
+      top: 100px;
       left: 0;
       width: 100%;
       /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); */
@@ -148,7 +149,8 @@ import "../css/styles.css";
     }
 
     .nav_ul.active ul li {
-      margin: 10px 20px;
+      margin: 20px 20px;
+      place-self: start;
     }
 
     .nav_ul.active ul a {
