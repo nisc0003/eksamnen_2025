@@ -100,73 +100,72 @@ button {
   border-radius: 3px;
   padding: 1rem 5rem;
   cursor: pointer;
-  transition: 0.5s;
-}
 
-.cta1 {
-  background-color: rgba(25, 25, 25, 1);
-  color: white;
-  z-index: 10;
-}
-
-.cta1:hover {
-  background-color: white;
-  color: rgba(25, 25, 25, 1);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.cta2 {
-  background-color: white;
-  color: rgba(25, 25, 25, 1);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  z-index: 10;
-}
-
-.cta2:hover {
-  background-color: rgba(25, 25, 25, 1);
-  color: white;
-  box-shadow: none;
-}
-
-.cta3 {
-  background-color: rgba(25, 25, 25, 1);
-  color: var(--font-color-white);
-  border: solid transparent 2px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.cta3:hover {
-  border: solid var(--second-color) 2px;
-  background-color: var(--font-color-white);
-  color: var(--second-color);
-}
-
-.flex {
-  display: flex;
-}
-
-.flexcol {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 800px) {
-  h1 {
-    font-size: 5rem;
+  .cta1 {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+    z-index: 10;
   }
-  h2 {
-    font-size: 4rem;
+
+  .cta1:hover {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
-  h3 {
-    font-size: 3rem;
+
+  .cta2 {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: 10;
   }
-  h4 {
-    font-size: 2.25rem;
+
+  .cta2:hover {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+    box-shadow: none;
   }
-  h5 {
-    font-size: 1.5rem;
+
+  .cta3 {
+    background-color: rgba(25, 25, 25, 1);
+    color: var(--font-color-white);
+    border: solid transparent 2px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
-  h6 {
-    font-size: 1.25rem;
+
+  .cta3:hover {
+    border: solid var(--second-color) 2px;
+    background-color: var(--font-color-white);
+    color: var(--second-color);
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flexcol {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 800px) {
+    h1 {
+      font-size: 5rem;
+    }
+    h2 {
+      font-size: 4rem;
+    }
+    h3 {
+      font-size: 3rem;
+    }
+    h4 {
+      font-size: 2.25rem;
+    }
+    h5 {
+      font-size: 1.5rem;
+    }
+    h6 {
+      font-size: 1.25rem;
+    }
   }
 }

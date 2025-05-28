@@ -1,0 +1,110 @@
+---
+import "../css/styles.css";
+---
+
+<section>
+  <img class="logo" src="/logo.svg" alt="" />
+  <!-- <video src="../../public/hero_video.mov"></video> -->
+  <img class="heroGif" src="/hero_video.gif" alt="" />
+  <h1>"THE SPIRIT OF CRAFT"</h1>
+  <button class="cta2">shop vores øl</button>
+</section>
+
+<style>
+  section {
+    background-image: url(/heroimg_mobile.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .logo {
+    width: 4.5rem;
+    margin: 2rem auto 1rem auto;
+
+    grid-column: 2 / span 2;
+    grid-row: 1;
+  }
+
+  h1 {
+    grid-column: 2 / span 2;
+    grid-row: 4;
+
+    text-align: center;
+    font-weight: 700;
+    font-size: 8cqw;
+    margin: 1rem auto 0.5rem auto;
+  }
+
+  button {
+    grid-column: 2 / span 2;
+    grid-row: 5;
+    margin: 0.5rem auto 3rem auto;
+    padding: 1rem 4rem;
+
+    font-size: 2.5cqw;
+  }
+
+  .heroGif {
+    grid-column: 1 / span 4;
+    grid-row: 2;
+
+    height: 22rem;
+    width: 22rem;
+
+    margin: auto;
+  }
+
+  /* desktop */
+  @media screen and (min-width: 900px) {
+    section {
+      background-image: url(/heroimg.png);
+      background-position: center;
+      background-size: calc(100vw - 15rem);
+      background-repeat: no-repeat;
+      background-position: right;
+
+      grid-template-columns: 0.5fr 2.5fr 2.5fr 0.5fr;
+      grid-template-rows: 2fr auto auto auto 2fr;
+    }
+
+    .logo {
+      width: 8rem;
+      margin: auto auto -2rem auto;
+
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    h1 {
+      grid-column: 3;
+      grid-row: 3;
+
+      font-size: 5cqw;
+      margin: auto;
+    }
+
+    button {
+      grid-column: 3;
+      grid-row: 4;
+      margin: -2rem auto auto auto;
+      padding: 1rem 5rem;
+
+      font-size: 1.5cqw;
+    }
+
+    .heroGif {
+      grid-column: 2;
+      grid-row: 2 / span 3;
+
+      height: 31rem;
+      width: 31rem;
+
+      margin: 5.5rem auto 5.5rem auto;
+    }
+  }
+</style>
