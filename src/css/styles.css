@@ -96,6 +96,7 @@ button {
   padding: 1rem 5rem;
   cursor: pointer;
   transition: 0.3s;
+  font-family: "Montserrat", sans-serif;
 }
 
 .cta1 {
