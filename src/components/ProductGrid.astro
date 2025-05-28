@@ -18,8 +18,10 @@ const data = await fetch(url, options).then((res) => res.json());
   {
     data.map((product) => (
       <ProductCard
+        category={product.category}
         img={product.img}
         title={product.title}
+        beertype={product.beertype}
         price={product.price}
         path={product.id}
       />

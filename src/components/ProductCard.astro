@@ -1,11 +1,13 @@
 ---
-const { img, title, price, path, id } = Astro.props;
+const { img, title, price, category, beertype, path, id } = Astro.props;
 ---
 
 <li>
   <article>
+    <div class="circle" {beertype}></div>
     <img src={`/beer-card_images/${img}`} alt={title} />
-    <h2><a href={"/products/" + path}>{title}</a></h2>
+    <h3><a href={"/products/" + path}>{title}</a></h3>
+    <h5>{category}</h5>
     <p>{price},-</p>
     <button class="cta1">Add to basket</button>
   </article>
@@ -39,14 +41,14 @@ const { img, title, price, path, id } = Astro.props;
     margin-inline: 1rem;
   }
 
-  h2 a {
-    font-size: 1.25rem;
+  h3 a {
     font-weight: 600;
-    color: #000;
+    font-size: 1.25rem;
+    color: var(--second-color);
     text-decoration: none;
   }
 
-  h2 a::after {
+  h3 a::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -54,7 +56,15 @@ const { img, title, price, path, id } = Astro.props;
 
   p {
     text-align: right;
-    font-weight: 500;
+    font-weight: 5s00;
     opacity: 90%;
+  }
+
+  .circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: lightblue; /* Optional: Add a background color */
+    border: 2px solid black; /* Optional: Add a border */
   }
 </style>
