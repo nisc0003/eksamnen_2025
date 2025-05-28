@@ -1,0 +1,60 @@
+---
+import "../css/styles.css";
+import "../../public/hero_video.mp4";
+---
+
+<section>
+  <img class="logo" src="../../public/logo.svg" alt="" />
+  <!-- <video src="../../public/hero_video.mov"></video> -->
+  <video src="../../public/hero_video.gif"></video>
+  <h1>"THE SPIRIT OF CRAFT"</h1>
+  <button class="cta2">SHOP VORES ØL</button>
+</section>
+
+<style>
+  section {
+    background-image: url(../../public/heroimg_mobile.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
+  .logo {
+    width: 5rem;
+    margin: 2rem auto 2rem auto;
+
+    grid-column: 2 / span 2;
+    grid-row: 1;
+  }
+
+  /* .heroimg {
+    grid-column: 1/4;
+    grid-row: 1/4;
+  } */
+
+  h1 {
+    grid-column: 2 / span 2;
+    grid-row: 4;
+
+    text-align: center;
+    font-weight: 700;
+    font-size: 8cqw;
+    margin: 1rem auto 0.5rem auto;
+  }
+
+  button {
+    grid-column: 2 / span 2;
+    grid-row: 5;
+    margin: 0.5rem auto 2rem auto;
+
+    font-size: 2.1cqw;
+  }
+
+  video {
+    grid-column: 1 / span 4;
+  }
+</style>
