@@ -1,69 +1,196 @@
 ---
-const { img, title, price, category, path, id } = Astro.props;
+const {
+  img,
+  title,
+  title2,
+  price,
+  Old_price,
+  discount_percentage,
+  soldout,
+  category,
+  category2,
+  type,
+  path,
+} = Astro.props;
 ---
 
 <li>
   <article>
     <img src={`/beer-card_images/${img}`} alt={title} />
-    <h3><a href={"/products/" + path}>{title}</a></h3>
-    <h5>{category}</h5>
-    <p>{price},-</p>
-    <button class="cta1">Add to basket</button>
+    <div class="card_text">
+      <div class="card_text_title">
+        <h3><a href={"/products/" + path}>{title}</a></h3>
+        {title2 && <h4>{title2}</h4>}
+      </div>
+      {type && <h5>{type}</h5>}
+    </div>
+    <div class="grid_1-1">
+      <div class="price_box">
+        <p class="price_text">Starting at</p>
+        {Old_price && <p class="price_text">used to be</p>}
+        <div class="grid_1">
+          <h6>{price},-</h6>
+          <h6 class="old_price">{Old_price}</h6>
+        </div>
+      </div>
+      <button class="cta1">Add to basket</button>
+    </div>
   </article>
 </li>
 
 <style>
-  li {
-    display: contents;
+  img {
+    width: 100%;
+    height: auto;
   }
+  li {
+    display: block;
+    height: 100%;
+  }
+
   article {
     position: relative;
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 4;
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--font-color-white);
     border-radius: 10px;
-    padding-block-end: 1rem;
-    filter: drop-shadow(5px 5px 5px #eee);
+    filter: drop-shadow(0px 8px 8px #0000002c);
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .grid_1-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .grid_1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .card_text {
+    display: grid;
+    gap: 0.25rem;
+    padding-inline: 0.25rem;
+    margin-inline: 1.25rem;
+    border-bottom: solid var(--second-color) 3px;
+    place-self: bottom;
+  }
+
+  .card_text_title {
+    padding-bottom: 0.25rem;
   }
 
   img {
-    object-fit: cover;
     place-self: center;
+    width: 100%;
+    height: auto;
+    padding-inline: 5rem;
   }
 
   article:hover img {
-    opacity: 80%;
+    opacity: 20%;
+    transition-duration: 0.3s;
   }
 
   button {
     margin-inline: 1rem;
   }
 
+  h3 {
+    line-height: 80%;
+    padding-bottom: 1rem;
+  }
+
   h3 a {
-    font-weight: 600;
-    font-size: 1.25rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
     color: var(--second-color);
     text-decoration: none;
+    line-height: 0.1;
+  }
+
+  h3 a:hover {
+    transition-duration: 0.3s;
+    opacity: 20%;
   }
 
   h3 a::after {
     content: "";
     position: absolute;
     inset: 0;
+    text-decoration: underline;
   }
 
-  p {
+  button {
+    border-radius: 3px;
+    width: 100%;
+    text-wrap: nowrap;
+    margin: 0px;
+    padding-block: 2rem;
+  }
+
+  .price_box {
+    display: grid;
+    border-radius: 3px;
+    padding: auto auto;
+    padding-inline: 1.75rem;
+    padding-inline: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+  .price_text {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 92%;
+    text-align: left;
+    place-self: left;
+  }
+
+  .old_price {
+    text-decoration: line-through;
+    font-weight: 500;
+    opacity: 90%;
     text-align: right;
-    font-weight: 5s00;
+  }
+  p {
+    font-weight: 500;
     opacity: 90%;
   }
+  h4 {
+    font-size: 1rem;
+    font-style: oblique;
+    text-transform: uppercase;
+  }
 
-  .circle {
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: oblique;
+    font-size: 1.75rem;
+    text-align: left;
+    place-self: left;
+  }
+  /* .circle {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: lightblue; /* Optional: Add a background color */
-    border: 2px solid black; /* Optional: Add a border */
+    background-color: lightblue;
+    border: 2px solid black;
+  } */
+
+  @media screen and (min-width: 800px) {
+    img {
+      padding-inline: 4rem;
+      padding-block: 2rem;
+    }
   }
 </style>
