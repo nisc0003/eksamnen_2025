@@ -1,0 +1,102 @@
+---
+
+---
+
+<section>
+  <div class="countdown_div">
+    <h1>Beer Club</h1>
+    <p>Nedtælling til næste forsendelse af månedskassen</p>
+    <h2 class="timer"></h2>
+  </div>
+
+  <div class="countdown_btns">
+    <button class="signup_btn">BLIV MEDLEM</button>
+    <button class="readmore_btn">LÆS MERE</button>
+  </div>
+</section>
+
+<style>
+  .countdown_div {
+    text-align: center;
+  }
+
+  .countdown_btns {
+    display: flex;
+    flex-direction: column;
+    place-self: center;
+    place-content: center;
+  }
+
+  .countdown_btns button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .signup_btn {
+    background-color: var(--second-color);
+    color: var(--font-color-white);
+  }
+
+  .readmore_btn {
+    background-color: var(--font-color-white);
+    color: var(--font-color-black);
+    border-radius: 1px;
+    box-shadow:
+      9px 22px 7px 0px rgba(0, 0, 0, 0),
+      6px 14px 6px 0px rgba(0, 0, 0, 0.01),
+      3px 8px 5px 0px rgba(0, 0, 0, 0.03),
+      1px 3px 4px 0px rgba(0, 0, 0, 0.04),
+      0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  }
+
+  html,
+  body,
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    display: grid;
+    /* place-items: center; */
+    height: 100vh;
+    width: 100%;
+  }
+
+  h1:empty:after {
+    display: none;
+  }
+
+  h1:after {
+    /* Dato og tid der bliver VIST */
+    content: "June 2, 2025 10:00:00";
+    display: none;
+    font-weight: 400;
+    font-size: 17px;
+  }
+</style>
+
+<script>
+  // INDSÆT DAT OG TID
+  var countDownDate = new Date("June 2, 2025 10:00:00").getTime();
+  var timeClear = setInterval(function () {
+    var now = new Date().getTime();
+    var timeLeft = countDownDate - now;
+    var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    var hours = Math.floor(
+      (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+    );
+    var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    document.querySelector(".timer").innerHTML =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    if (timeLeft < 0) {
+      clearInterval(timeClear);
+      document.querySelector(".timer").innerHTML = "Timer Finished";
+    }
+  }, 1000);
+</script>
