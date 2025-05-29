@@ -2,7 +2,7 @@
 // @ts-nocheck
 ---
 
-<section class="cart_container">
+<section class="cart_container inactive">
   <!-- Skal gøre at der er en sort baggrund for X knappen som er 100 i width -->
   <section class="top_box">
     <div class="x">
@@ -119,7 +119,63 @@
     <button class="buy_page"> <p class="p_b">Køb nu</p> </button>
   </section>
 </section>
+
 <style>
+  .inactive {
+    translate: 150vh;
+  }
+
+  .inactive_anim {
+    animation: inactive-anim 1s;
+  }
+  @keyframes inactive-anim {
+    0% {
+      translate: 0vh;
+    }
+
+    25% {
+      translate: 75vh;
+    }
+
+    50% {
+      translate: 100vh;
+    }
+
+    75% {
+      translate: 125vh;
+    }
+
+    100% {
+      translate: 150vh;
+    }
+  }
+
+  .active {
+    animation: active-anim 1s;
+  }
+
+  @keyframes active-anim {
+    0% {
+      translate: 150vh;
+    }
+
+    25% {
+      translate: 125vh;
+    }
+
+    50% {
+      translate: 100vh;
+    }
+
+    75% {
+      translate: 75vh;
+    }
+
+    100% {
+      translate: 0vh;
+    }
+  }
+
   .cart_container {
     position: fixed; /* Already fixed, so it's fine */
     top: 0;
@@ -157,7 +213,7 @@
     position: absolute;
     width: 2rem;
     height: 0.25rem;
-    background-color: white;
+    background-color: black;
     border-radius: 2px;
   }
 
@@ -275,3 +331,20 @@
     color: var(--font-color-white);
   }
 </style>
+
+<script>
+  const basket = document.querySelector(".basket_icon");
+  const basket_menu = document.querySelector(".cart_container");
+  const basket_x = document.querySelector(".x");
+
+  basket.addEventListener("click", () => {
+    basket_menu.classList.add("active");
+    basket_menu.classList.remove("inactive");
+  });
+
+  basket_x.addEventListener("click", () => {
+    basket_menu.classList.add("inactive_anim");
+    basket_menu.classList.add("inactive");
+    basket_menu.classList.remove("active");
+  });
+</script>
