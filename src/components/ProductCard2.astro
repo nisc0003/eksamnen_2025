@@ -1,0 +1,240 @@
+---
+import "../css/styles.css";
+---
+
+<article>
+  <img src="../../public/temporaryimg.png" alt="" />
+  <div class="background">
+    <p class="repeat">
+      reason to give reason to give reason to give reason to give reason to give
+      reason to give reason to give reason to give reason to give reason to give
+      reason to give reason to give reason to give reason to give reason to give
+      reason to give reason to give reason to give reason to give reason to give
+      reason to give reason to give reason to give reason to give reason to give
+      reason to give reason to give reason to give reason to give reason to give
+      reason to give
+    </p>
+  </div>
+  <div class="card_text">
+    <div class="card_text_title">
+      <h3>REASON TO GIVE</h3>
+      <!-- <h4>Titel2</h4> -->
+    </div>
+    <h5>Double India Pale Ale</h5>
+  </div>
+  <div class="grid_1-1">
+    <div class="price_box">
+      <div class="grid_1">
+        <div>
+          <p class="price_text">Starting at</p>
+          <h6>60,00 DKK</h6>
+        </div>
+        <!-- <div>
+            <p class="old_price">used to be</p>
+            <h6 class="old_price">Gammel</h6>
+          </div> -->
+      </div>
+    </div>
+    <button class="cta1">Add to basket</button>
+  </div>
+</article>
+
+<style>
+  img {
+    width: 100%;
+    height: auto;
+  }
+  li {
+    display: block;
+    height: 100%;
+  }
+
+  article {
+    position: relative;
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: space-between; */
+    background-color: var(--font-color-white);
+    border-radius: 10px;
+    filter: drop-shadow(0px 8px 8px #0000002c);
+    /* overflow: hidden; */
+    height: 100%;
+
+    width: 60vw;
+    margin: auto;
+  }
+
+  .grid_1-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .grid_1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .card_text {
+    display: grid;
+    gap: 0.25rem;
+    padding-inline: 0.25rem;
+    margin-inline: 1.25rem;
+    border-bottom: solid var(--second-color) 3px;
+    place-self: bottom;
+  }
+
+  .card_text_title {
+    padding-bottom: 0.25rem;
+  }
+
+  img {
+    place-self: center;
+    width: 120%;
+    height: auto;
+    padding-inline: 5rem;
+
+    position: relative;
+    top: -5rem;
+
+    margin-bottom: -4rem;
+    z-index: 10;
+  }
+
+  .repeat {
+    font-size: 6.7cqw;
+    width: 80vw;
+    color: #e6e6e6;
+    text-transform: uppercase;
+
+    font-family: "Montserrat", sans-serif;
+    font-weight: 750;
+  }
+
+  .background {
+    position: absolute;
+    top: -0.5rem;
+    overflow: hidden;
+    width: 60vw;
+    height: 70vw;
+  }
+
+  article:hover img {
+    opacity: 20%;
+    transition-duration: 0.3s;
+  }
+
+  button {
+    margin-inline: 1rem;
+  }
+
+  h3 {
+    line-height: 80%;
+    padding-bottom: 0rem;
+
+    font-size: 3.5cqw;
+    text-align: center;
+  }
+
+  h3 a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--second-color);
+    text-decoration: none;
+    line-height: 0.1;
+  }
+
+  h3 a:hover {
+    transition-duration: 0.3s;
+    opacity: 20%;
+  }
+
+  h3 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    text-decoration: underline;
+  }
+
+  button {
+    border-radius: 3px;
+    width: 100%;
+    text-wrap: nowrap;
+    margin: 0px;
+    padding-block: 2rem;
+  }
+
+  .price_box {
+    display: grid;
+    border-radius: 3px;
+    padding: auto auto;
+    padding-inline: 1.75rem;
+    padding-inline: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+  .price_text {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 92%;
+    text-align: left;
+    place-self: left;
+  }
+
+  .old_price {
+    text-decoration: line-through;
+    font-weight: 500;
+    opacity: 90%;
+    text-align: right;
+  }
+  p {
+    font-weight: 500;
+    opacity: 90%;
+  }
+  /* h4 {
+    font-size: 1rem;
+    font-style: oblique;
+    text-transform: uppercase;
+  } */
+
+  h5 {
+    font-size: 2.7cqw;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+
+    padding-bottom: 1rem;
+  }
+
+  h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: oblique;
+    font-size: 3cqw;
+    text-align: left;
+    place-self: left;
+  }
+
+  @media screen and (min-width: 800px) {
+    img {
+      padding-inline: 4rem;
+      padding-block: 2rem;
+    }
+
+    article {
+      position: relative;
+      /* display: flex;
+    flex-direction: column; */
+      /* justify-content: space-between; */
+      background-color: var(--font-color-white);
+      border-radius: 10px;
+      filter: drop-shadow(0px 8px 8px #0000002c);
+      /* overflow: hidden; */
+      height: 100%;
+
+      width: 60vw;
+      margin: auto;
+    }
+  }
+</style>
