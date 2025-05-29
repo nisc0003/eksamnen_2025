@@ -1,10 +1,9 @@
 ---
-const { img, title, price, category, beertype, path, id } = Astro.props;
+const { img, title, price, category, path, id } = Astro.props;
 ---
 
 <li>
   <article>
-    <div class="circle" {beertype}></div>
     <img src={`/beer-card_images/${img}`} alt={title} />
     <h3><a href={"/products/" + path}>{title}</a></h3>
     <h5>{category}</h5>
