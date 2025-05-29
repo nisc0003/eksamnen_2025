@@ -1,6 +1,7 @@
 ---
 //@ts-nocheck
 import ProductCard from "../components/ProductCard.astro";
+import Beerfilter from "../components/Beer-Filter.astro";
 
 // Fetch products
 const url =
@@ -14,29 +15,32 @@ const options = {
 const data = await fetch(url, options).then((res) => res.json());
 ---
 
-<section>
-  <ul class="product-grid">
-    {
-      data.map((product) => (
-        <li>
-          <ProductCard
-            img={product.img}
-            title={product.title}
-            title2={product.title2}
-            price={product.price}
-            Old_price={product.Old_price}
-            discount_percentage={product.discount_percentage}
-            soldout={product.soldout}
-            category={product.category}
-            category2={product.category2}
-            type={product.type}
-            path={product.id}
-          />
-        </li>
-      ))
-    }
-  </ul>
-</section>
+<Beerfilter />
+
+<nav></nav>
+
+<ul class="product-grid">
+  {
+    data.map((product) => (
+      <li data-category2={`${product.category2}`}>
+        <ProductCard
+          img={product.img}
+          title={product.title}
+          title2={product.title2}
+          price={product.price}
+          Old_price={product.Old_price}
+          discount_percentage={product.discount_percentage}
+          soldout={product.soldout}
+          category={product.category}
+          category2={product.category2}
+          type={product.type}
+          path={product.id}
+        />
+      </li>
+    ))
+  }
+</ul>
+
 <style>
   section {
     margin-right: 4vw;

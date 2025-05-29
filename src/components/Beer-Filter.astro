@@ -1,0 +1,59 @@
+---
+//@ts-nocheck
+---
+
+<div id="category2-filters" style="margin-bottom: 1rem;">
+  <button data-filter="all">All</button>
+  <button data-filter="Beer-Can">Beer Can</button>
+  <button data-filter="Tilbehør">Tilbehør</button>
+  <button data-filter="Case-offers">Case Offers</button>
+  <button data-filter="Wild-Ales">Wild Ales</button>
+  <button data-filter="Barrel-Aged">Barrel Aged</button>
+</div>
+
+<script client:load>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("#category2-filters button");
+    const items = document.querySelectorAll("li[data-category2]");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
+
+        items.forEach((item) => {
+          const cat = item.dataset.category2;
+          if (filter === "all" || cat === filter) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+          }
+        });
+
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+  });
+</script>
+
+<style>
+  #category2-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  #category2-filters button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #eee;
+    border: none;
+    border-radius: 4px;
+  }
+
+  #category2-filters button.active {
+    background-color: #222;
+    color: #fff;
+  }
+</style>
