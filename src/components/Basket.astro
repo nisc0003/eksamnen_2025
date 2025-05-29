@@ -151,6 +151,10 @@
   }
 
   .active {
+    translate: 0vh;
+  }
+
+  .active_anim {
     animation: active-anim 1s;
   }
 
@@ -330,6 +334,35 @@
   .buy_page p {
     color: var(--font-color-white);
   }
+
+  @media screen and (min-width: 800px) {
+    .cart_container {
+      position: fixed; /* Already fixed, so it's fine */
+      top: -50;
+      right: 0;
+      height: 75%;
+      width: 50%;
+      z-index: 100;
+      background-color: var(--main-color);
+      padding: 5rem;
+      transform: translateX(100%);
+      transition: transform 0.5s ease;
+    }
+
+    .cart_sub {
+      height: 20rem;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+
+    .inactive {
+      translate: 150vh;
+    }
+
+    .active {
+      translate: 0vh;
+    }
+  }
 </style>
 
 <script>
@@ -338,6 +371,7 @@
   const basket_x = document.querySelector(".x");
 
   basket.addEventListener("click", () => {
+    basket_menu.classList.add("active_anim");
     basket_menu.classList.add("active");
     basket_menu.classList.remove("inactive");
   });
@@ -346,5 +380,6 @@
     basket_menu.classList.add("inactive_anim");
     basket_menu.classList.add("inactive");
     basket_menu.classList.remove("active");
+    basket_menu.classList.remove("active_anim");
   });
 </script>
