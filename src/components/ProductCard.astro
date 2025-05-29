@@ -12,21 +12,35 @@ const {
   type,
   path,
 } = Astro.props;
+
+const showSoldOut = soldout === true;
+const showDefault = !soldout;
 ---
 
-<li>
-  <article>
+<article>
+  <div class="flex">
+    <p>{category2} /</p>
+    <p>{category}</p>
+  </div>
+  <div class="card_image_grid">
+    {
+      discount_percentage && (
+        <div class="percentage__box">
+          <p class="percentage">{discount_percentage}</p>
+        </div>
+      )
+    }
     <img src={`/beer-card_images/${img}`} alt={title} />
-    <div class="card_text">
-      <div class="card_text_title">
-        <h3><a href={"/products/" + path}>{title}</a></h3>
-        {title2 && <h4>{title2}</h4>}
-      </div>
-      {type && <h5>{type}</h5>}
-    </div>
-    <div class="grid_1-1">
-      <div class="price_box">
-        <div class="grid_1">
+  </div>
+  <div class="card_text_title">
+    <h3><a href={"/products/" + path}>{title}</a></h3>
+    {type && <h4>{type}</h4>}
+    {title2 && <h5>{title2}</h5>}
+  </div>
+  {
+    showDefault && (
+      <>
+        <div class="price_box">
           <div>
             <p class="price_text">Starting at</p>
             <h6>{price},-</h6>
@@ -36,27 +50,31 @@ const {
             <h6 class="old_price">{Old_price}</h6>
           </div>
         </div>
-      </div>
-      <button class="cta1">Add to basket</button>
-    </div>
-  </article>
-</li>
+        <button class="cta1">Add to basket</button>
+      </>
+    )
+  }
+
+  {
+    showSoldOut && (
+      <>
+        <div class="price_box">
+          <div>
+            <p class="price_text">Udsolgt</p>
+            <h6 class="sold_out_h6">{price},-</h6>
+          </div>
+        </div>
+        <button class="cta_none">Udsolgt</button>
+      </>
+    )
+  }
+</article>
 
 <style>
-  img {
-    width: 100%;
-    height: auto;
-  }
-  li {
-    display: block;
-    height: 100%;
-  }
-
   article {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / span 5;
     background-color: var(--font-color-white);
     border-radius: 10px;
     filter: drop-shadow(0px 8px 8px #0000002c);
@@ -64,28 +82,21 @@ const {
     height: 100%;
   }
 
-  .grid_1-1 {
-    display: grid;
-    grid-template-columns: 1fr;
+  .flex {
+    margin-inline: 1rem;
+    place-self: top;
+    place-self: end;
+    margin-top: 1rem;
   }
 
-  .grid_1 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-  }
-
-  .card_text {
+  .card_text_title {
     display: grid;
     gap: 0.25rem;
     padding-inline: 0.25rem;
     margin-inline: 1.25rem;
-    border-bottom: solid var(--second-color) 3px;
-    place-self: bottom;
-  }
-
-  .card_text_title {
-    padding-bottom: 0.25rem;
+    text-align: center;
+    place-self: start;
+    grid-row: 3;
   }
 
   img {
@@ -93,6 +104,7 @@ const {
     width: 100%;
     height: auto;
     padding-inline: 5rem;
+    place-self: center;
   }
 
   article:hover img {
@@ -102,11 +114,16 @@ const {
 
   button {
     margin-inline: 1rem;
+    place-self: bottom;
+    border-radius: 3px;
+    width: 100%;
+    text-wrap: nowrap;
+    margin: 0px;
+    padding-block: 2rem;
   }
 
   h3 {
     line-height: 80%;
-    padding-bottom: 1rem;
   }
 
   h3 a {
@@ -116,6 +133,8 @@ const {
     color: var(--second-color);
     text-decoration: none;
     line-height: 0.1;
+    text-align: center;
+    place-self: center;
   }
 
   h3 a:hover {
@@ -130,23 +149,15 @@ const {
     text-decoration: underline;
   }
 
-  button {
-    border-radius: 3px;
-    width: 100%;
-    text-wrap: nowrap;
-    margin: 0px;
-    padding-block: 2rem;
-  }
-
   .price_box {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     border-radius: 3px;
-    padding: auto auto;
-    padding-inline: 1.75rem;
     padding-inline: 1.5rem;
     margin-bottom: 1rem;
     margin-top: 0.5rem;
   }
+
   .price_text {
     font-size: 1rem;
     font-weight: 300;
@@ -155,24 +166,37 @@ const {
     place-self: left;
   }
 
+  .sold_out_h6 {
+    text-decoration: line-through;
+    opacity: 90%;
+  }
+
   .old_price {
     text-decoration: line-through;
     font-weight: 500;
     opacity: 90%;
     text-align: right;
   }
+
   p {
     font-weight: 500;
     opacity: 90%;
   }
+
   h4 {
     font-size: 1rem;
     font-style: oblique;
     text-transform: uppercase;
+    margin: 0px;
+    opacity: 85%;
   }
 
   h5 {
-    font-size: 1.25rem;
+    font-size: 0.75rem;
+    font-style: oblique;
+    text-transform: uppercase;
+    margin: 0px;
+    opacity: 75%;
   }
 
   h6 {
@@ -183,18 +207,36 @@ const {
     text-align: left;
     place-self: left;
   }
-  /* .circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: lightblue;
-    border: 2px solid black;
-  } */
+  .card_image_grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .percentage {
+    font-size: 2rem;
+    border-radius: 100px;
+    color: var(--font-color-white);
+    opacity: 100%;
+  }
 
+  .percentage__box {
+    display: grid;
+    background-color: var(--second-color);
+    z-index: 2;
+    width: min-content;
+    height: min-content;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    place-self: start end;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    opacity: 80%;
+  }
   @media screen and (min-width: 800px) {
     img {
       padding-inline: 4rem;
       padding-block: 2rem;
+      background-color: var();
     }
   }
 </style>
