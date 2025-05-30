@@ -1,0 +1,400 @@
+---
+// @ts-nocheck
+---
+
+<section class="cart_container inactive">
+  <!-- Skal gøre at der er en sort baggrund for X knappen som er 100 i width -->
+  <section class="top_box">
+    <div class="x">
+      <span class="span1"></span>
+      <span class="span2"></span>
+    </div>
+  </section>
+  <section class="cart_sub">
+    <div class="cart_list">
+      <div class="product">
+        <div class="product_image">
+          <img src="../../public/placeholder.webp" alt="" class="product_img" />
+        </div>
+        <div class="product_info">
+          <p>1- Stk</p>
+          <p>Mother's Next and Love (APA)</p>
+          <div class="old_price">
+            <p>50,00 kr.</p>
+          </div>
+          <p>45,00 kr.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart_list">
+      <div class="product">
+        <div class="product_image">
+          <img src="../../public/placeholder.webp" alt="" class="product_img" />
+        </div>
+        <div class="product_info">
+          <p>1- Stk</p>
+          <p>Mother's Next and Love (APA)</p>
+
+          <div class="old_price">
+            <p>50,00 kr.</p>
+          </div>
+          <p>45,00 kr.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart_list">
+      <div class="product">
+        <div class="product_image">
+          <img src="../../public/placeholder.webp" alt="" class="product_img" />
+        </div>
+        <div class="product_info">
+          <p>1- Stk</p>
+          <p>Mother's Next and Love (APA)</p>
+          <div class="old_price">
+            <p>50,00 kr.</p>
+          </div>
+          <p>45,00 kr.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart_list">
+      <div class="product">
+        <div class="product_image">
+          <img src="../../public/placeholder.webp" alt="" class="product_img" />
+        </div>
+        <div class="product_info">
+          <p>1- Stk</p>
+          <p>Mother's Next and Love (APA)</p>
+
+          <p class="old_price">50,00 kr.</p>
+          <p>45,00 kr.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart_list">
+      <div class="product">
+        <div class="product_image">
+          <img src="../../public/placeholder.webp" alt="" class="product_img" />
+        </div>
+        <div class="product_info">
+          <p>1- Stk</p>
+          <p>Mother's Next and Love (APA)</p>
+
+          <p class="old_price">50,00 kr.</p>
+          <p>45,00 kr.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="price_amount">
+    <div class="price_original">
+      <p>Subtotal</p>
+      <p>XXX</p>
+    </div>
+    <hr />
+    <div class="price_discounted">
+      <p>Rabat</p>
+      <div class="discount">
+        <p>XXX</p>
+      </div>
+    </div>
+    <hr />
+  </section>
+
+  <section class="total_price">
+    <div><h3>Pris I alt</h3></div>
+    <div class="price_value">
+      <h3>XXX</h3>
+      <h3>KR</h3>
+    </div>
+  </section>
+
+  <section class="cart_buttons">
+    <button class="cart_page"><p class="p_b">Gå til kurv</p></button>
+    <button class="buy_page"> <p class="p_b">Køb nu</p> </button>
+  </section>
+</section>
+
+<style>
+  .inactive {
+    translate: 150vh;
+  }
+
+  .inactive_anim {
+    animation: inactive-anim 1s;
+  }
+  @keyframes inactive-anim {
+    0% {
+      translate: 0vh;
+    }
+
+    25% {
+      translate: 75vh;
+    }
+
+    50% {
+      translate: 100vh;
+    }
+
+    75% {
+      translate: 125vh;
+    }
+
+    100% {
+      translate: 150vh;
+    }
+  }
+
+  .active {
+    translate: 0vh;
+  }
+
+  .active_anim {
+    animation: active-anim 1s;
+  }
+
+  @keyframes active-anim {
+    0% {
+      translate: 150vh;
+    }
+
+    25% {
+      translate: 125vh;
+    }
+
+    50% {
+      translate: 100vh;
+    }
+
+    75% {
+      translate: 75vh;
+    }
+
+    100% {
+      translate: 0vh;
+    }
+  }
+
+  .cart_container {
+    position: fixed; /* Already fixed, so it's fine */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--main-color);
+    padding: 5rem;
+  }
+
+  .top.box {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 100%;
+  }
+
+  /* Position the X button */
+  .x {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  /* X lines */
+  .x span {
+    position: absolute;
+    width: 2rem;
+    height: 0.25rem;
+    background-color: black;
+    border-radius: 2px;
+  }
+
+  .span1 {
+    transform: rotate(45deg);
+  }
+
+  .span2 {
+    transform: rotate(-45deg);
+  }
+
+  hr {
+    border-top: 3px solid black;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cart_container p {
+    font-size: 2rem;
+  }
+
+  .old_price p {
+    text-decoration: line-through;
+    /* color: #d9d9d9; */
+  }
+
+  .cart_sub {
+    height: 55rem;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+  .cart_sub::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .cart_sub::-webkit-scrollbar-track {
+    background: var(--main-color);
+    border-radius: 10px;
+  }
+
+  .cart_sub::-webkit-scrollbar-thumb {
+    background: var(--second-color);
+    border-radius: 10px;
+  }
+
+  .cart_list {
+    margin-bottom: 3rem;
+  }
+
+  .product {
+    display: grid;
+  }
+
+  .product_image {
+    margin-right: 2rem;
+  }
+
+  .product_info {
+    display: grid;
+    grid-column: 2;
+    padding-top: 3rem;
+    /* padding-bottom: auto; */
+    margin-right: 10rem;
+  }
+
+  .price_original,
+  .price_discounted {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .discount p {
+    color: #d9d9d9;
+  }
+
+  .total_price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price_value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .cart_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cart_buttons button {
+    width: 95%;
+  }
+
+  .cart_page {
+    background: var(--font-color-white);
+    place-self: start;
+  }
+
+  .buy_page {
+    background: var(--second-color);
+    place-self: end;
+    box-shadow:
+      6.244px 15.264px 4.857px 0px rgba(0, 0, 0, 0),
+      4.163px 9.714px 4.163px 0px rgba(0, 0, 0, 0.01),
+      2.081px 5.551px 3.469px 0px rgba(0, 0, 0, 0.03),
+      0.694px 2.081px 2.775px 0px rgba(0, 0, 0, 0.04),
+      0px 0.694px 1.388px 0px rgba(0, 0, 0, 0.05);
+  }
+
+  .buy_page p {
+    color: var(--font-color-white);
+  }
+
+  @media screen and (min-width: 800px) {
+    .cart_container {
+      position: fixed; /* Already fixed, so it's fine */
+      /* top: -50; */
+      right: 0;
+      height: 70%;
+      width: 30%;
+      z-index: 100;
+      background-color: var(--main-color);
+      padding: 5rem;
+      transform: translateX(234%);
+      transition: transform 0.5s ease;
+      margin-top: 153px;
+    }
+
+    .cart_container p {
+      font-size: 16px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+
+    .cart_sub {
+      height: 20rem;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+
+    .inactive {
+      translate: 150vh;
+    }
+
+    .active {
+      translate: 0vh;
+    }
+    .cart_buttons button {
+      width: 97%;
+      padding: 1rem 3rem;
+    }
+    .product_info {
+      margin-right: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const basket = document.querySelector(".basket_icon");
+  const basket_menu = document.querySelector(".cart_container");
+  const basket_x = document.querySelector(".x");
+
+  basket.addEventListener("click", () => {
+    basket_menu.classList.add("active_anim");
+    basket_menu.classList.add("active");
+    basket_menu.classList.remove("inactive");
+  });
+
+  basket_x.addEventListener("click", () => {
+    basket_menu.classList.add("inactive_anim");
+    basket_menu.classList.add("inactive");
+    basket_menu.classList.remove("active");
+    basket_menu.classList.remove("active_anim");
+  });
+</script>
