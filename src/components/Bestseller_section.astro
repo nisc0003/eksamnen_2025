@@ -1,0 +1,200 @@
+---
+import "../css/styles.css";
+import Card2 from "../components/ProductCard2.astro";
+---
+
+<section>
+  <div class="boks">
+    <div>
+      <h2>Best Sellers</h2>
+      <p>Vores top 3 produkter</p>
+    </div>
+    <div class="cards">
+      <ul>
+        <li><Card2 /></li>
+        <li><Card2 /></li>
+        <li><Card2 /></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  ul {
+    margin-top: 2rem;
+    /* sætter den som en kausel og laver en non-wrapping */
+    display: flex;
+
+    /* "fjerner" overflow på x aksen */
+    overflow-x: auto;
+    /* laver den til en scroll snap container */
+    scroll-behavior: contain;
+    /* sørger for at elemnterne snapper på x aksen */
+    scroll-snap-type: x mandatory;
+
+    width: 60vw;
+  }
+
+  li {
+    list-style: none;
+    /* sørger for at den venstre kant på li snapper på dne ventre kant af ul */
+    scroll-snap-align: start;
+    /* sørger for at de er 100% af width på ul */
+    flex: 0 0 100%;
+  }
+
+  ul::scroll-button(*) {
+    border: 0;
+    font-size: 2rem;
+    background: none;
+    color: var(second-color);
+    cursor: pointer;
+
+    position: absolute;
+  }
+
+  /* focus er til keyboard useres */
+  ul::scroll-button(*):hover,
+  ul::scroll-button(*):focus {
+    color: #7fb378;
+  }
+
+  /* gør at man ikke kan bruge kanppen når den når den sidste / den første li */
+  ul::scroll-button(*):disabled {
+    color: rgb(0 0 0 / 0.2);
+    cursor: unset;
+  }
+
+  /* bestemmer ikonet for kanppen */
+  ul::scroll-button(left) {
+    content: "◄";
+
+    left: 2rem;
+    top: 145rem;
+  }
+
+  ul::scroll-button(right) {
+    content: "►";
+
+    right: 2rem;
+    top: 145rem;
+  }
+
+  section {
+    background-image: url(../../public/bestsellers_baggrund.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100vw 50%;
+
+    padding-bottom: 8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  p {
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 400px) {
+    .cards {
+      margin: auto 1rem;
+    }
+
+    ul::scroll-button(left) {
+      left: 0.5rem;
+      top: 150rem;
+    }
+
+    ul::scroll-button(right) {
+      right: 0.5rem;
+      top: 150rem;
+    }
+  }
+
+  @media screen and (min-width: 550px) {
+    ul::scroll-button(left) {
+      top: 150rem;
+    }
+
+    ul::scroll-button(right) {
+      top: 150rem;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    ul::scroll-button(left) {
+      top: 155rem;
+    }
+
+    ul::scroll-button(right) {
+      top: 155rem;
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    ul::scroll-button(left) {
+      top: 160rem;
+    }
+
+    ul::scroll-button(right) {
+      top: 160rem;
+    }
+  }
+
+  /* desktop */
+  @media screen and (min-width: 800px) {
+    ul {
+      margin: 4rem auto 0rem auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      width: 75vw;
+    }
+
+    ul::scroll-button(*) {
+      display: none;
+    }
+
+    section {
+      background-size: 100% 60%;
+
+      margin: 10rem auto;
+    }
+
+    li {
+      padding: 0vw 1vw;
+    }
+
+    li:first-of-type {
+      padding: 0vw 1vw 0vw 0vw;
+    }
+
+    li:last-of-type {
+      padding: 0vw 0vw 0vw 1vw;
+    }
+
+    .cards {
+      margin: auto;
+      width: 90vw;
+      padding: 0;
+    }
+
+    h2 {
+      margin-left: 5rem;
+    }
+    p {
+      margin-left: 5rem;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    h2 {
+      margin-left: 7.5rem;
+    }
+    p {
+      margin-left: 7.5rem;
+    }
+  }
+</style>
