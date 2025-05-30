@@ -18,7 +18,6 @@ import "../css/styles.css";
   <div class="card_text">
     <div class="card_text_title">
       <h3>REASON TO GIVE</h3>
-      <!-- <h4>Titel2</h4> -->
     </div>
     <h5>Double India Pale Ale</h5>
   </div>
@@ -35,7 +34,7 @@ import "../css/styles.css";
           </div> -->
       </div>
     </div>
-    <button class="cta1">Add to basket</button>
+    <button>Add to basket</button>
   </div>
 </article>
 
@@ -55,7 +54,7 @@ import "../css/styles.css";
     flex-direction: column; */
     /* justify-content: space-between; */
     background-color: var(--font-color-white);
-    border-radius: 10px;
+    border-radius: 2rem;
     filter: drop-shadow(0px 8px 8px #0000002c);
     /* overflow: hidden; */
     height: 100%;
@@ -109,6 +108,8 @@ import "../css/styles.css";
 
     font-family: "Montserrat", sans-serif;
     font-weight: 750;
+
+    white-space: normal;
   }
 
   .background {
@@ -116,7 +117,9 @@ import "../css/styles.css";
     top: -0.5rem;
     overflow: hidden;
     width: 60vw;
-    height: 70vw;
+    height: 60vw;
+    border-top-left-radius: 2.7rem;
+    border-top-right-radius: 2.7rem;
   }
 
   article:hover img {
@@ -125,7 +128,13 @@ import "../css/styles.css";
   }
 
   button {
-    margin-inline: 1rem;
+    /* grid-column: 2; */
+    font-size: 3cqw;
+    padding: 0rem;
+
+    background-color: white;
+    border: 0.1rem solid var(--second-color);
+    border-radius: 5rem;
   }
 
   h3 {
@@ -134,6 +143,7 @@ import "../css/styles.css";
 
     font-size: 3.5cqw;
     text-align: center;
+    margin-top: 1rem;
   }
 
   h3 a {
@@ -216,25 +226,19 @@ import "../css/styles.css";
     place-self: left;
   }
 
+  @media screen and (min-width: 480px) {
+    .background {
+      height: 70vw;
+    }
+  }
   @media screen and (min-width: 800px) {
     img {
-      padding-inline: 4rem;
-      padding-block: 2rem;
+      /* padding-inline: 4rem; */
+      /* padding-block: 2rem; */
     }
 
-    article {
-      position: relative;
-      /* display: flex;
-    flex-direction: column; */
-      /* justify-content: space-between; */
-      background-color: var(--font-color-white);
-      border-radius: 10px;
-      filter: drop-shadow(0px 8px 8px #0000002c);
-      /* overflow: hidden; */
-      height: 100%;
-
-      width: 60vw;
-      margin: auto;
+    .background {
+      height: 80vw;
     }
   }
 </style>

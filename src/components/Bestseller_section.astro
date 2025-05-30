@@ -1,0 +1,109 @@
+---
+import "../css/styles.css";
+import Card2 from "../components/ProductCard2.astro";
+---
+
+<section>
+  <div class="boks">
+    <h2>Best Sellers</h2>
+    <p>Vores top 3 produkter</p>
+    <!-- <div class="grid_1_4_1">
+      <button class="scrollLeft">v</button>
+      <button class="scrolRight">v</button> -->
+    <div>
+      <ul>
+        <li><Card2 /></li>
+        <li><Card2 /></li>
+        <li><Card2 /></li>
+      </ul>
+    </div>
+    <!-- </div> -->
+  </div>
+</section>
+
+<style>
+  ul {
+    margin-top: 7rem;
+    /* sætter den som en kausel og laver en non-wrapping */
+    display: flex;
+
+    /* "fjerner" overflow på x aksen */
+    overflow-x: auto;
+    /* laver den til en scroll snap container */
+    scroll-behavior: contain;
+    /* sørger for at elemnterne snapper på x aksen */
+    scroll-snap-type: x mandatory;
+
+    width: 60vw;
+  }
+
+  li {
+    list-style: none;
+    /* sørger for at den venstre kant på li snapper på dne ventre kant af ul */
+    scroll-snap-align: start;
+    /* sørger for at de er 100% af width på ul */
+    flex: 0 0 100%;
+  }
+
+  ul::scroll-button(*) {
+    border: 0;
+    font-size: 2rem;
+    background: none;
+    color: var(second-color);
+    cursor: pointer;
+
+    position: absolute;
+  }
+
+  /* focus er til keyboard useres */
+  ul::scroll-button(*):hover,
+  ul::scroll-button(*):focus {
+    color: #7fb378;
+  }
+
+  /* gør at man ikke kan bruge kanppen når den når den sidste / den første li */
+  ul::scroll-button(*):disabled {
+    color: rgb(0 0 0 / 0.2);
+    cursor: unset;
+  }
+
+  /* bestemmer ikonet for kanppen */
+  ul::scroll-button(left) {
+    content: "◄";
+
+    left: 2rem;
+    top: 147rem;
+  }
+
+  ul::scroll-button(right) {
+    content: "►";
+
+    right: 2rem;
+    top: 147rem;
+  }
+
+  .grid_1_4_1 {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-row: 3fr 1fr 4fr;
+  }
+
+  .boks {
+    margin: 2rem 5.5rem;
+  }
+
+  section {
+    background-image: url(../../public/bestsellers_baggrund.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+    padding-bottom: 8rem;
+  }
+
+  p {
+    font-weight: 600;
+  }
+
+  @media screen and (min-width: 800px) {
+  }
+</style>
