@@ -5,25 +5,23 @@ import Card2 from "../components/ProductCard2.astro";
 
 <section>
   <div class="boks">
-    <h2>Best Sellers</h2>
-    <p>Vores top 3 produkter</p>
-    <!-- <div class="grid_1_4_1">
-      <button class="scrollLeft">v</button>
-      <button class="scrolRight">v</button> -->
     <div>
+      <h2>Best Sellers</h2>
+      <p>Vores top 3 produkter</p>
+    </div>
+    <div class="cards">
       <ul>
         <li><Card2 /></li>
         <li><Card2 /></li>
         <li><Card2 /></li>
       </ul>
     </div>
-    <!-- </div> -->
   </div>
 </section>
 
 <style>
   ul {
-    margin-top: 7rem;
+    margin-top: 2rem;
     /* sætter den som en kausel og laver en non-wrapping */
     display: flex;
 
@@ -72,38 +70,131 @@ import Card2 from "../components/ProductCard2.astro";
     content: "◄";
 
     left: 2rem;
-    top: 147rem;
+    top: 145rem;
   }
 
   ul::scroll-button(right) {
     content: "►";
 
     right: 2rem;
-    top: 147rem;
-  }
-
-  .grid_1_4_1 {
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
-    grid-row: 3fr 1fr 4fr;
-  }
-
-  .boks {
-    margin: 2rem 5.5rem;
+    top: 145rem;
   }
 
   section {
     background-image: url(../../public/bestsellers_baggrund.png);
     background-repeat: no-repeat;
     background-position: bottom;
+    background-size: 100vw 50%;
 
     padding-bottom: 8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   p {
     font-weight: 600;
   }
 
+  @media screen and (max-width: 400px) {
+    .cards {
+      margin: auto 1rem;
+    }
+
+    ul::scroll-button(left) {
+      left: 0.5rem;
+      top: 150rem;
+    }
+
+    ul::scroll-button(right) {
+      right: 0.5rem;
+      top: 150rem;
+    }
+  }
+
+  @media screen and (min-width: 550px) {
+    ul::scroll-button(left) {
+      top: 150rem;
+    }
+
+    ul::scroll-button(right) {
+      top: 150rem;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    ul::scroll-button(left) {
+      top: 155rem;
+    }
+
+    ul::scroll-button(right) {
+      top: 155rem;
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    ul::scroll-button(left) {
+      top: 160rem;
+    }
+
+    ul::scroll-button(right) {
+      top: 160rem;
+    }
+  }
+
+  /* desktop */
   @media screen and (min-width: 800px) {
+    ul {
+      margin: 4rem auto 0rem auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      width: 75vw;
+    }
+
+    ul::scroll-button(*) {
+      display: none;
+    }
+
+    section {
+      background-size: 100% 60%;
+
+      margin: 10rem auto;
+    }
+
+    li {
+      padding: 0vw 1vw;
+    }
+
+    li:first-of-type {
+      padding: 0vw 1vw 0vw 0vw;
+    }
+
+    li:last-of-type {
+      padding: 0vw 0vw 0vw 1vw;
+    }
+
+    .cards {
+      margin: auto;
+      width: 90vw;
+      padding: 0;
+    }
+
+    h2 {
+      margin-left: 5rem;
+    }
+    p {
+      margin-left: 5rem;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    h2 {
+      margin-left: 7.5rem;
+    }
+    p {
+      margin-left: 7.5rem;
+    }
   }
 </style>

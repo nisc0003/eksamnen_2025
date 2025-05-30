@@ -3,46 +3,44 @@ import "../css/styles.css";
 ---
 
 <article>
-  <img src="../../public/temporaryimg.png" alt="" />
-  <div class="background">
-    <p class="repeat">
-      reason to give reason to give reason to give reason to give reason to give
-      reason to give reason to give reason to give reason to give reason to give
-      reason to give reason to give reason to give reason to give reason to give
-      reason to give reason to give reason to give reason to give reason to give
-      reason to give reason to give reason to give reason to give reason to give
-      reason to give reason to give reason to give reason to give reason to give
-      reason to give
-    </p>
-  </div>
-  <div class="card_text">
-    <div class="card_text_title">
-      <h3>REASON TO GIVE</h3>
+  <div class="boks">
+    <img src="../../public/temporaryimg.png" alt="" />
+    <div class="background">
+      <p class="repeat">
+        reason to give reason to give reason to give reason to give reason to
+        give reason to give reason to give reason to give reason to give reason
+        to give reason to give reason to give reason to give reason to give
+        reason to give reason to give reason to give reason to give reason to
+        give reason to give reason to give reason to give reason to give reason
+        to give reason to give reason to give reason to give reason to give
+        reason to give reason to give reason to give
+      </p>
     </div>
-    <h5>Double India Pale Ale</h5>
-  </div>
-  <div class="grid_1-1">
-    <div class="price_box">
-      <div class="grid_1">
+    <div class="card_text">
+      <div class="card_text_title">
+        <h3>REASON TO GIVE</h3>
+      </div>
+      <h5>Double India Pale Ale</h5>
+    </div>
+    <div class="grid_1-1">
+      <div class="price_box">
         <div>
-          <p class="price_text">Starting at</p>
-          <h6>60,00 DKK</h6>
-        </div>
-        <!-- <div>
+          <div>
+            <p class="price_text">Starter fra</p>
+            <h6>60,00 DKK</h6>
+          </div>
+          <!-- <div>
             <p class="old_price">used to be</p>
             <h6 class="old_price">Gammel</h6>
           </div> -->
+        </div>
       </div>
+      <button>Tilføj til kurv</button>
     </div>
-    <button>Add to basket</button>
   </div>
 </article>
 
 <style>
-  img {
-    width: 100%;
-    height: auto;
-  }
   li {
     display: block;
     height: 100%;
@@ -50,28 +48,25 @@ import "../css/styles.css";
 
   article {
     position: relative;
-    /* display: flex;
-    flex-direction: column; */
-    /* justify-content: space-between; */
     background-color: var(--font-color-white);
     border-radius: 2rem;
     filter: drop-shadow(0px 8px 8px #0000002c);
-    /* overflow: hidden; */
     height: 100%;
 
     width: 60vw;
     margin: auto;
+
+    width: 60vw;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    overflow: hidden;
   }
 
   .grid_1-1 {
     display: grid;
     grid-template-columns: 1fr;
-  }
-
-  .grid_1 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
   }
 
   .card_text {
@@ -89,14 +84,12 @@ import "../css/styles.css";
 
   img {
     place-self: center;
-    width: 120%;
+    width: 100%;
     height: auto;
     padding-inline: 5rem;
 
     position: relative;
-    top: -5rem;
 
-    margin-bottom: -4rem;
     z-index: 10;
   }
 
@@ -117,7 +110,7 @@ import "../css/styles.css";
     top: -0.5rem;
     overflow: hidden;
     width: 60vw;
-    height: 60vw;
+    height: 50vw;
     border-top-left-radius: 2.7rem;
     border-top-right-radius: 2.7rem;
   }
@@ -128,13 +121,14 @@ import "../css/styles.css";
   }
 
   button {
-    /* grid-column: 2; */
-    font-size: 3cqw;
-    padding: 0rem;
+    grid-column: 2;
+    font-size: 2cqw;
+    padding: 1rem;
+    margin: 1rem;
 
     background-color: white;
     border: 0.1rem solid var(--second-color);
-    border-radius: 5rem;
+    border-radius: 0.5rem;
   }
 
   h3 {
@@ -167,14 +161,6 @@ import "../css/styles.css";
     text-decoration: underline;
   }
 
-  button {
-    border-radius: 3px;
-    width: 100%;
-    text-wrap: nowrap;
-    margin: 0px;
-    padding-block: 2rem;
-  }
-
   .price_box {
     display: grid;
     border-radius: 3px;
@@ -185,28 +171,25 @@ import "../css/styles.css";
     margin-top: 0.5rem;
   }
   .price_text {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 300;
     opacity: 92%;
     text-align: left;
     place-self: left;
+
+    margin-top: 1rem;
   }
 
-  .old_price {
+  /* .old_price {
     text-decoration: line-through;
     font-weight: 500;
     opacity: 90%;
     text-align: right;
-  }
+  } */
   p {
     font-weight: 500;
     opacity: 90%;
   }
-  /* h4 {
-    font-size: 1rem;
-    font-style: oblique;
-    text-transform: uppercase;
-  } */
 
   h5 {
     font-size: 2.7cqw;
@@ -221,24 +204,158 @@ import "../css/styles.css";
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-style: oblique;
-    font-size: 3cqw;
+    font-size: 2.8cqw;
     text-align: left;
     place-self: left;
   }
 
-  @media screen and (min-width: 480px) {
+  @media screen and (max-width: 400px) {
+    article {
+      position: relative;
+      background-color: var(--font-color-white);
+      border-radius: 2rem;
+      filter: drop-shadow(0px 8px 8px #0000002c);
+      height: 100%;
+    }
+
+    .price_text {
+      font-size: 0.7rem;
+    }
+
+    h6 {
+      font-size: 2.8cqw;
+    }
+
+    button {
+      font-size: 2cqw;
+      padding: 0.5rem;
+      margin: 1.5rem 1rem;
+    }
+
     .background {
       height: 70vw;
     }
   }
+
+  @media screen and (min-width: 480px) {
+    .background {
+      height: 65vw;
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    .background {
+      height: 80vw;
+    }
+  }
+
+  /* desktop */
   @media screen and (min-width: 800px) {
     img {
-      /* padding-inline: 4rem; */
-      /* padding-block: 2rem; */
+      place-self: center;
+      width: 120%;
+      height: auto;
+      padding-inline: 5rem;
+
+      position: relative;
+    }
+
+    .repeat {
+      font-size: 3cqw;
+      width: 80vw;
+      color: #e6e6e6;
+      text-transform: uppercase;
+
+      font-family: "Montserrat", sans-serif;
+      font-weight: 750;
+
+      white-space: normal;
     }
 
     .background {
-      height: 80vw;
+      position: absolute;
+      top: -0.5rem;
+      width: 60vw;
+      height: 25vw;
+      border-top-left-radius: 2.7rem;
+      border-top-right-radius: 2.7rem;
+    }
+
+    article {
+      position: relative;
+      background-color: var(--font-color-white);
+      border-radius: 1.5rem;
+      height: auto;
+
+      width: 23vw;
+      margin: auto;
+
+      display: flex;
+      align-content: center;
+      justify-content: center;
+    }
+
+    h3 {
+      font-size: 2cqw;
+    }
+
+    h5 {
+      font-size: 1.7cqw;
+    }
+
+    h6 {
+      font-size: 1.3cqw;
+    }
+
+    .price_text {
+      font-size: 1.5cqw;
+    }
+
+    button {
+      grid-column: 2;
+      font-size: 1cqw;
+      padding: 0.5rem;
+      margin-top: 2rem;
+      margin-right: 1rem;
+
+      background-color: white;
+      border: 0.1rem solid var(--second-color);
+      border-radius: 0.5rem;
+    }
+
+    .price_box {
+      padding-right: 0;
+    }
+  }
+
+  @media screen and (min-width: 940px) {
+    .background {
+      height: 25vw;
+    }
+  }
+
+  @media screen and (min-width: 1175px) {
+    .background {
+      height: 30vw;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    img {
+      width: 100%;
+    }
+
+    .background {
+      height: 25vw;
+    }
+
+    h3 {
+      font-size: 1.5cqw;
+      margin-top: 2rem;
+    }
+
+    h5 {
+      font-size: 1cqw;
     }
   }
 </style>
