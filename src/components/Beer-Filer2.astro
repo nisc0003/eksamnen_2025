@@ -132,10 +132,13 @@
     // Funktion til at vise produkter i produkt-listen
     // 1 tømmer DOM / tilføjer alle elementernr i arrayet tilbagwe / hvert produkt vises (display = "").
     function showItems(items) {
-      productList.innerHTML = ""; // tøm listen ved brug af constanten for document.querySelector(".product-grid");
+      // tøm listen ved brug af constanten for document.querySelector(".product-grid");
+      productList.innerHTML = "";
       items.forEach(function (item) {
-        item.style.display = ""; // sørger for produktet er synligt
-        productList.appendChild(item); // tilføj produkt til listen i DOM
+        // sørger for produktet er synligt
+        item.style.display = "";
+        // tilføj produkt til listen i DOM
+        productList.appendChild(item);
       });
     }
 
@@ -180,30 +183,37 @@
     // sortere produkter efter pris - højest eller lavest først
     function sortByPrice(items, highestFirst) {
       items.sort((a, b) => {
-        const priceA = getPrice(a); // få pris for produkt A
-        const priceB = getPrice(b); // få pris for produkt B
-        return highestFirst ? priceB - priceA : priceA - priceB; // sorter efter valg
+        // få pris for produkt B
+        // få pris for produkt A
+        const priceA = getPrice(a);
+        const priceB = getPrice(b);
+        // sorter efter valg
+        return highestFirst ? priceB - priceA : priceA - priceB;
       });
     }
 
     // hjælper til at få prisen fra et produkt
     function getPrice(item) {
-      const priceText = item.querySelector(".price_box h6")?.textContent || ""; // find pris tekst
+      const priceText = item.querySelector(".price_box h6")?.textContent || "";
 
       const numMatch = priceText.match(/\d+/);
       // Finder det første tal i teksten:
       //   / / = start og slut på søgning
       //   \d = et tal fra 0 til 9
-      //   + = et eller flerea tal i streg
-      return numMatch ? Number(numMatch[0]) : 0; // Hvis der er et tal, brug det - ellers skal den tage brug af 0
+      //   + = et eller flerea tal i streg¨
+      // Hvis der er et tal, brug det - ellers skal den tage brug af 0
+      return numMatch ? Number(numMatch[0]) : 0;
     }
 
     // filtrere produkter efter pris mellem min og max
     function filterByPrice(items, min, max) {
       return items.filter((item) => {
-        const price = getPrice(item); // brug getPrice funktionen
-        if (min !== null && price < min) return false; // for lav pris
-        if (max !== null && price > max) return false; // for høj pris
+        // brug getPrice funktionen
+        const price = getPrice(item);
+        // for lav pris
+        if (min !== null && price < min) return false;
+        // for høj pris
+        if (max !== null && price > max) return false;
         return true;
       });
     }

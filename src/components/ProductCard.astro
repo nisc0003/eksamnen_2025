@@ -61,7 +61,7 @@ const showDefault = !soldout;
         <div class="price_box">
           <div>
             <p class="price_text">Udsolgt</p>
-            <h6 class="sold_out_h6">{price},-</h6>
+            <h6 class="sold_out_h6">{price}DKK</h6>
           </div>
         </div>
         <button class="cta_none">Udsolgt</button>
@@ -80,31 +80,33 @@ const showDefault = !soldout;
     filter: drop-shadow(0px 8px 8px #0000002c);
     overflow: hidden;
     gap: 0px;
+    width: auto;
+    height: min-content;
+    object-fit: contain;
   }
 
   .flex {
     margin-inline: 1rem;
     place-self: top;
     place-self: end;
-    margin-top: 1rem;
   }
 
   .card_text_title {
     display: grid;
     gap: 0.25rem;
     padding-inline: 0.25rem;
-    margin-inline: 1.25rem;
+    margin-inline: 1rem;
     text-align: center;
-    place-self: center;
+    place-self: top;
     grid-row: 3;
   }
 
   img {
     place-self: center;
-    width: 100%;
+    width: 260px;
     height: auto;
-    padding-inline: 5rem;
-    place-self: center;
+    padding-inline: clamp(2rem, 4rem, 5rem);
+    z-index: 10;
   }
 
   article:hover img {
@@ -113,28 +115,34 @@ const showDefault = !soldout;
   }
 
   button {
+    display: flex;
+    flex-direction: column;
     margin-inline: 1rem;
     place-self: bottom;
     border-radius: 3px;
     width: 100%;
+    height: 100%;
     text-wrap: nowrap;
     margin: 0px;
-    padding-block: 2rem;
+    padding-block: 1.5rem;
   }
 
   h3 {
     line-height: 80%;
+    padding-bottom: 0rem;
+    font-size: 3.5cqh;
+    text-align: center;
   }
 
   h3 a {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: 2.5cqh;
+    line-height: 1;
     color: var(--second-color);
     text-decoration: none;
-    line-height: 0.1;
     text-align: center;
-    place-self: center;
+    line-height: 1.2;
   }
 
   h3 a:hover {
@@ -142,26 +150,26 @@ const showDefault = !soldout;
     opacity: 20%;
   }
 
-  h3 a::after {
+  /* h3 a::after {
     content: "";
     position: absolute;
     inset: 0;
     text-decoration: underline;
-  }
+  } */
 
   .price_box {
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-top: solid 2px var(--second-color);
-    border-radius: 3px;
+    margin-right: 1rem;
     padding-inline: 1.5rem;
-    padding-top: 0.5rem;
+    padding: 0.5rem;
     margin-inline: 0.5rem;
     place-self: bottom;
   }
 
   .price_text {
-    font-size: 1rem;
+    font-size: 1.5cqh;
     font-weight: 300;
     opacity: 92%;
     text-align: left;
@@ -183,31 +191,32 @@ const showDefault = !soldout;
   p {
     font-weight: 500;
     opacity: 90%;
+    text-align: center;
   }
 
   h4 {
-    font-size: 1rem;
+    font-size: 1.75cqh;
     font-style: oblique;
     text-transform: uppercase;
+    text-align: center;
     margin: 0px;
-    opacity: 85%;
+    opacity: 90%;
   }
 
   h5 {
-    font-size: 0.75rem;
+    font-size: 1.5cqh;
     font-style: oblique;
     text-transform: uppercase;
     margin: 0px;
-    opacity: 75%;
+    opacity: 80%;
   }
 
   h6 {
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-style: oblique;
-    font-size: 1.75rem;
+    font-size: 3cqh;
     text-align: left;
-    place-self: left;
   }
   .card_image_grid {
     display: grid;
@@ -237,7 +246,10 @@ const showDefault = !soldout;
   @media screen and (min-width: 800px) {
     img {
       padding-block: 0.75rem;
-      background-color: var();
+    }
+
+    h3 {
+      line-height: 0.4;
     }
   }
 </style>
