@@ -47,6 +47,7 @@
   }
 
   .btn {
+    display: block;
     margin-top: 2rem;
     width: 50%;
   }
@@ -60,8 +61,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: start;
-      margin-right: 30rem;
-      margin-left: 30rem;
+      margin-right: 15rem;
+      margin-left: 15rem;
     }
 
     .img_button {
@@ -78,14 +79,15 @@
       grid-column: 1;
       grid-row: 1;
       max-width: 25rem;
+      place-self: center;
     }
-  }
 
-  .btn2 {
-    display: block;
-  }
+    .btn {
+      display: none;
+    }
 
-  .btn {
-    display: none;
+    .btn2 {
+      display: block;
+    }
   }
 </style>
