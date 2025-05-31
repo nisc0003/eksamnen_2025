@@ -7,6 +7,41 @@
   <div class="newsletter_icon"><img src="../../public/Mail.svg" alt="" /></div>
 </section>
 
+<section class="newsletter_popup_grandparent">
+  <section class="newsletter_popup_parent">
+    <div class="newsletter_popup_container_1">
+      <div class="x">
+        <span class="span1"></span>
+        <span class="span2"></span>
+      </div>
+
+      <div class="newsletter_header">
+        <h2>Tilmeld dig vores nyhedsbrev</h2>
+      </div>
+
+      <div class="newsletter_text">
+        <p class="p_b">Og få månedlige opdateringer direkte fra bryggeriet!</p>
+        <p>
+          Et uforpligtende og gratis abonement, som du kan afmelde når som
+          helst.
+        </p>
+      </div>
+
+      <!-- ID'et bliver brugt til at kunne lave en javascript funktion som gør at hele containeren lukker når man trykker enter -->
+      <form class="footer_nyhedsbrev" id="newsletterForm">
+        <h5>Tilmeld dig vores nyhedsbrev!</h5>
+        <input
+          type="email"
+          placeholder="eksempel@gmail.dk"
+          id="email"
+          name="email"
+          required
+        />
+      </form>
+    </div>
+  </section>
+</section>
+
 <style>
   .newsletter {
     background-color: black;
@@ -21,6 +56,93 @@
     width: auto;
   }
 
+  .newsletter_popup_grandparent {
+    display: none;
+  }
+
+  .newsletter_popup_parent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .newsletter_popup_container_1 {
+    background: white;
+    height: 30rem;
+    width: 50rem;
+    padding: 2rem;
+  }
+
+  .x {
+    /* position: absolute; */
+    place-self: end;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  /* X lines */
+  .x span {
+    position: fixed;
+    width: 2rem;
+    height: 0.25rem;
+    background-color: black;
+    border-radius: 2px;
+  }
+
+  .span1 {
+    transform: rotate(45deg);
+  }
+
+  .span2 {
+    transform: rotate(-45deg);
+  }
+
+  .newsletter_header {
+    margin-bottom: 2rem;
+  }
+
+  .footer_nyhedsbrev {
+    display: grid;
+    grid-column: 1 / span 2;
+    margin-top: 2rem;
+  }
+
+  input {
+    border-radius: 50px;
+    padding-left: 5px;
+    width: 100%;
+    height: 3rem;
+  }
+
+  .inactive {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+
+  .newsletter_popup_grandparent.inactive {
+    display: none;
+  }
+
+  .newsletter_popup_grandparent.active {
+    display: block;
+  }
+
   @media screen and (min-width: 800px) {
     .newsletter {
       position: fixed;
@@ -33,3 +155,43 @@
     }
   }
 </style>
+
+<script>
+  const Newsletter = document.querySelector(".newsletter_icon");
+  const PopUp = document.querySelector(".newsletter_popup_grandparent");
+  const Newsletter_x = document.querySelector(".x");
+  const Newsletter_OutOfBox = document.querySelector(
+    ".newsletter_popup_parent",
+  );
+  const Form = document.getElementById("newsletterForm");
+
+  Newsletter.addEventListener("click", () => {
+    console.log("CLICKED");
+
+    PopUp.classList.add("active");
+    PopUp.classList.remove("inactive");
+  });
+
+  Newsletter_x.addEventListener("click", () => {
+    PopUp.classList.add("inactive");
+    PopUp.classList.remove("active");
+  });
+
+  //   Gør at når man klikker UDE af child container at vinduet lukke
+  Newsletter_OutOfBox.addEventListener("click", (event) => {
+    if (event.target === Newsletter_OutOfBox) {
+      PopUp.classList.add("inactive");
+      PopUp.classList.remove("active");
+    }
+  });
+
+  //   Det her er Javascript funktionen der gør at når man trykker enter på formen at den lukker
+  // (e) betyder event, den første linjer siger at når der sker et submit event i formen så skal koden ske
+  // e.preventdefualt er der for at stoppe browseren i at gøre dent "default" behavior når man submitter en form, hvilket er at sende formen det til en server og reload siden
+  Form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    PopUp.classList.add("inactive");
+    PopUp.classList.remove("active");
+    console.log("Newsletter form submitted!");
+  });
+</script>
