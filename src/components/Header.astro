@@ -28,15 +28,21 @@ import Basket from "./Basket.astro";
     </ul>
 
     <div class="flex">
-      <img src={Knap1.src} alt="" />
+      <img src={Knap1.src} alt="" class="basket_icon" />
       <img src={Knap2.src} alt="" />
     </div>
   </nav>
+
+<Basket />
 </header>
 
 
 
 <style>
+  .basket_icon:hover {
+    cursor: pointer;
+  }
+  
   img {
     height: 1.5rem;
   }

@@ -56,6 +56,10 @@
     width: auto;
   }
 
+  .newsletter_icon:hover {
+    cursor: pointer;
+  }
+
   .newsletter_popup_grandparent {
     display: none;
   }
@@ -83,7 +87,7 @@
   }
 
   .x {
-    /* position: absolute; */
+    position: relative;
     place-self: end;
     width: 2.5rem;
     height: 2.5rem;
@@ -91,11 +95,12 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    z-index: 1100;
   }
 
   /* X lines */
   .x span {
-    position: fixed;
+    position: absolute;
     width: 2rem;
     height: 0.25rem;
     background-color: black;
@@ -160,14 +165,12 @@
   const Newsletter = document.querySelector(".newsletter_icon");
   const PopUp = document.querySelector(".newsletter_popup_grandparent");
   const Newsletter_x = document.querySelector(".x");
-  const Newsletter_OutOfBox = document.querySelector(
-    ".newsletter_popup_parent",
-  );
+  // const Newsletter_OutOfBox = document.querySelector(
+  //   ".newsletter_popup_parent",
+  // );
   const Form = document.getElementById("newsletterForm");
 
   Newsletter.addEventListener("click", () => {
-    console.log("CLICKED");
-
     PopUp.classList.add("active");
     PopUp.classList.remove("inactive");
   });
@@ -175,15 +178,16 @@
   Newsletter_x.addEventListener("click", () => {
     PopUp.classList.add("inactive");
     PopUp.classList.remove("active");
+    console.log("X CLICKED");
   });
 
   //   Gør at når man klikker UDE af child container at vinduet lukke
-  Newsletter_OutOfBox.addEventListener("click", (event) => {
-    if (event.target === Newsletter_OutOfBox) {
-      PopUp.classList.add("inactive");
-      PopUp.classList.remove("active");
-    }
-  });
+  // Newsletter_OutOfBox.addEventListener("click", (event) => {
+  //   if (event.target === Newsletter_OutOfBox) {
+  //     PopUp.classList.add("inactive");
+  //     PopUp.classList.remove("active");
+  //   }
+  // });
 
   //   Det her er Javascript funktionen der gør at når man trykker enter på formen at den lukker
   // (e) betyder event, den første linjer siger at når der sker et submit event i formen så skal koden ske
