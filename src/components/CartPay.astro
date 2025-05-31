@@ -1,0 +1,112 @@
+---
+// @ts-check
+---
+
+<h4>Betaling</h4>
+
+<section class="betaling_container">
+  <div class="kort">
+    <div class="kort_div">
+      <img src="../../public/Ellipse10.png" alt="" class="ellipse" />
+      <img src="../../public/credit_cards.webp" class="credit" alt="" />
+    </div>
+    <hr />
+    <div class="kort_info">
+      <div class="solo">
+        <input
+          type="text"
+          placeholder="Kortnummer"
+          id="knummer"
+          name="kortnummer"
+        />
+      </div>
+
+      <div class="twotwo">
+        <input
+          type="text"
+          placeholder="Udløbsdato"
+          id="expdate"
+          name="udloeb"
+        />
+        <input
+          type="text"
+          placeholder="Sikkerhedskode"
+          id="scode"
+          name="sikkerhedskode"
+        />
+      </div>
+      <div class="solo">
+        <input
+          type="text"
+          placeholder="Navn på kortet"
+          id="knavn"
+          name="kortnavn"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="kort_div">
+      <img src="../../public/Ellipse11.png" alt="" class="ellipse" />
+      <img src="../../public/paypal.png" class="credit" alt="" />
+    </div>
+    <hr />
+    <div class="kort_div">
+      <img src="../../public/Ellipse11.png" alt="" class="ellipse" />
+      <img src="../../public/MP.png" class="credit" alt="" />
+    </div>
+    <hr />
+  </div>
+</section>
+
+<style>
+  hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 2px solid black;
+  }
+
+  section {
+    place-content: center;
+    place-self: center;
+    width: 40rem;
+  }
+
+  .kort_div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .credit {
+    height: 20px;
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .ellipse {
+    height: 10px;
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 2px;
+  }
+
+  .kort_info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .solo input {
+    width: 100%;
+  }
+
+  .twotwo {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    gap: 10px;
+  }
+  .twotwo input {
+    width: 50%;
+  }
+</style>
