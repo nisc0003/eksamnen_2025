@@ -1,0 +1,61 @@
+---
+//@ts-nocheck
+---
+
+<div id="button_filter" style="margin-bottom: 1rem;">
+  <button id="all" class="filter-btn">All</button>
+  <button id="Beer-Can" class="filter-btn">Beer Can</button>
+  <button id="Tilbehør" class="filter-btn">Tilbehør</button>
+  <button id="Case-offers" class="filter-btn">Case Offers</button>
+  <button id="Wild-Ales" class="filter-btn">Wild Ales</button>
+  <button id="Barrel-Aged" class="filter-btn">Barrel Aged</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll<HTMLElement>(
+      "#button_filter button",
+    );
+    const items = document.querySelectorAll<HTMLElement>("li[data-category2]");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.id;
+
+        items.forEach((item) => {
+          const cat = item.dataset.category2;
+          if (filter === "all" || cat === filter) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+          }
+        });
+
+        buttons.forEach((button) => button.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+  });
+</script>
+
+<style>
+  #button_filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #eee;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .filter-btn.active {
+    background-color: #222;
+    color: #fff;
+  }
+</style>

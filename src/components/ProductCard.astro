@@ -1,60 +1,243 @@
 ---
-const { img, title, price, path, id } = Astro.props;
+const {
+  img,
+  title,
+  title2,
+  price,
+  Old_price,
+  discount_percentage,
+  soldout,
+  category,
+  category2,
+  type,
+  path,
+} = Astro.props;
+
+const showSoldOut = soldout === true;
+const showDefault = !soldout;
 ---
 
-<li>
-  <article>
+<article>
+  <div class="flex">
+    <p>{category2} /</p>
+    <p>{category}</p>
+  </div>
+  <div class="card_image_grid">
+    {
+      discount_percentage && (
+        <div class="percentage__box">
+          <p class="percentage">{discount_percentage}</p>
+        </div>
+      )
+    }
     <img src={`/beer-card_images/${img}`} alt={title} />
-    <h2><a href={"/products/" + path}>{title}</a></h2>
-    <p>{price},-</p>
-    <button class="cta1">Add to basket</button>
-  </article>
-</li>
+  </div>
+  <div class="card_text_title">
+    <h3><a href={"/products/" + path}>{title}</a></h3>
+    {type && <h4>{type}</h4>}
+    {title2 && <h5>{title2}</h5>}
+  </div>
+  {
+    showDefault && (
+      <>
+        <div class="price_box">
+          <div>
+            <p class="price_text">Starting at</p>
+            <h6>{price},-</h6>
+          </div>
+          <div>
+            {Old_price && <p class="old_price">used to be</p>}
+            <h6 class="old_price">{Old_price}</h6>
+          </div>
+        </div>
+        <button class="cta1">Add to basket</button>
+      </>
+    )
+  }
+
+  {
+    showSoldOut && (
+      <>
+        <div class="price_box">
+          <div>
+            <p class="price_text">Udsolgt</p>
+            <h6 class="sold_out_h6">{price},-</h6>
+          </div>
+        </div>
+        <button class="cta_none">Udsolgt</button>
+      </>
+    )
+  }
+</article>
 
 <style>
-  li {
-    display: contents;
-  }
   article {
-    position: relative;
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: span 4;
-    background-color: #fff;
+    grid-row: 1 / span 5;
+    background-color: var(--font-color-white);
     border-radius: 10px;
-    padding-block-end: 1rem;
-    filter: drop-shadow(5px 5px 5px #eee);
+    filter: drop-shadow(0px 8px 8px #0000002c);
+    overflow: hidden;
+    gap: 0px;
+  }
+
+  .flex {
+    margin-inline: 1rem;
+    place-self: top;
+    place-self: end;
+    margin-top: 1rem;
+  }
+
+  .card_text_title {
+    display: grid;
+    gap: 0.25rem;
+    padding-inline: 0.25rem;
+    margin-inline: 1.25rem;
+    text-align: center;
+    place-self: center;
+    grid-row: 3;
   }
 
   img {
-    object-fit: cover;
+    place-self: center;
+    width: 100%;
+    height: auto;
+    padding-inline: 5rem;
     place-self: center;
   }
 
   article:hover img {
-    opacity: 80%;
+    opacity: 20%;
+    transition-duration: 0.3s;
   }
 
   button {
     margin-inline: 1rem;
+    place-self: bottom;
+    border-radius: 3px;
+    width: 100%;
+    text-wrap: nowrap;
+    margin: 0px;
+    padding-block: 2rem;
   }
 
-  h2 a {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #000;
+  h3 {
+    line-height: 80%;
+  }
+
+  h3 a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--second-color);
     text-decoration: none;
+    line-height: 0.1;
+    text-align: center;
+    place-self: center;
   }
 
-  h2 a::after {
+  h3 a:hover {
+    transition-duration: 0.3s;
+    opacity: 20%;
+  }
+
+  h3 a::after {
     content: "";
     position: absolute;
     inset: 0;
+    text-decoration: underline;
+  }
+
+  .price_box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: solid 2px var(--second-color);
+    border-radius: 3px;
+    padding-inline: 1.5rem;
+    padding-top: 0.5rem;
+    margin-inline: 0.5rem;
+    place-self: bottom;
+  }
+
+  .price_text {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 92%;
+    text-align: left;
+    place-self: left;
+  }
+
+  .sold_out_h6 {
+    text-decoration: line-through;
+    opacity: 90%;
+  }
+
+  .old_price {
+    text-decoration: line-through;
+    font-weight: 500;
+    opacity: 90%;
+    text-align: right;
   }
 
   p {
-    text-align: right;
     font-weight: 500;
     opacity: 90%;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-style: oblique;
+    text-transform: uppercase;
+    margin: 0px;
+    opacity: 85%;
+  }
+
+  h5 {
+    font-size: 0.75rem;
+    font-style: oblique;
+    text-transform: uppercase;
+    margin: 0px;
+    opacity: 75%;
+  }
+
+  h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-style: oblique;
+    font-size: 1.75rem;
+    text-align: left;
+    place-self: left;
+  }
+  .card_image_grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .percentage {
+    font-size: 2rem;
+    border-radius: 100px;
+    color: var(--font-color-white);
+    opacity: 100%;
+  }
+
+  .percentage__box {
+    display: grid;
+    background-color: var(--second-color);
+    z-index: 2;
+    width: min-content;
+    height: min-content;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    place-self: start end;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    opacity: 80%;
+  }
+  @media screen and (min-width: 800px) {
+    img {
+      padding-block: 0.75rem;
+      background-color: var();
+    }
   }
 </style>
