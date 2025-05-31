@@ -1,0 +1,89 @@
+---
+
+---
+
+<section class="season_container">
+  <div class="season_text">
+    <h1>Denne sæsons øl</h1>
+    <p class="p_b p_bold">Farsdags Øl 2025</p>
+    <p>
+      Dette års farsdags øl, Il Capo, er en IPA med smag af Chinook, Topaz og
+      Amarillo. En kompleks og balanceret smagsprofil, hvor både frugtighed,
+      krydderi og bitterhed spiller sammen. Fejre fædrene i dit liv med denne
+      øl!
+    </p>
+  </div>
+
+  <div class="season_image">
+    <img src="../../public/logo.svg" alt="" class="logo" />
+    <img src="../../public/seasonal_beer.svg" alt="" class="beer_img" />
+  </div>
+
+  <div class="btns">
+    <button class="buy_btn"> <h1>KØB HER</h1> </button>
+    <button class="read_btn"> <h1>LÆS MERE</h1> </button>
+  </div>
+</section>
+
+<style>
+  .season_container {
+    margin: 2rem 4.5rem 6rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .p_bold {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .logo {
+    height: 10rem;
+    margin-bottom: 2rem;
+  }
+
+  .season_image,
+  .beer_img {
+    border-radius: 25px;
+  }
+
+  .season_image {
+    margin-top: 3rem;
+    padding: 4rem;
+    width: 35rem;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow:
+      86px 238px 71px 0px rgba(0, 0, 0, 0),
+      55px 152px 65px 0px rgba(0, 0, 0, 0.01),
+      31px 86px 55px 0px rgba(0, 0, 0, 0.03),
+      14px 38px 40px 0px rgba(0, 0, 0, 0.04),
+      3px 10px 22px 0px rgba(0, 0, 0, 0.05);
+  }
+
+  .btns {
+    margin-top: 5rem;
+    width: 100%; /* Ensure .btns fills its parent */
+  }
+
+  .read_btn {
+    display: none;
+  }
+
+  .buy_btn,
+  .read_btn {
+    width: 100%; /* Make button fill the .btns container */
+    padding: 1rem;
+    background-color: #000; /* Example styles */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .buy_btn h1,
+  .read_btn h1 {
+    color: #fff;
+  }
+</style>
