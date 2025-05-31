@@ -22,21 +22,27 @@ const showDefault = !soldout;
     <p>{category2} /</p>
     <p>{category}</p>
   </div>
+
+  <!-- Ny wrapper med relative position -->
   <div class="card_image_grid">
-    {
-      discount_percentage && (
-        <div class="percentage__box">
-          <p class="percentage">{discount_percentage}</p>
-        </div>
-      )
-    }
-    <img src={`/beer-card_images/${img}`} alt={title} />
+    <div class="image_wrapper">
+      {
+        discount_percentage && (
+          <div class="percentage__box">
+            <p class="percentage">{discount_percentage}</p>
+          </div>
+        )
+      }
+      <img src={`/beer-card_images/${img}`} alt={title} />
+    </div>
   </div>
+
   <div class="card_text_title">
     <h3><a href={"/products/" + path}>{title}</a></h3>
     {type && <h4>{type}</h4>}
     {title2 && <h5>{title2}</h5>}
   </div>
+
   {
     showDefault && (
       <>
@@ -50,7 +56,19 @@ const showDefault = !soldout;
             <h6 class="old_price">{Old_price}</h6>
           </div>
         </div>
-        <button class="cta1">Add to basket</button>
+        <button
+          class="cta1 add-to-cart"
+          data-product={JSON.stringify({
+            title,
+            title2,
+            price,
+            Old_price,
+            img,
+            path,
+          })}
+        >
+          Add to basket
+        </button>
       </>
     )
   }
@@ -242,6 +260,35 @@ const showDefault = !soldout;
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
     opacity: 80%;
+  }
+
+  .image_wrapper {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  .percentage__box {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: grid;
+    background-color: var(--second-color);
+    z-index: 2;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    opacity: 90%;
+  }
+
+  .percentage {
+    font-size: 2rem;
+    border-radius: 100px;
+    color: var(--font-color-white);
+    margin: 0;
+    padding: 0;
   }
   @media screen and (min-width: 800px) {
     img {

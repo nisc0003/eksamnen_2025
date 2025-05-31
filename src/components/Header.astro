@@ -7,70 +7,72 @@ import Basket from "./Basket.astro";
 ---
 
 <header>
-  <div class="top_header">
-    <a href="/" class="logo">
-  <img src="/logo_white.svg" alt="Logo" />
-</a>
+  <div class="header_main">
+    <div class="top_header">
+      <a href="/" class="logo">
+        <img src="/logo_white.svg" alt="Logo" />
+      </a>
 
-    <div class="burger">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
     </div>
+    <nav class="nav_ul">
+      <ul>
+        <li><a href="/">Forside</a></li>
+        <li><a href="/products">Shop</a></li>
+        <li><a href="/beer-club">Beer-club</a></li>
+        <li><a href="/wip">Brewery-tours</a></li>
+        <li><a href="/wip">Information</a></li>
+      </ul>
+
+      <div class="flex">
+        <img src={Knap1.src} alt="" class="basket_icon" />
+        <img src={Knap2.src} alt="" />
+      </div>
+    </nav>
   </div>
-  <nav class="nav_ul">
-    <ul>
-      <li><a href="/">Forside</a></li>
-      <li><a href="/products">Shop</a></li>
-      <li><a href="/beer-club">Beer-club</a></li>
-      <li><a href="/wip">Brewery-tours</a></li>
-      <li><a href="/wip">Information</a></li>
-    </ul>
-
-    <div class="flex">
-      <img src={Knap1.src} alt="" class="basket_icon" />
-      <img src={Knap2.src} alt="" />
-    </div>
-  </nav>
-
-<Basket />
+  <Basket />
 </header>
 
-
-
 <style>
+  .header_main {
+    z-index: 99;
+  }
   .basket_icon:hover {
     cursor: pointer;
   }
-  
+
   img {
     height: 1.5rem;
   }
 
   .top_header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* centers children vertically */
-  background-color: var(--second-color);
-  padding: 2rem;
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    place-content: center;
+    background-color: var(--second-color);
+    padding: 2rem;
+  }
 
-  .logo{
+  .logo {
     place-self: start;
     height: 4rem;
-    img{
+    img {
       height: 4rem;
       width: auto;
     }
   }
 
-  .burger{
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  cursor: pointer;
-}
-  
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    cursor: pointer;
+  }
 
   header {
     background-color: var(--second-color);
@@ -106,9 +108,8 @@ import Basket from "./Basket.astro";
     width: 30px;
     height: 20px;
     cursor: pointer;
-        /* margin-top: auto;
+    /* margin-top: auto;
         margin-bottom: auto; */
-
   }
 
   .burger .line {
@@ -141,7 +142,7 @@ import Basket from "./Basket.astro";
 
     .burger.active .line:nth-child(3) {
       /* transform: rotate(-45deg) translate(5px, -5px); */
-      transform: rotate(-45deg) translate(14px,-12px);
+      transform: rotate(-45deg) translate(14px, -12px);
       transition: 0.2s linear;
     }
 
@@ -193,88 +194,84 @@ import Basket from "./Basket.astro";
       }
     }
 
-    .logo {
-    }
-    header {
-      padding: 1rem 1rem;
-      display: grid;
-      background-color: var(--second-color);
-    }
+  .logo {
+  }
+  header {
+    padding: 0.5rem 0.5rem;
+    display: grid;
+    background-color: var(--second-color);
+  }
 
-    nav {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      justify-content: center;
-      position: relative;
-    }
+  nav {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    position: relative;
+  }
 
-    ul {
-      display: flex;
-      place-self: center;
-      list-style-type: none;
-      gap: calc(1vw + 2rem);
-      margin-right: 6rem;
-      margin-left: 6rem;
-    }
+  ul {
+    display: flex;
+    place-self: center;
+    list-style-type: none;
+    gap: calc(1vw + 2rem);
+    margin-right: 6rem;
+    margin-left: 6rem;
+  }
 
-    li {
-      border: solid var(--second-color) 2px;
-      padding-inline: 0.5rem;
-      padding-block: 0.125rem;
-    }
+  li {
+    border: solid var(--second-color) 2px;
+    padding-inline: 0.5rem;
+    padding-block: 0.125rem;
+  }
 
-    li:hover {
-      animation: draw-outline 1s;
-      animation-direction: alternate;
-      padding-inline: 0.5rem;
-      padding-block: 0.125rem;
-    }
+  li:hover {
+    animation: draw-outline 1s;
+    animation-direction: alternate;
+    padding-inline: 0.5rem;
+    padding-block: 0.125rem;
+  }
 
-    @keyframes draw-outline {
-      0% {
-      }
-
-      25% {
-        border-top: solid white 2px;
-      }
-
-      50% {
-        border-right: solid white 2px;
-      }
-
-      75% {
-        border-bottom: solid white 2px;
-      }
-
-      100% {
-        border: solid white 2px;
-      
+  @keyframes draw-outline {
+    0% {
     }
 
-    a.logo {
-      font-weight: bold;
-      font-size: 3rem;
-      color: white;
-      place-self: center;
+    25% {
+      border-top: solid white 2px;
     }
 
-    .burger {
-      display: none;
+    50% {
+      border-right: solid white 2px;
+    }
+
+    75% {
+      border-bottom: solid white 2px;
+    }
+
+    100% {
+      border: solid white 2px;
     }
   }
-  
+
+  /* Disse hører ikke hjemme i @keyframes */
+  a.logo {
+    font-weight: bold;
+    font-size: 3rem;
+    color: white;
+    place-self: center;
+  }
+
+  .burger {
+    display: none;
+  }
 </style>
 
-<script>
+<script is="client">
+  const burger = document.querySelector(".burger");
+  const menu = document.querySelector("nav");
 
-    const burger = document.querySelector('.burger');
-    const menu = document.querySelector('nav');
-
-    burger.addEventListener("click", () => {
+  burger.addEventListener("click", () => {
     burger.classList.toggle("active");
     menu.classList.toggle("active");
-});
-
-
+  });
 </script>
