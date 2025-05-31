@@ -1,0 +1,91 @@
+---
+// @ts-check
+---
+
+<section class="beer_container">
+  <div class="beer_text">
+    <h2>Beer Club</h2>
+    <p>
+      Bliv medlem af Alefarm Beer Club og få hver måned 12 sprudlende friske og
+      spændende øl direkte hjem til dig. Som medlem får du også adgang til
+      eksklusive sæsonrabatter og meget mere. Perfekt til dig, der elsker
+      kvalitets Craft Beer!
+    </p>
+    <button class="cta2 btn2">LÆS MERE</button>
+  </div>
+
+  <div class="img_button">
+    <img src="../../public/alefarm_box.webp" alt="" />
+    <button class="cta2 btn">LÆS MERE</button>
+  </div>
+</section>
+
+<style>
+  .beer_container {
+    margin: 2rem 4.5rem 6rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .beer_text {
+    grid-column: 1;
+    grid-row: 2;
+    place-self: center;
+  }
+
+  .beer_text h2,
+  p {
+    margin-bottom: 2rem;
+  }
+
+  .img_button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+  }
+
+  .btn {
+    margin-top: 2rem;
+    width: 50%;
+  }
+
+  .btn2 {
+    display: none;
+  }
+
+  @media (min-width: 800px) {
+    .beer_container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      margin-right: 30rem;
+      margin-left: 30rem;
+    }
+
+    .img_button {
+      grid-column: 2;
+      place-self: center;
+    }
+
+    .img_button img {
+      max-height: 25rem;
+      width: auto;
+    }
+
+    .beer_text {
+      grid-column: 1;
+      grid-row: 1;
+      max-width: 25rem;
+    }
+  }
+
+  .btn2 {
+    display: block;
+  }
+
+  .btn {
+    display: none;
+  }
+</style>
