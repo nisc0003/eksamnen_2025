@@ -2,6 +2,7 @@
 //@ts-nocheck
 import ProductCard from "../components/ProductCard.astro";
 import Beerfilter from "../components/Beer-Filter.astro";
+import Beerfilter2 from "../components/Beer-Filer2.astro";
 
 // Fetch products
 const url =
@@ -15,32 +16,32 @@ const options = {
 const data = await fetch(url, options).then((res) => res.json());
 ---
 
-<Beerfilter />
-
-<nav></nav>
-
-<ul class="product-grid">
-  {
-    data.map((product) => (
-      <li data-category2={`${product.category2}`}>
-        <ProductCard
-          img={product.img}
-          title={product.title}
-          title2={product.title2}
-          price={product.price}
-          Old_price={product.Old_price}
-          discount_percentage={product.discount_percentage}
-          soldout={product.soldout}
-          category={product.category}
-          category2={product.category2}
-          type={product.type}
-          path={product.id}
-        />
-      </li>
-    ))
-  }
-</ul>
-
+<!-- <Beerfilter /> -->
+<Beerfilter2 />
+<section>
+  <ul class="product-grid">
+    {
+      data.map((product) => (
+        <li data-category2={`${product.category2}`}>
+          <ProductCard
+            img={product.img}
+            title={product.title}
+            title2={product.title2}
+            price={product.price}
+            Old_price={product.Old_price}
+            discount_percentage={product.discount_percentage}
+            soldout={product.soldout}
+            category={product.category}
+            category2={product.category2}
+            type={product.type}
+            path={product.id}
+            date={product.date}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>
 <style>
   section {
     margin-right: 4vw;
@@ -48,9 +49,10 @@ const data = await fetch(url, options).then((res) => res.json());
   }
   ul.product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     grid-template-rows: auto auto 1fr auto auto;
-    gap: 1rem;
+    gap: 2ssrem;
+
     list-style: none;
     padding: 2rem 1rem;
   }
@@ -63,8 +65,8 @@ const data = await fetch(url, options).then((res) => res.json());
 
   @media screen and (min-width: 800px) {
     section {
-      margin-right: 10vw;
-      margin-left: 10vw;
+      margin-right: 12vw;
+      margin-left: 12vw;
     }
     ul {
       gap: 6rem;
