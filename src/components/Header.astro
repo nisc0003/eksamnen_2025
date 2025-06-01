@@ -34,12 +34,14 @@ import Basket from "./Basket.astro";
       </div>
     </nav>
   </div>
-  <Basket />
 </header>
+
+<Basket />
 
 <style>
   .header_main {
-    z-index: 99;
+    z-index: 1000;
+    height: 16vh;
   }
   .basket_icon:hover {
     cursor: pointer;
@@ -76,6 +78,7 @@ import Basket from "./Basket.astro";
 
   header {
     background-color: var(--second-color);
+    z-index: 1000;
   }
 
   nav {
@@ -154,7 +157,7 @@ import Basket from "./Basket.astro";
       width: 100%;
       /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); */
       background-color: black;
-      z-index: 1;
+      z-index: 1000;
     }
 
     .nav_ul.active ul li {
@@ -185,7 +188,6 @@ import Basket from "./Basket.astro";
       /* grid-template-columns: 1fr 1fr; */
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 1%;
       height: 5rem;
       background-color: var(--second-color);
       img{
@@ -197,7 +199,6 @@ import Basket from "./Basket.astro";
   .logo {
   }
   header {
-    padding: 0.5rem 0.5rem;
     display: grid;
     background-color: var(--second-color);
   }
