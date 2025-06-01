@@ -268,11 +268,20 @@ import Basket from "./Basket.astro";
 </style>
 
 <script is="client">
-  const burger = document.querySelector(".burger");
-  const menu = document.querySelector("nav");
+  const burger = document.querySelector('.burger');
+  const menu = document.querySelector('nav');
+  const basketIcon = document.querySelector('.basket_icon');
 
   burger.addEventListener("click", () => {
     burger.classList.toggle("active");
     menu.classList.toggle("active");
+  });
+
+  // Add this to close menu when basket is clicked
+  basketIcon.addEventListener("click", () => {
+    if (menu.classList.contains("active")) {
+      burger.classList.remove("active");
+      menu.classList.remove("active");
+    }
   });
 </script>
