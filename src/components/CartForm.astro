@@ -1,0 +1,124 @@
+---
+// @ts-check
+import Knap3 from "../assets/3.svg";
+---
+
+<section class="cartForm_container">
+  <div>
+    <h1>HEJSA</h1>
+  </div>
+
+  <div class="h4_email">
+    <h4>Kontakt oplysninger</h4>
+    <input
+      type="email"
+      placeholder="eksempel@gmail.dk"
+      id="email"
+      name="email"
+      required
+    />
+    <p>Send mails om nyheder og tilbud gennem nyhedsbrev</p>
+    <img src={Knap3.src} alt="" />
+  </div>
+
+  <div class="form2">
+    <div class="levering two">
+      <h4>Levering</h4>
+    </div>
+
+    <div>
+      <input
+        type="text"
+        placeholder="Telefonnummer"
+        id="tnummer"
+        name="nummer"
+      />
+    </div>
+
+    <div class="twotwo">
+      <input type="text" placeholder="Fornavn" id="fnavn" name="fornavn" />
+      <input type="text" placeholder="Efternavn" id="enavn" name="efternavn" />
+    </div>
+
+    <div>
+      <input
+        type="text"
+        placeholder="Firma (Valgri)"
+        id="firma_valgri"
+        name="firma"
+      />
+    </div>
+
+    <div>
+      <input
+        type="text"
+        placeholder="Adresse"
+        id="adresse_bosted"
+        name="adresse"
+      />
+    </div>
+
+    <div>
+      <input
+        type="text"
+        placeholder="Leveringsnotat (Valgri)"
+        id="leveringsnotat_valgfri"
+        name="levering"
+      />
+    </div>
+
+    <div class="twotwo">
+      <input
+        type="text"
+        placeholder="Postnummber"
+        id="pnummer"
+        name="postnummer"
+      />
+      <input type="text" placeholder="By" id="by_city" name="by" />
+    </div>
+
+    <div>
+      <input type="text" placeholder="Land" id="cntry" name="land" />
+    </div>
+
+    <div class="leveringsmetode">
+      <h4>Leveringsmetode</h4>
+      <input
+        type="text"
+        placeholder="Angiv din leveringsadresse for at se de tilgængelige leveringsmetoder."
+        id="leveringsmetode"
+        name="levering"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    place-self: center;
+    background-color: var(--main-color);
+  }
+
+  section input {
+    margin-bottom: 1rem;
+    height: 50px;
+    width: 100%;
+  }
+
+  .h4_email img {
+    width: auto;
+    max-height: 5rem;
+    margin-bottom: 1rem;
+  }
+
+  .twotwo {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .leveringsmetode input {
+    height: 10rem;
+    text-align: center;
+  }
+</style>
