@@ -1,12 +1,9 @@
-<!-- INDKØBSKURVEN (overlay) -->
 <section class="cart_container inactive">
   <div class="x">
     <span class="span1"></span>
     <span class="span2"></span>
   </div>
-
-  <button class="delete-all">Slet alt</button>
-
+  <button class="delete-all cta1">Slet alt</button>
   <!-- Produktliste og kontrolknap -->
   <section class="cart_sub">
     <div class="cart_controls"></div>
@@ -17,117 +14,145 @@
   <section class="price_amount">
     <div class="price_original">
       <p>Subtotal</p>
-      <p>0,00 kr.</p>
+      <p></p>
     </div>
     <hr />
     <div class="price_discounted">
       <p>Rabat</p>
-      <div class="discount"><p>0,00 kr.</p></div>
+      <div class="discount"><p></p></div>
     </div>
     <hr />
   </section>
-
   <!-- Total pris -->
   <section class="total_price">
     <h3>Pris i alt</h3>
     <div class="price_value">
-      <h3>0,00</h3>
-      <h3>KR</h3>
+      <h3></h3>
     </div>
   </section>
-
   <!-- Knapper til checkout eller kurv-side -->
   <section class="cart_buttons">
-    <button class="cart_page"><p>Gå til kurv</p></button>
-    <button class="buy_page"><p>Køb nu</p></button>
+    <a href="../pages/cart.astro">
+      <button class="cta_basket">Gå til kurv</button>
+    </a>
+
+    <a href="">
+      <button class="cta_buy">Køb nu</button>
+    </a>
   </section>
 </section>
 
 <script is="client">
   // Eksisterende JavaScript forbliver uændret
+
+  // Find kurv-ikonet, kurv-menuen og lukke-knappen
   const basket = document.querySelector(".basket_icon");
   const basketMenu = document.querySelector(".cart_container");
   const basketClose = document.querySelector(".x");
 
+  // Når man klikker på kurv-ikonet, vis kurven (få den til at glide ind)
   basket?.addEventListener("click", () => {
-    basketMenu.classList.add("active_anim", "active");
-    basketMenu.classList.remove("inactive", "inactive_anim");
+    basketMenu.classList.add("active");
+    basketMenu.classList.remove("inactive");
   });
 
+  // Når man klikker på krydset (x), luk kurven (få den til at glide væk)
   basketClose?.addEventListener("click", () => {
-    basketMenu.classList.add("inactive_anim", "inactive");
-    basketMenu.classList.remove("active", "active_anim");
+    basketMenu.classList.add("inactive");
+    basketMenu.classList.remove("active");
   });
-
+  // Tjek om der er gemt varer i localStorage – hvis ikke, lav en tom kurv
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+  // Funktion der opdaterer indholdet i visningen af kurven
   const updateCartDisplay = () => {
+    // Find det sted på siden hvor varerne skal vises
     const cartSub = document.querySelector(".cart_sub .cart_list");
+    // Tøm det gamle indhold
     cartSub.innerHTML = "";
 
+    // Den samlede pris uden rabat
     let subtotal = 0;
+    // Den samlede rabat
     let discountTotal = 0;
 
+    // Loop igennem hver vare i kurven
     cart.forEach((item, index) => {
+      // Hent info om varen – og sørg for at quantity altid er sat til noget (default 1)
       const { img, title, title2, price, Old_price, quantity = 1 } = item;
+      // Lav prisen om til et tal (hvis det fx er en tekst)
       const currentPrice = parseFloat(price);
+      // Samme med gammel pris – hvis den findes
       const oldPrice = Old_price ? parseFloat(Old_price) : null;
+      // Udregn rabat for denne vare
       const discount = oldPrice ? (oldPrice - currentPrice) * quantity : 0;
+      // Læg denne vares pris til samlet pris
       subtotal += currentPrice * quantity;
+      // Læg rabat til total rabat
       discountTotal += discount;
 
+      // Lav HTML'en for hver enkelt vare i kurven
       const product = document.createElement("div");
       product.className = "product";
       product.innerHTML = `
   <div class="product_image">
-    <img src="/beer-card_images/${img || "placeholder.webp"}" alt="${title}" />
+    <img class="product_image" src="/beer-card_images/${img}" alt="${title}" />
   </div>
   <div class="product_info">
     <h5 class="product_title">${title}</h5>
     ${title2 ? `<h6 class="product_subtitle">${title2}</h6>` : ""}
-
-
     <div>
-      <p class="p_quantity">${quantity} stk.</p>
-    </div>
+       <div class="amount_grid">
+        <p class="p_quantity">${quantity} stk.</p>
+              <div class="amount_grid">
+        <button class="quantity-up" data-index="${index}">▲</button>
+        <button class="quantity-down" data-index="${index}">▼</button>
+      </div>
+</div>
+      ${
+        Old_price
+          ? `
+        <div class="old_price_row">
+          <h6 class="h6_Old_price">${Old_price} kr.</h6>
+        </div>
+        `
+          : ""
+      }
 
-        ${
-          Old_price
-            ? `
-    <div class="old_price_row">
-      <h6 class="h6_Old_price">${Old_price} kr.</h6>
-    </div>
-    `
-            : ""
-        }
-    
-    <div class="total_row">
-      <h6 class="h6_price"> ${(currentPrice * quantity).toFixed(2)} DKK.</h6>
-    </div>
-    
-    
-    <button class="delete-item" data-index="${index}">Slet</button>
-  </div>
+      <div class="total_row">
+        <h6 class="h6_price">${(currentPrice * quantity).toFixed(2)} DKK.</h6>
+      </div>
+
+      <button class="delete-item" data-index="${index}">Slet</button>
+    </div> 
+  </div> 
 `;
 
       cartSub.appendChild(product);
     });
 
+    // Vis totaler i bunden af kurven
     document.querySelector(".price_original p:last-child").textContent =
-      subtotal.toFixed(2) + " kr.";
-    document.querySelector(".discount p").textContent =
-      discountTotal.toFixed(2) + " kr.";
-    document.querySelector(".total_price .price_value h3").textContent = (
-      subtotal - discountTotal
-    ).toFixed(2);
+      subtotal.toFixed(2) + " DKK.";
 
+    document.querySelector(".discount p").textContent =
+      discountTotal.toFixed(2) + " DKK.";
+
+    document.querySelector(".total_price .price_value h3").textContent =
+      (subtotal - discountTotal).toFixed(2) + " DKK.";
+
+    // Gem opdateret kurv i localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("add-to-cart")) {
-      const productData = JSON.parse(e.target.getAttribute("data-product"));
+  // Lyt efter klik overalt på siden
+  document.addEventListener("click", (event) => {
+    // Hvis der klikkes på en "add-to-cart" knap
+    if (event.target.classList.contains("add-to-cart")) {
+      const productData = JSON.parse(event.target.getAttribute("data-product"));
       productData.quantity = 1;
+
+      // Tjek om varen allerede er i kurven (baseret på titel og undertitel)
       const existingIndex = cart.findIndex(
         (item) =>
           item.title === productData.title &&
@@ -141,26 +166,53 @@
       }
 
       updateCartDisplay();
-      basketMenu.classList.add("active_anim", "active");
-      basketMenu.classList.remove("inactive", "inactive_anim");
+      basketMenu.classList.add("active");
+      basketMenu.classList.remove("inactive");
     }
 
-    if (e.target.classList.contains("delete-all")) {
+    // Hvis man klikker på "slet alle"
+    if (event.target.classList.contains("delete-all")) {
       cart = [];
       updateCartDisplay();
     }
 
-    if (e.target.classList.contains("delete-item")) {
-      const index = parseInt(e.target.getAttribute("data-index"));
+    // Hvis man klikker på en enkelt slet-knap
+    if (event.target.classList.contains("delete-item")) {
+      // __________________________
+      // Fjern en enkelt vare baseret på dens index
+      const index = parseInt(event.target.getAttribute("data-index"));
       if (!isNaN(index)) {
         cart.splice(index, 1);
         updateCartDisplay();
       }
+      // __________________________
     }
+
+    // __________________________
+    // Hvis man klikker på pil OP (quantity-up)
+    if (event.target.classList.contains("quantity-up")) {
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index)) {
+        cart[index].quantity += 1;
+        updateCartDisplay();
+      }
+    }
+
+    // Hvis man klikker på pil NED (quantity-down)
+    if (event.target.classList.contains("quantity-down")) {
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index) && cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+        updateCartDisplay();
+      }
+    }
+    // __________________________
   });
 
+  // Find header-elementet så vi kan beregne hvor højt kurven skal sidde
   const header = document.querySelector("header");
 
+  // Funktion der sætter kurvens top-position i forhold til headerens højde
   const setCartTop = () => {
     const headerHeight = header.offsetHeight;
     if (!basketMenu.classList.contains("scrolled-past")) {
@@ -168,8 +220,9 @@
       basketMenu.style.height = `calc(100vh - ${headerHeight}px)`;
     }
   };
-
+  // Når man scroller – flyt kurven op hvis man er scrollet forbi headeren
   window.addEventListener("scroll", () => {
+    // Hvor langt ned vi er scrollet
     const scrollY = window.scrollY;
     const headerHeight = header.offsetHeight;
 
@@ -183,8 +236,10 @@
     }
   });
 
+  // Når vinduet ændrer størrelse, genberegn top-position for kurven
   window.addEventListener("resize", setCartTop);
 
+  // Når siden er færdig med at loade:
   document.addEventListener("DOMContentLoaded", () => {
     updateCartDisplay();
     setCartTop();
@@ -192,46 +247,46 @@
 </script>
 
 <style>
-  /* OVERLAY: Fast i højre side, under header, 30% bred på store skærme */
   .cart_container {
     position: fixed;
     right: 0;
     width: 100vw;
     height: auto;
-    background: var(--font-color-white); /* Hvid baggrund */
+    background: var(--font-color-white);
     z-index: 10;
     padding: 2rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition:
-      top 0.3s ease,
-      height 0.3s ease,
-      transform 0.4s ease;
-    transform: translateY(-200%);
+    z-index: 99;
   }
 
   /* Når aktiv, glidende ind */
   .cart_container.active {
-    transform: translateY(0%);
+    transition-duration: 1s;
+    transform: translateX(0%);
+  }
+
+  .cart_container.inactive {
+    transition-duration: 1s;
+    transform: translateX(200%);
   }
 
   /* Når scrollet forbi header fylder kurven hele højden */
   .cart_container.scrolled-past {
-    top: 0 !important;
-    height: 100vh !important;
+    transition-duration: 0.5s;
   }
 
   /* Typografi - Montserrat til overskrifter, Inter til brødtekst */
   .cart_container h3 {
     font-family: "Montserrat", sans-serif;
-    color: var(--second-color); /* Sort tekst */
+    color: var(--second-color);
     font-weight: 700;
   }
 
   .cart_container p {
     font-family: "Inter", sans-serif;
-    color: var(--second-color); /* Sort tekst */
+    color: var(--second-color);
   }
 
   /* Luk-knap (X) øverst højre */
@@ -248,7 +303,7 @@
     position: absolute;
     width: 2rem;
     height: 0.25rem;
-    background: var(--second-color); /* Sort farve til X */
+    background: var(--second-color);
     border-radius: 2px;
   }
 
@@ -268,11 +323,13 @@
   }
 
   .delete-all {
-    background: var(--second-color); /* Sort baggrund */
-    color: var(--font-color-white); /* Hvid tekst */
+    background: var(--second-color);
+    color: var(--font-color-white);
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
+
+    margin-top: 1rem;
     cursor: pointer;
     font-family: "Inter", sans-serif;
     font-weight: 600;
@@ -285,10 +342,54 @@
     margin: 2rem 0 1rem 0;
   }
 
-  :global(.product_image img) {
-    max-width: 100%;
-    max-height: 100px;
+  :global(.quantity-up, .quantity-down) {
+    place-self: center;
+    object-fit: cover;
+    padding: 25%;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: var(--font-color-white);
+    color: var(--second-color);
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 1px 2px 0px;
+  }
+  button {
+    display: grid;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .cta_buy {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+  }
+
+  .cta_buy:hover {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  .cta_basket {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  .cta_basket:hover {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+  }
+  :global(.product_image) {
+    display: flex;
     object-fit: contain;
+    max-height: 150px;
   }
   /* Grid-layout for produkter */
   :global(.cart_list) {
@@ -300,16 +401,25 @@
   :global(.product) {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 1rem;
     align-items: start;
   }
 
+  :global(.amount_grid) {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row: 1fr;
+    gap: 0.75rem;
+    width: min-content;
+    place-content: left;
+    margin-bottom: 1rem;
+  }
   :global(.product_title) {
     text-transform: uppercase;
     font-weight: 700;
   }
   :global(.h6_price) {
     font-style: oblique;
+    font-size: 1rem;
     font-weight: 600;
   }
 
@@ -323,10 +433,14 @@
     opacity: 80%;
   }
 
-  .product_image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  :global(.h6_price) {
+    font-style: oblique;
+    opacity: 80%;
+  }
+  h3 {
+    font-size: 1.5rem;
+    color: var(--second-color);
+    font-weight: bold;
   }
 
   .product_info {
@@ -339,13 +453,13 @@
     margin: 0;
     font-size: 0.9rem;
     font-family: "Inter", sans-serif;
-    color: var(--second-color); /* Sort tekst */
+    color: var(--second-color);
   }
 
   /* Gammel pris med gennemstregning */
   .old_price p {
     text-decoration: line-through;
-    color: #777; /* Lysere grå til gennemstreget pris */
+    color: #777;
   }
 
   /* Prisoversigt margener */
@@ -354,7 +468,6 @@
     margin: 1rem 0;
   }
 
-  .price_amount > div,
   .total_price {
     display: flex;
     justify-content: space-between;
@@ -362,7 +475,8 @@
 
   /* Knapper nederst i kurven */
   .cart_buttons {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
 
@@ -377,17 +491,28 @@
   }
 
   .cart_page {
-    background: var(--font-color-white); /* Hvid baggrund */
-    color: var(--second-color); /* Sort tekst */
+    background: var(--font-color-white);
+    color: var(--second-color);
     border: 1px solid var(--second-color);
   }
 
   .buy_page {
-    background: var(--second-color); /* Sort baggrund */
-    color: var(--font-color-white); /* Hvid tekst */
+    background: var(--second-color);
+    color: var(--font-color-white);
   }
 
-  /* Media query til større skærme */
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .quantity-input {
+    width: 60px;
+    padding: 0.25rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+  }
   @media (min-width: 800px) {
     .cart_container {
       width: 30vw;

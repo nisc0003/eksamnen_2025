@@ -19,20 +19,20 @@ const showDefault = !soldout;
 
 <article>
   <div class="flex">
-    <p>{category2} /</p>
-    <p>{category}</p>
+    <!-- <p>{category2} /</p>
+    <p>{category}</p> -->
   </div>
 
   <!-- Ny wrapper med relative position -->
   <div class="card_image_grid">
+    {
+      discount_percentage && (
+        <div class="percentage__box">
+          <p class="percentage">{discount_percentage}</p>
+        </div>
+      )
+    }
     <div class="image_wrapper">
-      {
-        discount_percentage && (
-          <div class="percentage__box">
-            <p class="percentage">{discount_percentage}</p>
-          </div>
-        )
-      }
       <img src={`/beer-card_images/${img}`} alt={title} />
     </div>
   </div>
@@ -266,6 +266,9 @@ const showDefault = !soldout;
     position: relative;
     display: grid;
     place-items: center;
+    padding-inline: "";
+    margin: 0px;
+    padding: 0px;
   }
 
   .percentage__box {
