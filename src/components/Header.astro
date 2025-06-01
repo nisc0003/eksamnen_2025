@@ -7,70 +7,71 @@ import Basket from "./Basket.astro";
 ---
 
 <header>
-  <div class="top_header">
-    <a href="/" class="logo">
-  <img src="/logo_white.svg" alt="Logo" />
-</a>
+  <div class="header_main">
+    <div class="top_header">
+      <a href="/" class="logo">
+        <img src="/logo_white.svg" alt="Logo" />
+      </a>
 
-    <div class="burger">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
     </div>
+    <nav class="nav_ul">
+      <ul>
+        <li><a href="/">Forside</a></li>
+        <li><a href="/products">Shop</a></li>
+        <li><a href="/beer-club">Beer-club</a></li>
+        <li><a href="/wip">Brewery-tours</a></li>
+        <li><a href="/wip">Information</a></li>
+      </ul>
+
+      <div class="flex">
+        <img src={Knap1.src} alt="" class="basket_icon" />
+        <img src={Knap2.src} alt="" />
+      </div>
+    </nav>
   </div>
-  <nav class="nav_ul">
-    <ul>
-      <li><a href="/">Forside</a></li>
-      <li><a href="/products">Shop</a></li>
-      <li><a href="/beer-club">Beer-club</a></li>
-      <li><a href="/wip">Brewery-tours</a></li>
-      <li><a href="/wip">Information</a></li>
-    </ul>
-
-    <div class="flex">
-      <img src={Knap1.src} alt="" class="basket_icon" />
-      <img src={Knap2.src} alt="" />
-    </div>
-  </nav>
-
-<Basket />
 </header>
 
-
+<Basket />
 
 <style>
+  .header_main {
+    z-index: 1000;
+    height: 16vh;
+  }
   .basket_icon:hover {
     cursor: pointer;
   }
-  
+
   img {
     height: 1.5rem;
   }
 
   .top_header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* centers children vertically */
-  background-color: var(--second-color);
-  padding: 2rem;
-}
-
-  .logo{
-    place-self: start;
-    height: 4rem;
-    img{
-      height: 4rem;
-      width: auto;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--second-color);
+    padding-inline: 4vw;
+    padding-block: 0.5rem;
   }
 
-  .burger{
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  cursor: pointer;
-}
-  
+  .logo img {
+    place-self: start;
+    height: 4rem;
+    width: auto;
+  }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    cursor: pointer;
+  }
 
   header {
     background-color: var(--second-color);
@@ -103,12 +104,7 @@ import Basket from "./Basket.astro";
   }
 
   .burger {
-    width: 30px;
-    height: 20px;
     cursor: pointer;
-        /* margin-top: auto;
-        margin-bottom: auto; */
-
   }
 
   .burger .line {
@@ -140,20 +136,18 @@ import Basket from "./Basket.astro";
     }
 
     .burger.active .line:nth-child(3) {
-      /* transform: rotate(-45deg) translate(5px, -5px); */
-      transform: rotate(-45deg) translate(14px,-12px);
+      transform: rotate(-45deg) translate(14px, -12px);
       transition: 0.2s linear;
     }
 
     .nav_ul.active ul {
       display: block;
       position: absolute;
-      top: 100px;
+      top: 16vh;
       left: 0;
       width: 100%;
-      /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); */
-      background-color: black;
-      z-index: 1;
+      background-color: var(--second-color);
+      z-index: 1000;
     }
 
     .nav_ul.active ul li {
@@ -166,7 +160,7 @@ import Basket from "./Basket.astro";
     }
   }
 
-  .flex{
+  .flex {
     gap: 1rem;
     padding-right: 1rem;
   }
@@ -180,23 +174,16 @@ import Basket from "./Basket.astro";
     }
 
     .top_header {
-      display: flex;
-      /* grid-template-columns: 1fr 1fr; */
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 1%;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      place-content: center;
       height: 5rem;
       background-color: var(--second-color);
-      img{
-        height: 100%;
-        width: auto;
-      }
     }
 
     .logo {
     }
     header {
-      padding: 1rem 1rem;
       display: grid;
       background-color: var(--second-color);
     }
@@ -249,9 +236,10 @@ import Basket from "./Basket.astro";
 
       100% {
         border: solid white 2px;
-      
+      }
     }
 
+    /* Disse hører ikke hjemme i @keyframes */
     a.logo {
       font-weight: bold;
       font-size: 3rem;
@@ -263,18 +251,22 @@ import Basket from "./Basket.astro";
       display: none;
     }
   }
-  
 </style>
 
-<script>
+<script is="client">
+  const burger = document.querySelector(".burger");
+  const menu = document.querySelector("nav");
+  const basketIcon = document.querySelector(".basket_icon");
 
-    const burger = document.querySelector('.burger');
-    const menu = document.querySelector('nav');
-
-    burger.addEventListener("click", () => {
+  burger.addEventListener("click", () => {
     burger.classList.toggle("active");
     menu.classList.toggle("active");
-});
+  });
 
-
+  basketIcon.addEventListener("click", () => {
+    if (menu.classList.contains("active")) {
+      burger.classList.remove("active");
+      menu.classList.remove("active");
+    }
+  });
 </script>

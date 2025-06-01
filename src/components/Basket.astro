@@ -1,227 +1,309 @@
----
-// import type ProductCard from "./ProductCard.astro";
-import ProductCard from "./ProductCard.astro";
-// import ProductCard={}
-// import ProductCard2={}
-// @ts-nocheck
----
-
 <section class="cart_container inactive">
-  <!-- Skal gøre at der er en sort baggrund for X knappen som er 100 i width -->
-  <section class="top_box">
-    <div class="x">
-      <span class="span1"></span>
-      <span class="span2"></span>
-    </div>
-  </section>
+  <div class="x">
+    <span class="span1"></span>
+    <span class="span2"></span>
+  </div>
+  <button class="delete-all cta1">Slet alt</button>
+  <!-- Produktliste og kontrolknap -->
   <section class="cart_sub">
-    <div class="cart_list">
-      <div class="product">
-        <div class="product_image">
-          <img src="../../public/placeholder.webp" alt="" class="product_img" />
-        </div>
-        <div class="product_info">
-          <p>1- Stk</p>
-          <p>Mother's Next and Love (APA)</p>
-          <div class="old_price">
-            <p>50,00 kr.</p>
-          </div>
-          <p>45,00 kr.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cart_list">
-      <div class="product">
-        <div class="product_image">
-          <img src="../../public/placeholder.webp" alt="" class="product_img" />
-        </div>
-        <div class="product_info">
-          <p>1- Stk</p>
-          <p>Mother's Next and Love (APA)</p>
-
-          <div class="old_price">
-            <p>50,00 kr.</p>
-          </div>
-          <p>45,00 kr.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cart_list">
-      <div class="product">
-        <div class="product_image">
-          <img src="../../public/placeholder.webp" alt="" class="product_img" />
-        </div>
-        <div class="product_info">
-          <p>1- Stk</p>
-          <p>Mother's Next and Love (APA)</p>
-          <div class="old_price">
-            <p>50,00 kr.</p>
-          </div>
-          <p>45,00 kr.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cart_list">
-      <div class="product">
-        <div class="product_image">
-          <img src="../../public/placeholder.webp" alt="" class="product_img" />
-        </div>
-        <div class="product_info">
-          <p>1- Stk</p>
-          <p>Mother's Next and Love (APA)</p>
-
-          <p class="old_price">50,00 kr.</p>
-          <p>45,00 kr.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cart_list">
-      <div class="product">
-        <div class="product_image">
-          <img src="../../public/placeholder.webp" alt="" class="product_img" />
-        </div>
-        <div class="product_info">
-          <p>1- Stk</p>
-          <p>Mother's Next and Love (APA)</p>
-
-          <p class="old_price">50,00 kr.</p>
-          <p>45,00 kr.</p>
-        </div>
-      </div>
-    </div>
+    <div class="cart_controls"></div>
+    <div class="cart_list"></div>
   </section>
 
+  <!-- Prisoversigt -->
   <section class="price_amount">
     <div class="price_original">
       <p>Subtotal</p>
-      <p>XXX</p>
+      <p></p>
     </div>
     <hr />
     <div class="price_discounted">
       <p>Rabat</p>
-      <div class="discount">
-        <p>XXX</p>
-      </div>
+      <div class="discount"><p></p></div>
     </div>
     <hr />
   </section>
-
+  <!-- Total pris -->
   <section class="total_price">
-    <div><h3>Pris I alt</h3></div>
+    <h3>Pris i alt</h3>
     <div class="price_value">
-      <h3>XXX</h3>
-      <h3>KR</h3>
+      <h3></h3>
     </div>
   </section>
-
+  <!-- Knapper til checkout eller kurv-side -->
   <section class="cart_buttons">
-    <button class="cart_page"><p class="p_b">Gå til kurv</p></button>
-    <button class="buy_page"> <p class="p_b">Køb nu</p> </button>
+    <a href="../pages/cart.astro">
+      <button class="cta_basket">Gå til kurv</button>
+    </a>
+
+    <a href="">
+      <button class="cta_buy">Køb nu</button>
+    </a>
   </section>
 </section>
 
+<script is="client">
+  // Eksisterende JavaScript forbliver uændret
+
+  // Find kurv-ikonet, kurv-menuen og lukke-knappen
+  const basket = document.querySelector(".basket_icon");
+  const basketMenu = document.querySelector(".cart_container");
+  const basketClose = document.querySelector(".x");
+
+  // Når man klikker på kurv-ikonet, vis kurven (få den til at glide ind)
+  basket?.addEventListener("click", () => {
+    basketMenu.classList.add("active");
+    basketMenu.classList.remove("inactive");
+  });
+
+  // Når man klikker på krydset (x), luk kurven (få den til at glide væk)
+  basketClose?.addEventListener("click", () => {
+    basketMenu.classList.add("inactive");
+    basketMenu.classList.remove("active");
+  });
+  // Tjek om der er gemt varer i localStorage – hvis ikke, lav en tom kurv
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Funktion der opdaterer indholdet i visningen af kurven
+  const updateCartDisplay = () => {
+    // Find det sted på siden hvor varerne skal vises
+    const cartSub = document.querySelector(".cart_sub .cart_list");
+    // Tøm det gamle indhold
+    cartSub.innerHTML = "";
+
+    // Den samlede pris uden rabat
+    let subtotal = 0;
+    // Den samlede rabat
+    let discountTotal = 0;
+
+    // Loop igennem hver vare i kurven
+    cart.forEach((item, index) => {
+      // Hent info om varen – og sørg for at quantity altid er sat til noget (default 1)
+      const { img, title, title2, price, Old_price, quantity = 1 } = item;
+      // Lav prisen om til et tal (hvis det fx er en tekst)
+      const currentPrice = parseFloat(price);
+      // Samme med gammel pris – hvis den findes
+      const oldPrice = Old_price ? parseFloat(Old_price) : null;
+      // Udregn rabat for denne vare
+      const discount = oldPrice ? (oldPrice - currentPrice) * quantity : 0;
+      // Læg denne vares pris til samlet pris
+      subtotal += currentPrice * quantity;
+      // Læg rabat til total rabat
+      discountTotal += discount;
+
+      // Lav HTML'en for hver enkelt vare i kurven
+      const product = document.createElement("div");
+      product.className = "product";
+      product.innerHTML = `
+  <div class="product_image">
+    <img class="product_image" src="/beer-card_images/${img}" alt="${title}" />
+  </div>
+  <div class="product_info">
+    <h5 class="product_title">${title}</h5>
+    ${title2 ? `<h6 class="product_subtitle">${title2}</h6>` : ""}
+    <div>
+       <div class="amount_grid">
+        <p class="p_quantity">${quantity} stk.</p>
+              <div class="amount_grid">
+        <button class="quantity-up" data-index="${index}">▲</button>
+        <button class="quantity-down" data-index="${index}">▼</button>
+      </div>
+</div>
+      ${
+        Old_price
+          ? `
+        <div class="old_price_row">
+          <h6 class="h6_Old_price">${Old_price} kr.</h6>
+        </div>
+        `
+          : ""
+      }
+
+      <div class="total_row">
+        <h6 class="h6_price">${(currentPrice * quantity).toFixed(2)} DKK.</h6>
+      </div>
+
+      <button class="delete-item" data-index="${index}">Slet</button>
+    </div> 
+  </div> 
+`;
+
+      cartSub.appendChild(product);
+    });
+
+    // Vis totaler i bunden af kurven
+    document.querySelector(".price_original p:last-child").textContent =
+      subtotal.toFixed(2) + " DKK.";
+
+    document.querySelector(".discount p").textContent =
+      discountTotal.toFixed(2) + " DKK.";
+
+    document.querySelector(".total_price .price_value h3").textContent =
+      (subtotal - discountTotal).toFixed(2) + " DKK.";
+
+    // Gem opdateret kurv i localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  // Lyt efter klik overalt på siden
+  document.addEventListener("click", (event) => {
+    // Hvis der klikkes på en "add-to-cart" knap
+    if (event.target.classList.contains("add-to-cart")) {
+      const productData = JSON.parse(event.target.getAttribute("data-product"));
+      productData.quantity = 1;
+
+      // Tjek om varen allerede er i kurven (baseret på titel og undertitel)
+      const existingIndex = cart.findIndex(
+        (item) =>
+          item.title === productData.title &&
+          item.title2 === productData.title2,
+      );
+
+      if (existingIndex !== -1) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push(productData);
+      }
+
+      updateCartDisplay();
+      basketMenu.classList.add("active");
+      basketMenu.classList.remove("inactive");
+    }
+
+    // Hvis man klikker på "slet alle"
+    if (event.target.classList.contains("delete-all")) {
+      cart = [];
+      updateCartDisplay();
+    }
+
+    // Hvis man klikker på en enkelt slet-knap
+    if (event.target.classList.contains("delete-item")) {
+      // __________________________
+      // Fjern en enkelt vare baseret på dens index
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index)) {
+        cart.splice(index, 1);
+        updateCartDisplay();
+      }
+      // __________________________
+    }
+
+    // __________________________
+    // Hvis man klikker på pil OP (quantity-up)
+    if (event.target.classList.contains("quantity-up")) {
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index)) {
+        cart[index].quantity += 1;
+        updateCartDisplay();
+      }
+    }
+
+    // Hvis man klikker på pil NED (quantity-down)
+    if (event.target.classList.contains("quantity-down")) {
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index) && cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+        updateCartDisplay();
+      }
+    }
+    // __________________________
+  });
+
+  // Find header-elementet så vi kan beregne hvor højt kurven skal sidde
+  const header = document.querySelector("header");
+
+  // Funktion der sætter kurvens top-position i forhold til headerens højde
+  const setCartTop = () => {
+    const headerHeight = header.offsetHeight;
+    if (!basketMenu.classList.contains("scrolled-past")) {
+      basketMenu.style.top = `${headerHeight}px`;
+      basketMenu.style.height = `calc(100vh - ${headerHeight}px)`;
+    }
+  };
+  // Når man scroller – flyt kurven op hvis man er scrollet forbi headeren
+  window.addEventListener("scroll", () => {
+    // Hvor langt ned vi er scrollet
+    const scrollY = window.scrollY;
+    const headerHeight = header.offsetHeight;
+
+    if (scrollY >= headerHeight) {
+      basketMenu.classList.add("scrolled-past");
+      basketMenu.style.top = "0px";
+      basketMenu.style.height = "100vh";
+    } else {
+      basketMenu.classList.remove("scrolled-past");
+      setCartTop();
+    }
+  });
+
+  // Når vinduet ændrer størrelse, genberegn top-position for kurven
+  window.addEventListener("resize", setCartTop);
+
+  // Når siden er færdig med at loade:
+  document.addEventListener("DOMContentLoaded", () => {
+    updateCartDisplay();
+    setCartTop();
+  });
+</script>
+
 <style>
-  .inactive {
-    translate: 150vh;
-  }
-
-  .inactive_anim {
-    animation: inactive-anim 1s;
-  }
-  @keyframes inactive-anim {
-    0% {
-      translate: 0vh;
-    }
-
-    25% {
-      translate: 75vh;
-    }
-
-    50% {
-      translate: 100vh;
-    }
-
-    75% {
-      translate: 125vh;
-    }
-
-    100% {
-      translate: 150vh;
-    }
-  }
-
-  .active {
-    translate: 0vh;
-  }
-
-  .active_anim {
-    animation: active-anim 1s;
-  }
-
-  @keyframes active-anim {
-    0% {
-      translate: 150vh;
-    }
-
-    25% {
-      translate: 125vh;
-    }
-
-    50% {
-      translate: 100vh;
-    }
-
-    75% {
-      translate: 75vh;
-    }
-
-    100% {
-      translate: 0vh;
-    }
-  }
-
   .cart_container {
-    position: fixed; /* Already fixed, so it's fine */
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 100;
-    background-color: var(--main-color);
-    padding: 5rem;
+    position: fixed;
+    right: 0;
+    width: 100vw;
+    height: auto;
+    background: var(--font-color-white);
+    z-index: 10;
+    padding: 2rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 99;
   }
 
-  .top.box {
-    display: block;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 100%;
+  /* Når aktiv, glidende ind */
+  .cart_container.active {
+    transition-duration: 1s;
+    transform: translateX(0%);
   }
 
-  /* Position the X button*/
+  .cart_container.inactive {
+    transition-duration: 1s;
+    transform: translateX(200%);
+  }
+
+  /* Når scrollet forbi header fylder kurven hele højden */
+  .cart_container.scrolled-past {
+    transition-duration: 0.5s;
+  }
+
+  /* Typografi - Montserrat til overskrifter, Inter til brødtekst */
+  .cart_container h3 {
+    font-family: "Montserrat", sans-serif;
+    color: var(--second-color);
+    font-weight: 700;
+  }
+
+  .cart_container p {
+    font-family: "Inter", sans-serif;
+    color: var(--second-color);
+  }
+
+  /* Luk-knap (X) øverst højre */
   .x {
     position: absolute;
-    top: 1rem;
     right: 1rem;
+    top: 1rem;
     width: 2.5rem;
     height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
   }
 
-  /* X lines */
   .x span {
     position: absolute;
     width: 2rem;
     height: 0.25rem;
-    background-color: black;
+    background: var(--second-color);
     border-radius: 2px;
   }
 
@@ -233,172 +315,212 @@ import ProductCard from "./ProductCard.astro";
     transform: rotate(-45deg);
   }
 
-  hr {
-    border-top: 3px solid black;
+  /* Knap til at slette alt */
+  .cart_controls {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0;
+  }
+
+  .delete-all {
+    background: var(--second-color);
+    color: var(--font-color-white);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+
     margin-top: 1rem;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+  }
+
+  /* Produktliste med scroll */
+  .cart_sub {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin: 2rem 0 1rem 0;
+  }
+
+  :global(.quantity-up, .quantity-down) {
+    place-self: center;
+    object-fit: cover;
+    padding: 25%;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: var(--font-color-white);
+    color: var(--second-color);
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 1px 2px 0px;
+  }
+  button {
+    display: grid;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .cta_buy {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+  }
+
+  .cta_buy:hover {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  .cta_basket {
+    background-color: white;
+    color: rgba(25, 25, 25, 1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+  .cta_basket:hover {
+    background-color: rgba(25, 25, 25, 1);
+    color: white;
+  }
+  :global(.product_image) {
+    display: flex;
+    object-fit: contain;
+    max-height: 150px;
+  }
+  /* Grid-layout for produkter */
+  :global(.cart_list) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  :global(.product) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+  }
+
+  :global(.amount_grid) {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row: 1fr;
+    gap: 0.75rem;
+    width: min-content;
+    place-content: left;
     margin-bottom: 1rem;
   }
-
-  .cart_container p {
-    font-size: 2rem;
+  :global(.product_title) {
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  :global(.h6_price) {
+    font-style: oblique;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
-  .old_price p {
+  :global(.p_quantity) {
+    font-weight: 300;
+    opacity: 90%;
+  }
+  :global(.h6_Old_price) {
+    font-style: oblique;
     text-decoration: line-through;
-    /* color: #d9d9d9; */
+    opacity: 80%;
   }
 
-  .cart_sub {
-    height: 55rem;
-    overflow: hidden;
-    overflow-y: scroll;
+  :global(.h6_price) {
+    font-style: oblique;
+    opacity: 80%;
   }
-
-  .cart_sub::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  .cart_sub::-webkit-scrollbar-track {
-    background: var(--main-color);
-    border-radius: 10px;
-  }
-
-  .cart_sub::-webkit-scrollbar-thumb {
-    background: var(--second-color);
-    border-radius: 10px;
-  }
-
-  .cart_list {
-    margin-bottom: 3rem;
-  }
-
-  .product {
-    display: grid;
-  }
-
-  .product_image {
-    margin-right: 2rem;
+  h3 {
+    font-size: 1.5rem;
+    color: var(--second-color);
+    font-weight: bold;
   }
 
   .product_info {
-    display: grid;
-    grid-column: 2;
-    padding-top: 3rem;
-    /* padding-bottom: auto; */
-    margin-right: 10rem;
-  }
-
-  .price_original,
-  .price_discounted {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 
-  .discount p {
-    color: #d9d9d9;
+  .product_info p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-family: "Inter", sans-serif;
+    color: var(--second-color);
+  }
+
+  /* Gammel pris med gennemstregning */
+  .old_price p {
+    text-decoration: line-through;
+    color: #777;
+  }
+
+  /* Prisoversigt margener */
+  .price_amount,
+  .total_price {
+    margin: 1rem 0;
   }
 
   .total_price {
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
 
-  .price_value {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-  }
-
+  /* Knapper nederst i kurven */
   .cart_buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 
   .cart_buttons button {
-    width: 95%;
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
   }
 
   .cart_page {
     background: var(--font-color-white);
-    place-self: start;
+    color: var(--second-color);
+    border: 1px solid var(--second-color);
   }
 
   .buy_page {
     background: var(--second-color);
-    place-self: end;
-    box-shadow:
-      6.244px 15.264px 4.857px 0px rgba(0, 0, 0, 0),
-      4.163px 9.714px 4.163px 0px rgba(0, 0, 0, 0.01),
-      2.081px 5.551px 3.469px 0px rgba(0, 0, 0, 0.03),
-      0.694px 2.081px 2.775px 0px rgba(0, 0, 0, 0.04),
-      0px 0.694px 1.388px 0px rgba(0, 0, 0, 0.05);
-  }
-
-  .buy_page p {
     color: var(--font-color-white);
   }
 
-  @media screen and (min-width: 800px) {
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .quantity-input {
+    width: 60px;
+    padding: 0.25rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+  }
+  @media (min-width: 800px) {
     .cart_container {
-      position: fixed; /* Already fixed, so it's fine */
-      /* top: -50; */
-      right: 0;
-      height: 70%;
-      width: 30%;
-      z-index: 100;
-      background-color: var(--main-color);
-      padding: 5rem;
-      transform: translateX(234%);
-      transition: transform 0.5s ease;
-      margin-top: 153px;
+      width: 30vw;
+      height: 100vh;
     }
 
-    .cart_container p {
-      font-size: 16px;
-    }
-    h3 {
-      font-size: 20px;
-    }
-
-    .cart_sub {
-      height: 20rem;
-      overflow: hidden;
-      overflow-y: scroll;
-    }
-
-    .inactive {
-      translate: 150vh;
-    }
-
-    .active {
-      translate: 0vh;
-    }
     .cart_buttons button {
-      width: 97%;
-      padding: 1rem 3rem;
-    }
-    .product_info {
-      margin-right: 1rem;
+      padding: 1rem;
     }
   }
 </style>
-
-<script>
-  const basket = document.querySelector(".basket_icon");
-  const basket_menu = document.querySelector(".cart_container");
-  const basket_x = document.querySelector(".x");
-
-  basket.addEventListener("click", () => {
-    basket_menu.classList.add("active_anim");
-    basket_menu.classList.add("active");
-    basket_menu.classList.remove("inactive");
-  });
-
-  basket_x.addEventListener("click", () => {
-    basket_menu.classList.add("inactive_anim");
-    basket_menu.classList.add("inactive");
-    basket_menu.classList.remove("active");
-    basket_menu.classList.remove("active_anim");
-  });
-</script>
