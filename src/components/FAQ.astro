@@ -1,0 +1,225 @@
+---
+// @ts-check
+---
+
+<section class="faq_container">
+  <h4>Ofte stillede spørgsmål</h4>
+
+  <div class="faq_subcontainer">
+    <div class="faq_div">
+      <p class="p_b">S: Hvornår sendes månedskassen ud?</p>
+      <img src="../../public/v.svg" alt="" class="v v1" />
+    </div>
+
+    <div class="faq faq1">
+      <p>
+        Vi sender alle månedskasser ud til medlemmerne af Alefarm Beer Club i <b
+        >
+          slutningen af hver måned.</b
+        > Den præcise forsendelsesdato afhænger af den sidste arbejdsdag i den givne
+        måned.
+      </p>
+
+      <p>
+        Når du tilmelder dig vores ølklub, så vil du modtage den første
+        månedskasse<b> i slutningen af den måned,</b> som du har tilmeldt dig i.
+      </p>
+
+      <p>
+        Det betyder altså at såfremt du fx har tilmeldt dig d. 25. Oktober, så
+        vil du modtage månedskassen for Oktober måned som den første månedskasse
+        - og herefter vil du modtage månedskassen for November i slutningen af
+        November og så fremdele.
+      </p>
+    </div>
+
+    <hr />
+
+    <div class="faq_div">
+      <p class="p_b">S: Hvornår betaler jeg for mit medlemskab ud?</p>
+      <img src="../../public/v.svg" alt="" class="v v2" />
+    </div>
+
+    <div class="faq faq2">
+      <p>
+        Du betaler på den date do meldte dig ind i, så hvis du meldte dig den 11
+        Juli vill du så betale den 11 hver måned indtil du afmelder dit
+        medlemskab.
+      </p>
+    </div>
+
+    <hr />
+
+    <div class="faq_div">
+      <p class="p_b">S: Betales et medlemskab af ølklubben på forhånd?</p>
+      <img src="../../public/v.svg" alt="" class="v v3" />
+    </div>
+
+    <div class="faq faq3">
+      <p>
+        Nej, den bliver betalt PÅ datoen du melder dig ind og samme dato hver
+        måned fremad indtil du afmelder medlemskaben.
+      </p>
+    </div>
+
+    <hr />
+
+    <div class="faq_div">
+      <p class="p_b">S: Kan du give et eksemplet på en betalings periode?</p>
+      <img src="../../public/v.svg" alt="" class="v v4" />
+    </div>
+
+    <div class="faq faq4">
+      <p>
+        Du melder dig ind den 20 September og betaler når du melder dig ind. Så
+        vil du betale den 20 i de fremtidige måneder indtil du slutter dit
+        medlemskab.
+      </p>
+    </div>
+
+    <hr />
+
+    <div class="faq_div">
+      <p class="p_b">S: Hvordan opdaterer jeg mine kreditkortoplysninger?</p>
+      <img src="../../public/v.svg" alt="" class="v v5" />
+    </div>
+
+    <div class="faq faq5">
+      <p>
+        Du kan anvende vores medlemsportal for at opdatere dine
+        kreditkortoplysninger, hvilket man jo typisk gør, når man fx har fået et
+        nyt kreditkort. Du skal bruge den e-mail-adresse, som du har tilmeldt
+        dig med, som brugernavn i vores medlemsportal.
+      </p>
+    </div>
+
+    <hr />
+
+    <div class="faq_div">
+      <p class="p_b">
+        S: Hvordan sætter jeg mit ølklubabonnement på pause eller opsiger det?
+      </p>
+      <img src="../../public/v.svg" alt="" class="v v6" />
+    </div>
+
+    <div class="faq faq6">
+      <p>
+        Det er desværre ikke muligt at sætte dit medlemskab af Alefarm Beer Club
+        på pause. Du kan til gengæld opsige det på et hvilket som helst
+        tidspunkt - vi har ingen bindingsperiode! - hvilket du kan gøre via
+        vores medlemsportal.
+      </p>
+    </div>
+
+    <hr />
+  </div>
+</section>
+
+<style>
+  .faq_container {
+    margin: 7rem;
+  }
+
+  .faq_div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+
+  .v {
+    height: 1rem;
+    width: auto;
+    vertical-align: middle class;
+    cursor: pointer;
+  }
+
+  .v.active,
+  .v2.active,
+  .v3.active,
+  v4.active {
+    transform: rotate(-0.25turn);
+  }
+
+  hr {
+    margin-top: 1rem;
+    border-top: 2px solid black;
+  }
+
+  .faq1,
+  .faq2,
+  .faq3,
+  .faq4,
+  .faq5,
+  .faq6 {
+    display: none;
+  }
+
+  .faq p {
+    margin-top: 2rem;
+  }
+
+  .faq1.active,
+  .faq2.active,
+  .faq3.active,
+  .faq4.active,
+  .faq5.active,
+  .faq6.active {
+    display: block;
+  }
+
+  .inactive {
+    display: none;
+  }
+</style>
+
+<script>
+  const v1 = document.querySelector(".v1");
+  const faq1 = document.querySelector(".faq1");
+
+  v1.addEventListener("click", () => {
+    v1.classList.toggle("active");
+    faq1.classList.toggle("active");
+  });
+
+  const v2 = document.querySelector(".v2");
+  const faq2 = document.querySelector(".faq2");
+
+  v2.addEventListener("click", () => {
+    v2.classList.toggle("active");
+    faq2.classList.toggle("active");
+  });
+
+  const v3 = document.querySelector(".v3");
+  const faq3 = document.querySelector(".faq3");
+
+  v3.addEventListener("click", () => {
+    v3.classList.toggle("active");
+    faq3.classList.toggle("active");
+  });
+
+  const v4 = document.querySelector(".v4");
+  const faq4 = document.querySelector(".faq4");
+
+  v4.addEventListener("click", () => {
+    v4.classList.toggle("active");
+    faq4.classList.toggle("active");
+  });
+
+  const v5 = document.querySelector(".v5");
+  const faq5 = document.querySelector(".faq5");
+
+  v5.addEventListener("click", () => {
+    v5.classList.toggle("active");
+    faq5.classList.toggle("active");
+  });
+
+  const v6 = document.querySelector(".v6");
+  const faq6 = document.querySelector(".faq6");
+
+  v6.addEventListener("click", () => {
+    v6.classList.toggle("active");
+    faq6.classList.toggle("active");
+  });
+</script>
