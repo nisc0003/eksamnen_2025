@@ -1,0 +1,78 @@
+---
+// @ts-check
+---
+
+<section class="beer_buttons">
+  <div class="signup_container">
+    <button class="cta1"> BLIV MEDLEM </button>
+
+    <p>
+      Månedskassen bliver <b>sendt ud i slutningen af hver måned.</b> Den første
+      betaling trækkes den dag, hvor du tilmelder dig ølklubben, og herefter den
+      samme dag hver følgende måned. Vi kan kun opfordre dig til at blive medlem
+      af Alefarm Beer Club. Det er en oplevelse, som er skabt med <b
+        >stor passion for det gode øl.</b
+      >
+    </p>
+  </div>
+
+  <div class="readmore_container">
+    <button class="cta2"> LÆS MERE </button>
+
+    <p>
+      Du kan administrere dit medlemskab af Alefarm Beer Club via vores
+      medlemsportal. Du skal <b>logge ind med den e-mail-adresse,</b> som du har
+      anvendt til at tilmelde dig ølklubben.
+    </p>
+  </div>
+</section>
+
+<style>
+  .beer_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .signup_container,
+  .readmore_container {
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .signup_container p,
+  .readmore_container p {
+    text-align: left;
+    width: 100%;
+  }
+
+  .beer_buttons button {
+    align-self: center;
+  }
+
+  /* 💻 Desktop layout */
+  @media (min-width: 800px) {
+    .beer_buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin: 5rem;
+    }
+
+    .signup_container {
+      grid-column: 1;
+    }
+
+    .readmore_container {
+      grid-column: 2;
+    }
+  }
+</style>

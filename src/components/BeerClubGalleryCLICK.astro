@@ -1,0 +1,90 @@
+---
+// @ts-check
+---
+
+<section class="beerclub1_container">
+  <div class="gallery">
+    <ul>
+      <li><img src="../../public/alefarm_box.webp" alt="" /></li>
+    </ul>
+  </div>
+
+  <div class="beerclub1_text">
+    <h3>12 Friske Øl</h3>
+    <p class="p_b">Øl på abonnement</p>
+    <p>
+      Vores ølklub består af en herlig månedskasse, som udsendes i slutningen af
+      hver måned, og som indeholder alle de sprudlende friske og spændende
+      øl fra vores produktion. Månedskassen er for alle, som sætter pris på
+      fantastisk og velsmagende craft beer, som er brygget med indlevelse,
+      ambition og respekt for det gode håndværk.
+    </p>
+
+    <ul>
+      <li><b>12 friske nye øl</b> hver måned</li>
+      <li><b>Sæsonaktuelle tilbud</b> og <b> rabatter </b></li>
+      <li>Eksklusiv adgang til vores <b>nye fadlagrede øl</b></li>
+      <li><b>10% rabat </b>i vores tap room</li>
+      <li><b>Opskrifter</b> til hjemmebryg af dine yndlings øl fra Alefarm</li>
+      <li><b>Gratis fragt</b></li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .beerclub1_container {
+    margin: 5rem;
+  }
+
+  .gallery {
+    margin-bottom: 3rem;
+  }
+
+  ul {
+    list-style-type: circle;
+    padding-left: 1.5rem; /* ensure space for bullets */
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    list-style-position: outside;
+    display: list-item; /* ensure it's not overridden */
+  }
+
+  li p {
+    display: inline; /* change block-level p to inline */
+  }
+
+  .gallery ul li {
+    color: var(--font-color-white);
+  }
+  .beerclub1_text ul li {
+    color: var(--second-color);
+  }
+
+  @media (min-width: 800px) {
+    .beerclub1_container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery {
+      max-width: 25rem;
+    }
+
+    .beerclub1_text {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .beerclub1_text ul {
+      margin-top: auto;
+      margin-bottom: 3rem;
+    }
+  }
+</style>
