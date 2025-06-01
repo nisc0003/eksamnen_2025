@@ -4,8 +4,8 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <div class="wip_h1">
-    <h1>Denne side er igang med</h1>
-    <h1>at blive arbejdet på</h1>
+    <h1>Denne side er under opbygning</h1>
+    <p>(work in progress)</p>
   </div>
 </Layout>
 
@@ -16,11 +16,17 @@ import Layout from "../layouts/Layout.astro";
     align-items: center;
     align-content: center;
     text-align: center;
-    height: 25rem;
+
+    height: 50vw;
   }
 
   .wip_h1 h1 {
-    margin-top: auto;
-    margin-bottom: auto;
+    font-size: 2cqw;
+    margin-top: 20rem;
+  }
+
+  p {
+    font-size: 1.5cqw;
+    font-style: italic;
   }
 </style>
