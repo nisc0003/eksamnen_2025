@@ -2,9 +2,8 @@
 // @ts-check
 ---
 
-<h4>Betaling</h4>
-
 <section class="betaling_container">
+  <h4 class="betal">Betaling</h4>
   <div class="kort">
     <div class="kort_div">
       <img src="../../public/Ellipse10.png" alt="" class="ellipse" />
@@ -55,6 +54,10 @@
       <img src="../../public/MP.png" class="credit" alt="" />
     </div>
     <hr />
+
+    <div class="buy_btn">
+      <button class="cta1">Betal nu </button>
+    </div>
   </div>
 </section>
 
@@ -69,6 +72,15 @@
     place-content: center;
     place-self: center;
     width: 40rem;
+    background-color: var(--main-color);
+  }
+
+  .betal {
+    margin-top: 1rem;
+  }
+
+  .betaling_container {
+    padding: 1rem 1rem 1rem 1rem;
   }
 
   .kort_div {
@@ -108,5 +120,11 @@
   }
   .twotwo input {
     width: 50%;
+  }
+
+  .buy_btn {
+    place-self: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
 </style>
