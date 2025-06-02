@@ -1,7 +1,7 @@
 *.DS_Store
 *.mp4
 *.mov
-*.gif
+
 
 # build output
 dist/
