@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Video from "../components/Video_card.astro";
+import BestsellerCard from "../components/ProductCard2.astro";
+<<<<<<< HEAD
+import CartPay from "../components/CartPay.astro";
+=======
+import Basket from "../components/Basket.astro";
+>>>>>>> add_to_cart
+---
+
+<Layout>
+  <section>
+    <h1>this is h1</h1>
+    <h2>this is h2</h2>
+    <h3>this is h3</h3>
+    <h4>this is h4</h4>
+    <h5>this is h5</h5>
+    <h6>this is h6</h6>
+    <p>this is p</p>
+    <p class="p_m">this is p_m</p>
+    <p class="p_b">this is p_b</p>
+    <button>standart button no name</button>
+    <button class="cta1">cta1</button>
+    <button class="cta2">cta2</button>
+    <button class="cta3">cta3</button>
+
+    <CartPay />
+
+    <Video />
+    <BestsellerCard />
+  </section>
+  <Basket />
+</Layout>
+
+<style>
+  section {
+    display: grid;
+    gap: 2rem;
+    margin: 2rem;
+  }
+</style>
