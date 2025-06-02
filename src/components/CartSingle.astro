@@ -1,0 +1,236 @@
+---
+// @ts-check
+---
+
+<section class="cart_container">
+  <button class="delete-all cta1">Slet alt</button>
+
+  <!-- Produktliste -->
+  <section class="cart_sub">
+    <div class="cart_controls"></div>
+    <div class="cart_list"></div>
+  </section>
+
+  <!-- Prisoversigt -->
+  <section class="price_amount">
+    <div class="price_original">
+      <p>Subtotal</p>
+      <p></p>
+    </div>
+    <hr />
+    <div class="price_discounted">
+      <p>Rabat</p>
+      <div class="discount"><p></p></div>
+    </div>
+    <hr />
+  </section>
+
+  <!-- Total -->
+  <section class="total_price">
+    <h3>Pris i alt</h3>
+    <div class="price_value">
+      <h3></h3>
+    </div>
+  </section>
+
+  <!-- Knapper -->
+  <section class="cart_buttons">
+    <a href="/cart">
+      <button class="cta_basket">Gå til kurv</button>
+    </a>
+    <a href="/checkout">
+      <button class="cta_buy">Køb nu</button>
+    </a>
+  </section>
+</section>
+
+<script is="client">
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const updateCartDisplay = () => {
+    const cartSub = document.querySelector(".cart_sub .cart_list");
+    if (!cartSub) return;
+
+    cartSub.innerHTML = "";
+    let subtotal = 0;
+    let discountTotal = 0;
+
+    cart.forEach((item, index) => {
+      const { img, title, title2, price, Old_price, quantity = 1 } = item;
+      const currentPrice = parseFloat(price);
+      const oldPrice = Old_price ? parseFloat(Old_price) : null;
+      const discount = oldPrice ? (oldPrice - currentPrice) * quantity : 0;
+
+      subtotal += currentPrice * quantity;
+      discountTotal += discount;
+
+      const product = document.createElement("div");
+      product.className = "product";
+      product.innerHTML = `
+        <div class="product_image">
+          <img class="product_image" src="/beer-card_images/${img}" alt="${title}" />
+        </div>
+        <div class="product_info">
+          <h5 class="product_title">${title}</h5>
+          ${title2 ? `<h6 class="product_subtitle">${title2}</h6>` : ""}
+          <div>
+            <div class="amount_grid">
+              <p class="p_quantity">${quantity} stk.</p>
+              <div class="amount_grid">
+                <button class="quantity-up" data-index="${index}">▲</button>
+                <button class="quantity-down" data-index="${index}">▼</button>
+              </div>
+            </div>
+            ${
+              Old_price
+                ? `<div class="old_price_row"><h6 class="h6_Old_price">${Old_price} kr.</h6></div>`
+                : ""
+            }
+            <div class="total_row">
+              <h6 class="h6_price">${(currentPrice * quantity).toFixed(2)} DKK.</h6>
+            </div>
+            <button class="delete-item" data-index="${index}">Slet</button>
+          </div>
+        </div>
+      `;
+      cartSub.appendChild(product);
+    });
+
+    document.querySelector(".price_original p:last-child").textContent =
+      subtotal.toFixed(2) + " DKK.";
+    document.querySelector(".discount p").textContent =
+      discountTotal.toFixed(2) + " DKK.";
+    document.querySelector(".total_price .price_value h3").textContent =
+      (subtotal - discountTotal).toFixed(2) + " DKK.";
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-all")) {
+      cart = [];
+      updateCartDisplay();
+    }
+
+    if (event.target.classList.contains("delete-item")) {
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index)) {
+        cart.splice(index, 1);
+        updateCartDisplay();
+      }
+    }
+
+    if (event.target.classList.contains("quantity-up")) {
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index)) {
+        cart[index].quantity += 1;
+        updateCartDisplay();
+      }
+    }
+
+    if (event.target.classList.contains("quantity-down")) {
+      const index = parseInt(event.target.getAttribute("data-index"));
+      if (!isNaN(index) && cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+        updateCartDisplay();
+      }
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    updateCartDisplay();
+  });
+</script>
+
+<style>
+  .cart_container {
+    width: 100%;
+    padding: 2rem;
+    background: var(--font-color-white);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cart_sub {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .cart_list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .product {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+
+  .product_image img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .product_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .product_title {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .product_subtitle {
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .amount_grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .h6_Old_price {
+    text-decoration: line-through;
+    font-style: oblique;
+    opacity: 0.7;
+  }
+
+  .h6_price {
+    font-weight: bold;
+    font-style: oblique;
+  }
+
+  .cta_basket,
+  .cta_buy {
+    padding: 0.75rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .cta_basket {
+    background: white;
+    color: black;
+    border: 1px solid black;
+  }
+
+  .cta_buy {
+    background: black;
+    color: white;
+  }
+
+  .cta_basket:hover,
+  .cta_buy:hover {
+    opacity: 0.9;
+  }
+</style>
