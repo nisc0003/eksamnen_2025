@@ -1,0 +1,516 @@
+<main class="checkout_page">
+  <h1>Checkout</h1>
+
+  <div class="checkout_content">
+    <section class="cartForm_container">
+      <div class="h4_email">
+        <h4>Kontakt oplysninger</h4>
+        <input
+          type="email"
+          placeholder="eksempel@gmail.dk"
+          id="email"
+          name="email"
+          required
+        />
+        <p>Send mails om nyheder og tilbud gennem nyhedsbrev</p>
+        <!-- <img src={Knap3.src} alt="" /> -->
+      </div>
+
+      <div class="form2">
+        <div class="levering two">
+          <h4>Levering</h4>
+        </div>
+
+        <div>
+          <input
+            type="text"
+            placeholder="Telefonnummer"
+            id="tnummer"
+            name="nummer"
+          />
+        </div>
+
+        <div class="twotwo">
+          <input type="text" placeholder="Fornavn" id="fnavn" name="fornavn" />
+          <input
+            type="text"
+            placeholder="Efternavn"
+            id="enavn"
+            name="efternavn"
+          />
+        </div>
+
+        <div>
+          <input
+            type="text"
+            placeholder="Firma (Valgri)"
+            id="firma_valgri"
+            name="firma"
+          />
+        </div>
+
+        <div>
+          <input
+            type="text"
+            placeholder="Adresse"
+            id="adresse_bosted"
+            name="adresse"
+          />
+        </div>
+
+        <div>
+          <input
+            type="text"
+            placeholder="Leveringsnotat (Valgri)"
+            id="leveringsnotat_valgfri"
+            name="levering"
+          />
+        </div>
+
+        <div class="twotwo">
+          <input
+            type="text"
+            placeholder="Postnummber"
+            id="pnummer"
+            name="postnummer"
+          />
+          <input type="text" placeholder="By" id="by_city" name="by" />
+        </div>
+
+        <div>
+          <input type="text" placeholder="Land" id="cntry" name="land" />
+        </div>
+
+        <div class="leveringsmetode">
+          <h4>Leveringsmetode</h4>
+          <input
+            type="text"
+            placeholder="Angiv din leveringsadresse for at se de tilgængelige leveringsmetoder."
+            id="leveringsmetode"
+            name="levering"
+          />
+        </div>
+
+        <div class="other_info">
+          <input
+            type="text"
+            placeholder="Andet info til os"
+            id="other_info"
+            name="other_info"
+            required
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Højre side - Kurvoversigt -->
+    <section class="cart_summary">
+      <h2>Din ordre</h2>
+
+      <!-- Genbrug samme struktur som i cart_container -->
+
+      <section class="cart_sub cart_sub2">
+        <div class="cart_list" id="checkout_cart_list"></div>
+      </section>
+
+      <!-- Flyttet denne her til bunden -->
+      <button class="delete-all delete-all2 cta1">Slet alt</button>
+
+      <div>
+        <input
+          type="text"
+          placeholder="Rabatkode/Gavekort"
+          id="discount"
+          name="code"
+          required
+        />
+
+        <button class="apply cta1" id="apply">Anvend</button>
+      </div>
+
+      <!-- Prisoversigt - samme struktur som original -->
+      <section class="price_amount">
+        <div class="price_original">
+          <p>Subtotal</p>
+          <p id="checkout_subtotal">0.00 DKK</p>
+        </div>
+        <hr />
+        <div class="price_discounted">
+          <p>Rabat</p>
+          <div class="discount"><p id="checkout_discount">0.00 DKK</p></div>
+        </div>
+        <hr />
+      </section>
+
+      <!-- Total pris - samme struktur -->
+      <section class="total_price total_price2">
+        <h3>Pris i alt</h3>
+        <div class="price_value">
+          <h3 id="checkout_total">0.00 DKK</h3>
+        </div>
+      </section>
+    </section>
+  </div>
+</main>
+
+<script is:"client">
+  // Genbrug samme logik som i cart_container
+  document.addEventListener("DOMContentLoaded", () => {
+    // Hent kurvdata fra localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartList = document.getElementById("checkout_cart_list");
+
+    // Opdater kurvvisning - næsten identisk med original
+    function updateCheckoutDisplay() {
+      cartList.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartList.innerHTML = `
+          <div>
+            <p>Din kurv er tom</p>
+            <a href="/products" class"empty_cart2">
+              <button class="cta_basket empty_cart2">Shop</button>
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      let subtotal = 0;
+      let discountTotal = 0;
+
+      // Loop igennem varer - samme struktur som original
+      cart.forEach((item, index) => {
+        const { img, title, title2, price, Old_price, quantity = 1 } = item;
+        const currentPrice = parseFloat(price);
+        const oldPrice = Old_price ? parseFloat(Old_price) : null;
+        const discount = oldPrice ? (oldPrice - currentPrice) * quantity : 0;
+
+        subtotal += currentPrice * quantity;
+        discountTotal += discount;
+
+        // Genbrug samme produkt HTML-struktur
+        const product = document.createElement("div");
+        product.className = "product product2";
+        product.innerHTML = `
+          <div class="product_image2">
+            <img src="/beer-card_images/${img}" alt="${title}" class="cart_img2" />
+          </div>
+          <div class="product_info">
+            <h5 class="product_title">${title}</h5>
+            ${title2 ? `<h6 class="product_subtitle">${title2}</h6>` : ""}
+            <div>
+              <div class="amount_grid">
+                <p class="p_quantity">${quantity} stk.</p>
+                <div class="amount_grid">
+                  <button class="quantity-up" data-index="${index}">▲</button>
+                  <button class="quantity-down" data-index="${index}">▼</button>
+                </div>
+              </div>
+              ${
+                Old_price
+                  ? `<div class="old_price_row">
+                      <h6 class="h6_Old_price">${Old_price} kr.</h6>
+                     </div>`
+                  : ""
+              }
+              <div class="total_row">
+                <h6 class="h6_price">${(currentPrice * quantity).toFixed(2)} DKK.</h6>
+              </div>
+              <button class="delete-item delete-item2" data-index="${index}">Slet</button>
+            </div>
+          </div>
+        `;
+
+        cartList.appendChild(product);
+      });
+
+      // Opdater totaler - samme logik som original
+      document.getElementById("checkout_subtotal").textContent =
+        subtotal.toFixed(2) + " DKK.";
+      document.getElementById("checkout_discount").textContent =
+        discountTotal.toFixed(2) + " DKK.";
+      document.getElementById("checkout_total").textContent =
+        (subtotal - discountTotal).toFixed(2) + " DKK.";
+    }
+
+    // Initial opdatering
+    updateCheckoutDisplay();
+
+    // Håndter kurvoperationer - samme logik som original
+    document.addEventListener("click", (event) => {
+      if (event.target.classList.contains("delete-all")) {
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCheckoutDisplay();
+      }
+
+      if (event.target.classList.contains("delete-item")) {
+        const index = parseInt(event.target.getAttribute("data-index"));
+        if (!isNaN(index)) {
+          cart.splice(index, 1);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCheckoutDisplay();
+        }
+      }
+
+      if (event.target.classList.contains("quantity-up")) {
+        const index = parseInt(event.target.getAttribute("data-index"));
+        if (!isNaN(index)) {
+          cart[index].quantity += 1;
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCheckoutDisplay();
+        }
+      }
+
+      if (event.target.classList.contains("quantity-down")) {
+        const index = parseInt(event.target.getAttribute("data-index"));
+        if (!isNaN(index) && cart[index].quantity > 1) {
+          cart[index].quantity -= 1;
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCheckoutDisplay();
+        }
+      }
+    });
+
+    // Håndter betalingsformular
+    const paymentForm = document.getElementById("payment_form");
+    paymentForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const submitBtn = paymentForm.querySelector(".submit_order");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Behandler...";
+
+      // Simuler betalingsbehandling
+      setTimeout(() => {
+        // Gem ordrehistorik
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.push({
+          date: new Date().toISOString(),
+          items: cart,
+          total: document.getElementById("checkout_total").textContent,
+          customer: {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+          },
+        });
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        // Tøm kurven
+        localStorage.removeItem("cart");
+
+        // Omdiriger til tak-siden
+        window.location.href = "/tak-for-din-ordre";
+      }, 1500);
+    });
+  });
+</script>
+
+<style>
+  section input {
+    margin-bottom: 1rem;
+    height: 50px;
+    width: 100%;
+  }
+
+  .h4_email img {
+    width: auto;
+    max-height: 5rem;
+    margin-bottom: 1rem;
+  }
+
+  .twotwo {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .leveringsmetode input {
+    height: 10rem;
+    text-align: center;
+  }
+
+  /* Egne styles, har navngivet classene VÆK fra global styling */
+
+  :global(.product_image2) {
+    height: 10px;
+    width: auto;
+  }
+
+  :global(.empty_cart2) {
+    width: 100%;
+  }
+
+  :global(.cart_img2) {
+    height: 9rem;
+    width: auto;
+    margin: auto;
+  }
+
+  :global(.delete-all2) {
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  :global(.delete-item2) {
+    width: 100%;
+  }
+
+  :global(.cart_sub2) {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin: 2rem 0 1rem 0;
+    max-height: 20rem;
+  }
+
+  :global(.total_price2) {
+    margin-top: 0rem;
+  }
+
+  #checkout_cart_list {
+    /* height: 20px; */
+    /* background-color: black; */
+  }
+
+  #cart_img {
+    height: 20px;
+  }
+
+  /* Genbrug samme grundlæggende styling */
+  .checkout_page {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: "Montserrat", sans-serif;
+    color: var(--second-color);
+    font-size: 2rem;
+  }
+
+  .checkout_content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 992px) {
+    .checkout_content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Genbrug styling fra cart_container */
+  .cart_summary {
+    background: var(--font-color-white);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+
+  .payment_section {
+    background: var(--font-color-white);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+
+  /* Formular styling - tilpasset men konsistent med eksisterende */
+  .form_group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: "Inter", sans-serif;
+    color: var(--second-color);
+  }
+
+  .form_input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .apply {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .other_info input {
+    /* margin-top: 5rem; */
+    height: 10rem;
+    text-align: center;
+  }
+
+  /* Betalingsmetoder */
+  .payment_methods {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .payment_method {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Inter", sans-serif;
+  }
+
+  /* Kortindtastningsområde */
+  .card_element {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin: 1rem 0;
+  }
+
+  /* Tilføj resten af de originale styles her */
+  /* ... */
+
+  /* Behold alle de originale :global regler */
+  :global(.product2) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  :global(.amount_grid) {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row: 1fr;
+    gap: 0.75rem;
+    width: min-content;
+    place-content: left;
+    margin-bottom: 1rem;
+  }
+
+  :global(.product_title) {
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  :global(.h6_price) {
+    font-style: oblique;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 800px) {
+    :global(.total_price2) {
+      margin-top: 5rem;
+    }
+  }
+</style>

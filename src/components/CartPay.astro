@@ -11,7 +11,7 @@
     </div>
     <hr />
     <div class="kort_info">
-      <div class="solo">
+      <div id="cardnumber" class="solo">
         <input
           type="text"
           placeholder="Kortnummer"
@@ -20,7 +20,7 @@
         />
       </div>
 
-      <div class="twotwo">
+      <div class="twotwo card_ex">
         <input
           type="text"
           placeholder="Udløbsdato"
@@ -34,7 +34,7 @@
           name="sikkerhedskode"
         />
       </div>
-      <div class="solo">
+      <div class="solo card_name">
         <input
           type="text"
           placeholder="Navn på kortet"
@@ -72,7 +72,7 @@
     place-content: center;
     place-self: center;
     width: 40rem;
-    background-color: var(--main-color);
+    /* background-color: var(--main-color); */
   }
 
   .betal {
@@ -81,6 +81,7 @@
 
   .betaling_container {
     padding: 1rem 1rem 1rem 1rem;
+    width: 95%;
   }
 
   .kort_div {
@@ -106,10 +107,17 @@
   .kort_info {
     display: flex;
     flex-direction: column;
+    background-color: #d9d9d9;
+    padding: 1rem;
+  }
+
+  input {
+    margin: 5px;
   }
 
   .solo input {
-    width: 100%;
+    width: 98.5%;
+    height: 3rem;
   }
 
   .twotwo {
@@ -120,11 +128,18 @@
   }
   .twotwo input {
     width: 50%;
+    height: 3rem;
   }
 
   .buy_btn {
     place-self: center;
     margin-top: 1rem;
     margin-bottom: 2rem;
+  }
+
+  @media (min-width: 800px) {
+    .betaling_container {
+      width: 78%;
+    }
   }
 </style>
