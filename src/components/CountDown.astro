@@ -5,13 +5,13 @@
 <section>
   <div class="countdown_div">
     <h1>Beer Club</h1>
-    <p>Nedtælling til næste forsendelse af månedskassen</p>
+    <p>Nedtælling til næste forsendelse af månedskassen:</p>
     <h2 class="timer"></h2>
   </div>
 
   <div class="countdown_btns">
     <button class="signup_btn">BLIV MEDLEM</button>
-    <button class="readmore_btn">LÆS MERE</button>
+    <button class="readmore_btn">MEDLEMS PORTAL</button>
   </div>
 </section>
 
@@ -28,13 +28,15 @@
   }
 
   .countdown_btns button {
-    width: 100%;
-    margin-bottom: 1rem;
+    font-size: 1.8cqw;
   }
 
   .signup_btn {
     background-color: var(--second-color);
     color: var(--font-color-white);
+
+    margin: 3rem auto 0.5rem auto;
+    padding: 0.5rem 4rem;
   }
 
   .readmore_btn {
@@ -47,13 +49,27 @@
       3px 8px 5px 0px rgba(0, 0, 0, 0.03),
       1px 3px 4px 0px rgba(0, 0, 0, 0.04),
       0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+
+    margin: 0.5rem auto 1rem auto;
+    padding: 0.5rem 3.3rem;
   }
 
-  html,
-  body,
+  h2 {
+    background-color: var(--second-color);
+    color: var(--font-color-white);
+    margin: auto 9vw;
+    padding: 0.5rem 0rem;
+  }
+
   h1 {
-    margin: 0;
-    padding: 0;
+    font-size: 9cqw;
+    margin-top: 4vw;
+  }
+
+  p {
+    font-size: 2.5cqw;
+    font-style: italic;
+    margin-bottom: 7vw;
   }
 
   * {
@@ -78,11 +94,42 @@
     font-weight: 400;
     font-size: 17px;
   }
+
+  @media screen and (min-width: 800px) {
+    h1 {
+      font-size: 5cqw;
+      margin-top: 8vw;
+    }
+
+    h2 {
+      font-size: 5cqw;
+      margin: auto 20vw;
+      padding: 0.5rem 0rem;
+    }
+
+    .signup_btn {
+      margin: 3rem auto 1rem auto;
+      padding: 0.5rem 4rem;
+    }
+
+    .readmore_btn {
+      margin: 0.5rem auto 3rem auto;
+      padding: 0.5rem 2.7rem;
+    }
+
+    .countdown_btns button {
+      font-size: 1.5cqw;
+    }
+
+    p {
+      font-size: 1.5cqw;
+    }
+  }
 </style>
 
 <script>
   // INDSÆT DAT OG TID
-  var countDownDate = new Date("June 2, 2025 10:00:00").getTime();
+  var countDownDate = new Date("July 1, 2025 10:00:00").getTime();
   var timeClear = setInterval(function () {
     var now = new Date().getTime();
     var timeLeft = countDownDate - now;

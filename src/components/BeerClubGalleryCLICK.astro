@@ -3,21 +3,18 @@
 ---
 
 <section class="beerclub1_container">
-  <div class="gallery">
-    <ul>
-      <li><img src="../../public/alefarm_box.webp" alt="" /></li>
-    </ul>
-  </div>
+  <img src="../../public/beerclub_v1.png" alt="" />
 
   <div class="beerclub1_text">
-    <h3>12 Friske Øl</h3>
-    <p class="p_b">Øl på abonnement</p>
+    <h3>Øl På Abonnement</h3>
+    <p class="p_b">12 friske øl</p>
     <p>
-      Vores ølklub består af en herlig månedskasse, som udsendes i slutningen af
-      hver måned, og som indeholder alle de sprudlende friske og spændende
-      øl fra vores produktion. Månedskassen er for alle, som sætter pris på
-      fantastisk og velsmagende craft beer, som er brygget med indlevelse,
-      ambition og respekt for det gode håndværk.
+      Vores ølklub består af <strong>en herlig månedskasse</strong>, som
+      udsendes i slutningen af hver måned, og som indeholder alle de <strong
+        >sprudlende friske og spændende øl</strong
+      > fra vores produktion. Månedskassen er for alle, som sætter pris på fantastisk
+      og velsmagende craft beer, som er brygget med indlevelse, ambition og respekt
+      for det gode håndværk.
     </p>
 
     <ul>
@@ -33,7 +30,7 @@
 
 <style>
   .beerclub1_container {
-    margin: 5rem;
+    margin: auto 3rem;
   }
 
   .gallery {
@@ -41,22 +38,15 @@
   }
 
   ul {
-    list-style-type: circle;
-    padding-left: 1.5rem; /* ensure space for bullets */
-  }
-
-  ul {
     list-style-type: disc;
     padding-left: 1.5rem;
+
+    margin: 8vw auto;
   }
 
   li {
-    list-style-position: outside;
-    display: list-item; /* ensure it's not overridden */
-  }
-
-  li p {
-    display: inline; /* change block-level p to inline */
+    padding: 1.5vw;
+    margin-left: -1.5vw;
   }
 
   .gallery ul li {
@@ -66,14 +56,31 @@
     color: var(--second-color);
   }
 
+  img {
+    margin: 2vw auto 20vw auto;
+  }
+
+  h3 {
+    margin-bottom: 3vw;
+    font-weight: 700;
+  }
+
+  p {
+    margin-bottom: 4vw;
+  }
+
   @media (min-width: 800px) {
     .beerclub1_container {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+
+      margin: 20vw 12rem auto 12rem;
     }
 
-    .gallery {
-      max-width: 25rem;
+    img {
+      margin: 0;
+      grid-column: 2;
     }
 
     .beerclub1_text {
@@ -84,7 +91,36 @@
 
     .beerclub1_text ul {
       margin-top: auto;
-      margin-bottom: 3rem;
+
+      padding-left: 1.5rem;
+
+      margin: 0vw;
+    }
+
+    li {
+      padding: 0.5vw;
+      margin-left: 0vw;
+    }
+
+    .p_b {
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+
+    .beerclub1_text {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    h3 {
+      font-size: 3cqw;
     }
   }
 </style>

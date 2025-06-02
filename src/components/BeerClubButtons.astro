@@ -17,7 +17,7 @@
   </div>
 
   <div class="readmore_container">
-    <button class="cta2"> LÆS MERE </button>
+    <button class="cta2"> MEDLEMS PORTAL </button>
 
     <p>
       Du kan administrere dit medlemskab af Alefarm Beer Club via vores
@@ -28,13 +28,25 @@
 </section>
 
 <style>
+  .cta1 {
+    margin: 3rem auto 1.5rem auto;
+    padding: 1rem 4rem;
+    font-size: 2.5cqw;
+  }
+
+  .cta2 {
+    margin: 0.5rem auto 1.5rem auto;
+    padding: 1rem 3.3rem;
+    font-size: 2.5cqw;
+  }
   .beer_buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
     gap: 2rem;
+
+    margin: auto 3rem;
   }
 
   .signup_container,
@@ -53,6 +65,10 @@
     width: 100%;
   }
 
+  .readmore_container {
+    margin-top: 10vw;
+  }
+
   .beer_buttons button {
     align-self: center;
   }
@@ -64,7 +80,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: start;
-      margin: 5rem;
+
+      margin: 5vw 12rem 20vw 12rem;
     }
 
     .signup_container {
@@ -73,6 +90,19 @@
 
     .readmore_container {
       grid-column: 2;
+      margin-top: 0vw;
+    }
+
+    .cta1 {
+      margin: 3rem auto 1.5rem auto;
+      padding: 1rem 4rem;
+      font-size: 1.5cqw;
+    }
+
+    .cta2 {
+      margin: 3rem auto 1.5rem auto;
+      padding: 1rem 3.3rem;
+      font-size: 1.5cqw;
     }
   }
 </style>
