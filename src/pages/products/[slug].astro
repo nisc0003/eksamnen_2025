@@ -27,55 +27,69 @@ const key =
 const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
   res.json(),
 );
+
+const showSoldOut = product.soldout === true;
+const showDefault = !product.soldout;
 ---
 
 <Layout>
   <section>
-    <img src={`/beer-card_images/${product.img}`} alt={product.title} />
+    <div class="productBackground">
+      <a href="../products/products.astro">← tilbage</a>
+      <img src={`/beer-card_images/${product.img}`} alt={product.title} />
+    </div>
     <article>
       <h4>{product.title}</h4>
       <h5>{product.title2}</h5>
       <h5>{product.type}</h5>
-      <p>{product.description}</p>
+      <p class="discription">{product.description}</p>
 
       <h6>{product.discount_percentage}</h6>
-      <p><strong>{product.ingredient}</strong></p>
-      <p>{product.Old_price}</p>
-      <p><em>{product.date}</em></p>
-      <p>
-        {product.category}, {product.category2}
-      </p>
+      <div class="productBox">
+        <p class="ingredients"><strong>{product.ingredient}</strong></p>
+
+        <p class="date"><em>{product.date}</em></p>
+        <p>
+          {product.category}, {product.category2}
+        </p>
+      </div>
       <div>
         {
-          product.soldout ? (
-            <p class="price" style="color: red;">
-              Sold out
-            </p>
-          ) : (
+          showDefault && (
             <>
               <p class="price">{product.price},-</p>
-              <button
-                class="cta1 add-to-cart"
-                data-product={JSON.stringify({
-                  img: product.img,
-                  title: product.title,
-                  title2: product.title2,
-                  price: product.price,
-                  Old_price: product.Old_price,
-                  discount_percentage: product.discount_percentage,
-                  soldout: product.soldout,
-                  category: product.category,
-                  category2: product.category2,
-                  type: product.type,
-                  path: product.path,
-                })}
-              >
-                Add to basket
-              </button>
+            </>
+          )
+        }{
+          showSoldOut && (
+            <>
+              <p class="price">{product.price},-</p>
+              <p>{product.Old_price}</p>
+              <p>{product.discount_percentage}DKK</p>
             </>
           )
         }
+
+        <button
+          class="cta1 add-to-cart"
+          data-product={JSON.stringify({
+            img: product.img,
+            title: product.title,
+            title2: product.title2,
+            price: product.price,
+            Old_price: product.Old_price,
+            discount_percentage: product.discount_percentage,
+            soldout: product.soldout,
+            category: product.category,
+            category2: product.category2,
+            type: product.type,
+            path: product.path,
+          })}
+        >
+          Add to basket
+        </button>
       </div>
+      ) }
     </article>
   </section>
 </Layout>
@@ -84,15 +98,16 @@ const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
   section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding-block: 2rem;
   }
 
   article {
     display: grid;
-    gap: 1.5rem;
+    gap: 1rem;
     place-content: start;
-    background-color: rgba(255, 251, 244, 1);
-    padding: 3rem;
+    /* background-color: rgba(255, 251, 244, 1); */
+    padding: 1.5rem 1rem;
+
+    grid-row: auto;
   }
 
   div {
@@ -107,5 +122,59 @@ const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
     font-weight: 600;
     opacity: 80%;
     text-align: right;
+  }
+
+  img {
+    height: 90vw;
+    width: auto;
+    margin: 1rem auto 2rem auto;
+  }
+
+  a {
+    color: var(--main-color);
+    margin: 1rem;
+    font-size: 3cqw;
+    text-transform: lowercase;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+  }
+
+  .productBackground {
+    background-image: url(../../../public/slug_background.webp);
+    background-size: cover;
+
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  h4 {
+    margin: 0vw;
+  }
+
+  h5 {
+    font-size: 3cqw;
+    margin-top: -2rem;
+  }
+
+  .discription {
+    margin-top: -1rem;
+    font-size: 3.5cqw;
+  }
+
+  .productBox {
+    font-size: 3.5cqw;
+    border: 1px solid var(--second-color);
+    padding: 1rem;
+    border-radius: 0.1rem;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .price {
+  }
+
+  .add-to-cart {
   }
 </style>
