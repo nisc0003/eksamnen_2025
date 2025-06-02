@@ -56,34 +56,36 @@ const showDefault = !product.soldout;
       {
         showDefault && (
           <>
-            <div class="price_box">
-              <div>
-                <p class="price_text">Starting at</p>
-                <h6>{product.price},-</h6>
+            <div class="bottomBox">
+              <div class="price_box">
+                <div>
+                  <p class="price_text">Starting at</p>
+                  <h6>{product.price} DKK</h6>
+                </div>
+                <div>
+                  {product.Old_price && <p class="old_price">used to be</p>}
+                  <h6 class="old_price">{product.Old_price}</h6>
+                </div>
               </div>
-              <div>
-                {product.Old_price && <p class="old_price">used to be</p>}
-                <h6 class="old_price">{product.Old_price}</h6>
-              </div>
+              <button
+                class="cta1 add-to-cart"
+                data-product={JSON.stringify({
+                  img: product.img,
+                  title: product.title,
+                  title2: product.title2,
+                  price: product.price,
+                  Old_price: product.Old_price,
+                  discount_percentage: product.discount_percentage,
+                  soldout: product.soldout,
+                  category: product.category,
+                  category2: product.category2,
+                  type: product.type,
+                  path: product.path,
+                })}
+              >
+                Add to basket
+              </button>
             </div>
-            <button
-              class="cta1 add-to-cart"
-              data-product={JSON.stringify({
-                img: product.img,
-                title: product.title,
-                title2: product.title2,
-                price: product.price,
-                Old_price: product.Old_price,
-                discount_percentage: product.discount_percentage,
-                soldout: product.soldout,
-                category: product.category,
-                category2: product.category2,
-                type: product.type,
-                path: product.path,
-              })}
-            >
-              Add to basket
-            </button>
           </>
         )
       }
@@ -136,13 +138,13 @@ const showDefault = !product.soldout;
   }
 
   img {
-    height: 90vw;
+    height: 85vw;
     width: auto;
-    margin: 1rem auto 2rem auto;
+    margin: -1rem auto 2rem auto;
   }
 
   a {
-    color: var(--main-color);
+    color: var(--second-color);
     margin: 1rem;
     font-size: 3cqw;
     text-transform: lowercase;
@@ -151,8 +153,8 @@ const showDefault = !product.soldout;
   }
 
   .productBackground {
-    background-image: url(../../../public/slug_background.webp);
-    background-size: cover;
+    /* background-image: url(../../../public/slug_background.webp); */
+    /* background-size: cover; */
 
     display: grid;
     grid-template-columns: 1fr;
@@ -164,11 +166,11 @@ const showDefault = !product.soldout;
 
   h5 {
     font-size: 3cqw;
-    margin-top: -2rem;
+    margin-top: -1rem;
   }
 
   .discription {
-    margin-top: -1rem;
+    margin-top: 0rem;
     font-size: 3.5cqw;
   }
 
@@ -183,9 +185,62 @@ const showDefault = !product.soldout;
     gap: 1rem;
   }
 
-  .price {
+  .bottomBox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 5vw;
   }
 
-  .add-to-cart {
+  button {
+    font-size: 2.5cqw;
+    padding: 0.6rem 3rem;
+  }
+
+  .price_box {
+    place-content: right;
+    border: 1px solid var(--second-color);
+    padding: 0.5rem;
+    border-radius: 0.1rem;
+  }
+
+  .price_box p {
+    font-size: 3cqw;
+  }
+
+  h6 {
+    font-size: 3cqw;
+  }
+
+  @media screen and (min-width: 800px) {
+    section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+
+    img {
+      height: 50vw;
+      width: auto;
+      margin: -1rem auto 2rem auto;
+
+      grid-column: 2;
+    }
+
+    a {
+      color: var(--second-color);
+      margin: 3rem auto auto 0rem;
+      font-size: 1.5cqw;
+      text-transform: lowercase;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 300;
+
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    article {
+      grid-column: 1;
+      grid-row: 1;
+    }
   }
 </style>
