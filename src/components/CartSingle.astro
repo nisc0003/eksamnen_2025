@@ -153,7 +153,7 @@
   </div>
 </main>
 
-<script is:inline>
+<script is:"client">
   // Genbrug samme logik som i cart_container
   document.addEventListener("DOMContentLoaded", () => {
     // Hent kurvdata fra localStorage
@@ -166,10 +166,10 @@
 
       if (cart.length === 0) {
         cartList.innerHTML = `
-          <div class="empty_cart">
+          <div>
             <p>Din kurv er tom</p>
-            <a href="/">
-              <button class="cta_basket">Fortshop</button>
+            <a href="/products" class"empty_cart2">
+              <button class="cta_basket empty_cart2">Shop</button>
             </a>
           </div>
         `;
@@ -336,6 +336,10 @@
   :global(.product_image2) {
     height: 10px;
     width: auto;
+  }
+
+  :global(.empty_cart2) {
+    width: 100%;
   }
 
   :global(.cart_img2) {
