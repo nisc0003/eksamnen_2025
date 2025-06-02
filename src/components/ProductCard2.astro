@@ -58,28 +58,13 @@ const { img, title, title2, price, Old_price, type, path } = Astro.props;
     <div class="grid_1-1">
       <div class="price_box">
         <div>
-          <div>
-            <p class="price_text">Starter fra</p>
-            <h6>{price},-</h6>
-          </div>
-          <!-- <div>
-            <p class="old_price">used to be</p>
-            <h6 class="old_price">Gammel</h6>
-          </div> -->
-        </div>
-      </div>
-      <div class="price_box">
-        <div>
-          <p class="price_text">Starting at</p>
+          <p class="price_text">Starter fra</p>
           <h6>{price},-</h6>
         </div>
-        <div>
-          {Old_price && <p class="old_price">used to be</p>}
-          <h6 class="old_price">{Old_price}</h6>
-        </div>
       </div>
+
       <button
-        class="cta1 add-to-cart"
+        class="cta2 add-to-cart"
         data-product={JSON.stringify({
           title,
           title2,
@@ -92,8 +77,8 @@ const { img, title, title2, price, Old_price, type, path } = Astro.props;
         Add to basket
       </button>
     </div>
-    )
   </div>
+  )
 </article>
 
 <style>
