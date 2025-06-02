@@ -34,17 +34,18 @@ const showDefault = !product.soldout;
 
 <Layout>
   <section>
-    <div class="productBackground">
+    <div>
       <a href="../products/products.astro">← tilbage</a>
-      <img src={`/beer-card_images/${product.img}`} alt={product.title} />
+      <!-- <img src={`/beer-card_images/${product.img}`} alt={product.title} /> -->
+      <img src={`/beer-card_images_webp/${product.img}`} alt={product.title} />
     </div>
     <article>
       <h4>{product.title}</h4>
       <h5>{product.title2}</h5>
       <h5>{product.type}</h5>
+      <h6 class="discount">{product.discount_percentage}</h6>
       <p class="discription">{product.description}</p>
 
-      <h6>{product.discount_percentage}</h6>
       <div class="productBox">
         <p class="ingredients"><strong>{product.ingredient}</strong></p>
 
@@ -57,18 +58,19 @@ const showDefault = !product.soldout;
         showDefault && (
           <>
             <div class="bottomBox">
-              <div class="price_box">
+              <div class="price_box sale_prie_box">
                 <div>
                   <p class="price_text">Starting at</p>
                   <h6>{product.price} DKK</h6>
                 </div>
-                <div>
-                  {product.Old_price && <p class="old_price">used to be</p>}
-                  <h6 class="old_price">{product.Old_price}</h6>
+                <div class="old_price">
+                  {product.Old_price && (
+                    <p class="old_price_p">used to be {product.Old_price}</p>
+                  )}
                 </div>
               </div>
               <button
-                class="cta1 add-to-cart"
+                class="cta1 add-to-cart old_price_button"
                 data-product={JSON.stringify({
                   img: product.img,
                   title: product.title,
@@ -93,13 +95,15 @@ const showDefault = !product.soldout;
       {
         showSoldOut && (
           <>
-            <div class="price_box">
-              <div>
-                <p class="price_text">Udsolgt</p>
-                <h6 class="sold_out_h6">{product.price}DKK</h6>
+            <div class="bottomBox">
+              <div class="price_box">
+                <div>
+                  <p class="price_text">Udsolgt</p>
+                  <h6 class="sold_out_h6 udsolgt">{product.price}DKK</h6>
+                </div>
               </div>
+              <button class="cta1 add-to-cart udsolgtButton">Udsolgt</button>
             </div>
-            <button class="cta_none">Udsolgt</button>
           </>
         )
       }
@@ -140,7 +144,7 @@ const showDefault = !product.soldout;
   img {
     height: 85vw;
     width: auto;
-    margin: -1rem auto 2rem auto;
+    margin: 1rem auto 0rem auto;
   }
 
   a {
@@ -183,6 +187,7 @@ const showDefault = !product.soldout;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    grid-template-rows: auto;
   }
 
   .bottomBox {
@@ -197,25 +202,35 @@ const showDefault = !product.soldout;
   }
 
   .price_box {
-    place-content: right;
     border: 1px solid var(--second-color);
-    padding: 0.5rem;
     border-radius: 0.1rem;
   }
 
   .price_box p {
     font-size: 3cqw;
+    padding-top: 0.5rem;
   }
 
   h6 {
     font-size: 3cqw;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
   }
 
-  @media screen and (min-width: 800px) {
+  a {
+    position: absolute;
+    top: 35vw;
+    left: 2vw;
+  }
+
+  @media screen and (min-width: 610px) {
     section {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto;
+      gap: 5rem;
+
+      margin: 5vw auto;
     }
 
     img {
@@ -227,20 +242,110 @@ const showDefault = !product.soldout;
     }
 
     a {
-      color: var(--second-color);
       margin: 3rem auto auto 0rem;
-      font-size: 1.5cqw;
-      text-transform: lowercase;
-      font-family: "Montserrat", sans-serif;
-      font-weight: 300;
+      font-size: 1.3cqw;
 
       grid-column: 1;
       grid-row: 1;
+
+      top: 10vw;
+      left: 8vw;
     }
 
     article {
       grid-column: 1;
       grid-row: 1;
+
+      margin-left: 7vw;
+    }
+
+    h4 {
+      font-size: 3cqw;
+    }
+
+    h5 {
+      font-size: 2cqw;
+    }
+
+    .discription {
+      font-size: 1.5cqw;
+    }
+
+    .price_box p {
+      font-size: 1.3cqw;
+      padding: 0.7rem;
+    }
+
+    .price_box {
+      width: 20vw;
+    }
+
+    h6 {
+      font-size: 1.5cqw;
+    }
+
+    .cta1 {
+      font-size: 1cqw;
+      padding: 1.3rem 3rem;
+    }
+  }
+
+  /* udsolgt og tilbud */
+
+  .old_price_p {
+    color: rgb(170, 170, 170);
+    font-style: italic;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .old_price_button {
+    padding: 1.4rem 3rem;
+  }
+
+  .sale_prie_box {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row: 1fr 1fr;
+
+    gap: 0.2rem;
+  }
+
+  .udsolgt {
+    color: rgb(185, 185, 185);
+  }
+
+  .udsolgtButton {
+    background-color: rgb(212, 212, 212);
+  }
+
+  .discount {
+    color: var(--filter-color_new);
+
+    font-weight: 700;
+  }
+
+  @media screen and (min-width: 610px) {
+    .old_price_p {
+      color: rgb(170, 170, 170);
+      font-style: italic;
+      padding: 0rem;
+    }
+
+    .sale_prie_box {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-row: 1fr 1fr;
+
+      gap: 0.2rem;
+    }
+
+    .udsolgt {
+      color: rgb(185, 185, 185);
+    }
+
+    .udsolgtButton {
+      background-color: rgb(212, 212, 212);
     }
   }
 </style>
