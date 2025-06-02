@@ -27,20 +27,82 @@ const key =
 const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
   res.json(),
 );
+
+const showSoldOut = product.soldout === true;
+const showDefault = !product.soldout;
 ---
 
 <Layout>
   <section>
-    <img src={`/beer-card_images/${product.img}`} alt={product.title} />
+    <div class="productBackground">
+      <a href="../products/products.astro">← tilbage</a>
+      <img src={`/beer-card_images/${product.img}`} alt={product.title} />
+    </div>
     <article>
       <h4>{product.title}</h4>
-      <p>{product.description}</p>
-      <p><strong>{product.ingredient}</strong></p>
-      <p><em>{product.date}</em></p>
-      <div>
-        <p class="price">{product.price},-</p>
-        <button class="cta2">Add to basket</button>
+      <h5>{product.title2}</h5>
+      <h5>{product.type}</h5>
+      <p class="discription">{product.description}</p>
+
+      <h6>{product.discount_percentage}</h6>
+      <div class="productBox">
+        <p class="ingredients"><strong>{product.ingredient}</strong></p>
+
+        <p class="date"><em>{product.date}</em></p>
+        <p>
+          {product.category}, {product.category2}
+        </p>
       </div>
+      {
+        showDefault && (
+          <>
+            <div class="bottomBox">
+              <div class="price_box">
+                <div>
+                  <p class="price_text">Starting at</p>
+                  <h6>{product.price} DKK</h6>
+                </div>
+                <div>
+                  {product.Old_price && <p class="old_price">used to be</p>}
+                  <h6 class="old_price">{product.Old_price}</h6>
+                </div>
+              </div>
+              <button
+                class="cta1 add-to-cart"
+                data-product={JSON.stringify({
+                  img: product.img,
+                  title: product.title,
+                  title2: product.title2,
+                  price: product.price,
+                  Old_price: product.Old_price,
+                  discount_percentage: product.discount_percentage,
+                  soldout: product.soldout,
+                  category: product.category,
+                  category2: product.category2,
+                  type: product.type,
+                  path: product.path,
+                })}
+              >
+                Add to basket
+              </button>
+            </div>
+          </>
+        )
+      }
+
+      {
+        showSoldOut && (
+          <>
+            <div class="price_box">
+              <div>
+                <p class="price_text">Udsolgt</p>
+                <h6 class="sold_out_h6">{product.price}DKK</h6>
+              </div>
+            </div>
+            <button class="cta_none">Udsolgt</button>
+          </>
+        )
+      }
     </article>
   </section>
 </Layout>
@@ -49,15 +111,16 @@ const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
   section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding-block: 2rem;
   }
 
   article {
     display: grid;
-    gap: 1.5rem;
+    gap: 1rem;
     place-content: start;
-    background-color: rgba(255, 251, 244, 1);
-    padding: 3rem;
+    /* background-color: rgba(255, 251, 244, 1); */
+    padding: 1.5rem 1rem;
+
+    grid-row: auto;
   }
 
   div {
@@ -72,5 +135,112 @@ const [product] = await fetch(url, { headers: { apikey: key } }).then((res) =>
     font-weight: 600;
     opacity: 80%;
     text-align: right;
+  }
+
+  img {
+    height: 85vw;
+    width: auto;
+    margin: -1rem auto 2rem auto;
+  }
+
+  a {
+    color: var(--second-color);
+    margin: 1rem;
+    font-size: 3cqw;
+    text-transform: lowercase;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+  }
+
+  .productBackground {
+    /* background-image: url(../../../public/slug_background.webp); */
+    /* background-size: cover; */
+
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  h4 {
+    margin: 0vw;
+  }
+
+  h5 {
+    font-size: 3cqw;
+    margin-top: -1rem;
+  }
+
+  .discription {
+    margin-top: 0rem;
+    font-size: 3.5cqw;
+  }
+
+  .productBox {
+    font-size: 3.5cqw;
+    border: 1px solid var(--second-color);
+    padding: 1rem;
+    border-radius: 0.1rem;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .bottomBox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 5vw;
+  }
+
+  button {
+    font-size: 2.5cqw;
+    padding: 0.6rem 3rem;
+  }
+
+  .price_box {
+    place-content: right;
+    border: 1px solid var(--second-color);
+    padding: 0.5rem;
+    border-radius: 0.1rem;
+  }
+
+  .price_box p {
+    font-size: 3cqw;
+  }
+
+  h6 {
+    font-size: 3cqw;
+  }
+
+  @media screen and (min-width: 800px) {
+    section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+
+    img {
+      height: 50vw;
+      width: auto;
+      margin: -1rem auto 2rem auto;
+
+      grid-column: 2;
+    }
+
+    a {
+      color: var(--second-color);
+      margin: 3rem auto auto 0rem;
+      font-size: 1.5cqw;
+      text-transform: lowercase;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 300;
+
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    article {
+      grid-column: 1;
+      grid-row: 1;
+    }
   }
 </style>

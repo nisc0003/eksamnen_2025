@@ -321,14 +321,12 @@
     justify-content: flex-end;
     margin: 1rem 0;
   }
-
-  .delete-all {
+  :global(.delete-item) {
     background: var(--second-color);
     color: var(--font-color-white);
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
-
     margin-top: 1rem;
     cursor: pointer;
     font-family: "Inter", sans-serif;
@@ -413,6 +411,7 @@
     place-content: left;
     margin-bottom: 1rem;
   }
+
   :global(.product_title) {
     text-transform: uppercase;
     font-weight: 700;
@@ -437,6 +436,19 @@
     font-style: oblique;
     opacity: 80%;
   }
+
+  :global(.quantity-up, .quantity-down) {
+    place-self: center;
+    object-fit: cover;
+    padding: 25%;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: var(--font-color-white);
+    color: var(--second-color);
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 1px 2px 0px;
+  }
+
   h3 {
     font-size: 1.5rem;
     color: var(--second-color);
