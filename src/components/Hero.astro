@@ -7,7 +7,9 @@ import "../css/styles.css";
   <!-- <video src="../../public/hero_video.mov"></video> -->
   <img class="heroGif" src="/hero_assets/hero_video.gif" alt="" />
   <h1>"THE SPIRIT OF CRAFT"</h1>
-  <button class="cta2">shop vores øl</button>
+  <a href="../pages/products.astro"
+    ><button class="cta2">shop vores øl</button></a
+  >
 </section>
 
 <style>
@@ -39,7 +41,7 @@ import "../css/styles.css";
     margin: 1rem auto 0.5rem auto;
   }
 
-  button {
+  a {
     grid-column: 2 / span 2;
     grid-row: 5;
     margin: 0.5rem auto 3rem auto;
@@ -87,13 +89,13 @@ import "../css/styles.css";
       margin: auto;
     }
 
-    button {
+    a {
       grid-column: 3;
       grid-row: 4;
       margin: -2rem auto auto auto;
       padding: 1rem 5rem;
 
-      font-size: 1.5cqw;
+      font-size: 2cqw;
     }
 
     .heroGif {
