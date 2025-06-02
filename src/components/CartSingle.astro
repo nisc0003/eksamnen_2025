@@ -1,109 +1,101 @@
----
-// pages/checkout.astro
-import Layout from "../layouts/Layout.astro";
----
+<main class="checkout_page">
+  <h1>Checkout</h1>
 
-<Layout>
-  <main class="checkout_page">
-    <h1>Checkout</h1>
+  <div class="checkout_content">
+    <!-- Venstre side - Kurvoversigt -->
+    <section class="cart_summary">
+      <h2>Din ordre</h2>
 
-    <div class="checkout_content">
-      <!-- Venstre side - Kurvoversigt -->
-      <section class="cart_summary">
-        <h2>Din ordre</h2>
+      <!-- Genbrug samme struktur som i cart_container -->
+      <button class="delete-all cta1">Slet alt</button>
 
-        <!-- Genbrug samme struktur som i cart_container -->
-        <button class="delete-all cta1">Slet alt</button>
-
-        <section class="cart_sub">
-          <div class="cart_list" id="checkout_cart_list"></div>
-        </section>
-
-        <!-- Prisoversigt - samme struktur som original -->
-        <section class="price_amount">
-          <div class="price_original">
-            <p>Subtotal</p>
-            <p id="checkout_subtotal">0.00 DKK</p>
-          </div>
-          <hr />
-          <div class="price_discounted">
-            <p>Rabat</p>
-            <div class="discount"><p id="checkout_discount">0.00 DKK</p></div>
-          </div>
-          <hr />
-        </section>
-
-        <!-- Total pris - samme struktur -->
-        <section class="total_price">
-          <h3>Pris i alt</h3>
-          <div class="price_value">
-            <h3 id="checkout_total">0.00 DKK</h3>
-          </div>
-        </section>
+      <section class="cart_sub">
+        <div class="cart_list" id="checkout_cart_list"></div>
       </section>
 
-      <!-- Højre side - Betalingsformular -->
-      <section class="payment_section">
-        <h2>Betalingsoplysninger</h2>
-        <form id="payment_form">
-          <!-- Formularfelter -->
-          <div class="form_group">
-            <label for="name">Fulde navn</label>
-            <input type="text" id="name" required class="form_input" />
-          </div>
-
-          <div class="form_group">
-            <label for="email">Email</label>
-            <input type="email" id="email" required class="form_input" />
-          </div>
-
-          <div class="form_group">
-            <label for="address">Adresse</label>
-            <input type="text" id="address" required class="form_input" />
-          </div>
-
-          <div class="form_row">
-            <div class="form_group">
-              <label for="zip">Postnummer</label>
-              <input type="text" id="zip" required class="form_input" />
-            </div>
-
-            <div class="form_group">
-              <label for="city">By</label>
-              <input type="text" id="city" required class="form_input" />
-            </div>
-          </div>
-
-          <div class="form_group">
-            <label for="phone">Telefon</label>
-            <input type="tel" id="phone" required class="form_input" />
-          </div>
-
-          <h3>Betalingsmetode</h3>
-          <div class="payment_methods">
-            <label class="payment_method">
-              <input type="radio" name="payment" value="card" checked />
-              <span>Kreditkort</span>
-            </label>
-
-            <label class="payment_method">
-              <input type="radio" name="payment" value="mobilepay" />
-              <span>MobilePay</span>
-            </label>
-          </div>
-
-          <!-- Kortindtastningsområde -->
-          <div id="card_element" class="card_element"></div>
-
-          <!-- Bekræftelsesknap - bruger samme styling som cta_buy -->
-          <button type="submit" class="cta_buy submit_order"
-            >Bekræft ordre</button
-          >
-        </form>
+      <!-- Prisoversigt - samme struktur som original -->
+      <section class="price_amount">
+        <div class="price_original">
+          <p>Subtotal</p>
+          <p id="checkout_subtotal">0.00 DKK</p>
+        </div>
+        <hr />
+        <div class="price_discounted">
+          <p>Rabat</p>
+          <div class="discount"><p id="checkout_discount">0.00 DKK</p></div>
+        </div>
+        <hr />
       </section>
-    </div>
-  </main>
-</Layout>
+
+      <!-- Total pris - samme struktur -->
+      <section class="total_price">
+        <h3>Pris i alt</h3>
+        <div class="price_value">
+          <h3 id="checkout_total">0.00 DKK</h3>
+        </div>
+      </section>
+    </section>
+
+    <!-- Højre side - Betalingsformular -->
+    <section class="payment_section">
+      <h2>Betalingsoplysninger</h2>
+      <form id="payment_form">
+        <!-- Formularfelter -->
+        <div class="form_group">
+          <label for="name">Fulde navn</label>
+          <input type="text" id="name" required class="form_input" />
+        </div>
+
+        <div class="form_group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required class="form_input" />
+        </div>
+
+        <div class="form_group">
+          <label for="address">Adresse</label>
+          <input type="text" id="address" required class="form_input" />
+        </div>
+
+        <div class="form_row">
+          <div class="form_group">
+            <label for="zip">Postnummer</label>
+            <input type="text" id="zip" required class="form_input" />
+          </div>
+
+          <div class="form_group">
+            <label for="city">By</label>
+            <input type="text" id="city" required class="form_input" />
+          </div>
+        </div>
+
+        <div class="form_group">
+          <label for="phone">Telefon</label>
+          <input type="tel" id="phone" required class="form_input" />
+        </div>
+
+        <h3>Betalingsmetode</h3>
+        <div class="payment_methods">
+          <label class="payment_method">
+            <input type="radio" name="payment" value="card" checked />
+            <span>Kreditkort</span>
+          </label>
+
+          <label class="payment_method">
+            <input type="radio" name="payment" value="mobilepay" />
+            <span>MobilePay</span>
+          </label>
+        </div>
+
+        <!-- Kortindtastningsområde -->
+        <div id="card_element" class="card_element"></div>
+
+        <!-- Bekræftelsesknap - bruger samme styling som cta_buy -->
+        <button type="submit" class="cta_buy submit_order">Bekræft ordre</button
+        >
+      </form>
+    </section>
+  </div>
+</main>
 
 <script is:inline>
   // Genbrug samme logik som i cart_container
