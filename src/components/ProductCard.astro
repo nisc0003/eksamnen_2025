@@ -32,11 +32,12 @@ const showDefault = !soldout;
         </div>
       )
     }
-    <div class="image_wrapper">
-      <img src={`/beer-card_images/${img}`} alt={title} />
-    </div>
+    <a href={"/products/" + path}>
+      <div class="image_wrapper">
+        <img src={`/beer-card_images/${img}`} alt={title} />
+      </div>
+    </a>
   </div>
-
   <div class="card_text_title">
     <h3><a href={"/products/" + path}>{title}</a></h3>
     {type && <h4>{type}</h4>}

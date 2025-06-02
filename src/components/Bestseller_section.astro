@@ -1,6 +1,20 @@
 ---
+//@ts-nocheck
 import "../css/styles.css";
 import Card2 from "../components/ProductCard2.astro";
+
+// Fetch products
+const url =
+  "https://qxzbnouobeqeoleqrllh.supabase.co/rest/v1/AlefarmBrewingEXAM";
+const key =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4emJub3VvYmVxZW9sZXFybGxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNDQ4MTYsImV4cCI6MjA2MjYyMDgxNn0.XW2IwfWGSgwE375yAIMAo0x-89W7Jq6Jn_n7sg6Ummk";
+
+const options = {
+  headers: { apikey: key },
+};
+const data = await fetch(url, options).then((res) => res.json());
+
+const bestseller = data.filter((product) => [1, 45, 46].includes(product.id));
 ---
 
 <section>
@@ -11,9 +25,26 @@ import Card2 from "../components/ProductCard2.astro";
     </div>
     <div class="cards">
       <ul>
-        <li><Card2 /></li>
-        <li><Card2 /></li>
-        <li><Card2 /></li>
+        {
+          bestseller.map((product) => (
+            <li>
+              <Card2
+                img={product.img}
+                title={product.title}
+                title2={product.title2}
+                price={product.price}
+                Old_price={product.Old_price}
+                discount_percentage={product.discount_percentage}
+                soldout={product.soldout}
+                category={product.category}
+                category2={product.category2}
+                type={product.type}
+                path={product.id}
+                date={product.date}
+              />
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>

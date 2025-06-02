@@ -1,33 +1,66 @@
 ---
-import "../css/styles.css";
+const { img, title, title2, price, Old_price, type, path } = Astro.props;
 ---
 
+<!-- ------------------------------------------------------------- -->
 <article>
   <div class="boks">
-    <img src="../../public/temporaryimg.webp" alt="" />
+    <img src={`/beer-card_images/${img}`} alt={title} />
     <div class="background">
       <p class="repeat">
-        reason to give reason to give reason to give reason to give reason to
-        give reason to give reason to give reason to give reason to give reason
-        to give reason to give reason to give reason to give reason to give
-        reason to give reason to give reason to give reason to give reason to
-        give reason to give reason to give reason to give reason to give reason
-        to give reason to give reason to give reason to give reason to give
-        reason to give reason to give reason to give
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
+        {title}
       </p>
     </div>
     <div class="card_text">
       <div class="card_text_title">
-        <h3>REASON TO GIVE</h3>
+        <h3><a href={"/products/" + path}>{title}</a></h3>
       </div>
-      <h5>Double India Pale Ale</h5>
+      {type && <h5>{type}</h5>}
     </div>
     <div class="grid_1-1">
       <div class="price_box">
         <div>
           <div>
             <p class="price_text">Starter fra</p>
-            <h6>60,00 DKK</h6>
+            <h6>{price},-</h6>
           </div>
           <!-- <div>
             <p class="old_price">used to be</p>
@@ -35,8 +68,31 @@ import "../css/styles.css";
           </div> -->
         </div>
       </div>
-      <button>Tilføj til kurv</button>
+      <div class="price_box">
+        <div>
+          <p class="price_text">Starting at</p>
+          <h6>{price},-</h6>
+        </div>
+        <div>
+          {Old_price && <p class="old_price">used to be</p>}
+          <h6 class="old_price">{Old_price}</h6>
+        </div>
+      </div>
+      <button
+        class="cta1 add-to-cart"
+        data-product={JSON.stringify({
+          title,
+          title2,
+          price,
+          Old_price,
+          img,
+          path,
+        })}
+      >
+        Add to basket
+      </button>
     </div>
+    )
   </div>
 </article>
 
