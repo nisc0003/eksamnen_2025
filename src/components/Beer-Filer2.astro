@@ -117,7 +117,7 @@
     if (!categoryButtons.length) return;
     // -------------------------------------------------------------------------------
 
-    // Gem hele listen i en array.
+    // Gem hele listen som array
     const originalItems = Array.from(productList.querySelectorAll("li"));
 
     // Variabel til at huske hvilken kategori der er valgt starter med all
@@ -129,7 +129,7 @@
     // huske pris filter minimum og maksimum som er null / ikke noget
     let priceFilter = { min: null, max: null };
 
-    // Funktion til at vise produkter i produkt-listen
+    // funktion til at vise produkter i produkt-listen
     // 1 tømmer DOM / tilføjer alle elementernr i arrayet tilbagwe / hvert produkt vises (display = "").
     function showItems(items) {
       // tøm listen ved brug af constanten for document.querySelector(".product-grid");
@@ -141,8 +141,6 @@
         productList.appendChild(item);
       });
     }
-
-    // -------------------------------------------------------------------------------------------hertil jeg var nået i forståelse______________
 
     // Funktion der filtrerer produkter efter kategori
     function filterByCategory(items, category) {
@@ -172,15 +170,14 @@
     }
 
     // Funktion der filtrerer produkter som har en udsalgsprocent (element med class ".percentage")
-    // Returnerer kun produkter hvor denne findes.
+    // giv kun produkter der har den
     function filterByDiscount(items) {
       return items.filter(function (item) {
         return item.querySelector(".percentage") !== null;
       });
     }
-    // ________________________________________________________________________________________________________________________________
     // Funktion der sorterer produkter efter pris
-    // sortere produkter efter pris - højest eller lavest først
+    // sortere produkter efter pris - højest eller omvendt
     function sortByPrice(items, highestFirst) {
       items.sort((a, b) => {
         // få pris for produkt B
@@ -200,12 +197,12 @@
       // Finder det første tal i teksten:
       //   / / = start og slut på søgning
       //   \d = et tal fra 0 til 9
-      //   + = et eller flerea tal i streg¨
+      //   + = et eller flerea tal i streh
       // Hvis der er et tal, brug det - ellers skal den tage brug af 0
       return numMatch ? Number(numMatch[0]) : 0;
     }
 
-    // filtrere produkter efter pris mellem min og max
+    // filtrerer produkter efter min max
     function filterByPrice(items, min, max) {
       return items.filter((item) => {
         // brug getPrice funktionen
@@ -260,37 +257,37 @@
     const selectedOption = document.getElementById("dropdown_toggle");
     const dropdownOptions = document.getElementById("custom_dropdown_list");
 
-    // Når brugeren klikker på dropdown-toggle knappen
-    // Viser eller skjuler dropdown-menuen ved at toggle "show" klassen
+    // Når brugeren klikker på dropdown cta
+    // Viser eller skjuler dropdown-menuen ved at bruge min show class fra css "show" klassen
     selectedOption.addEventListener("click", function () {
       dropdownOptions.classList.toggle("show");
     });
 
     // Når brugeren vælger en mulighed i dropdown-menuen
-    dropdownOptions.addEventListener("click", function (e) {
+    dropdownOptions.addEventListener("click", function (event) {
       // Tjek om det klikkede element er en LI (list item)
-      if (e.target.tagName === "LI") {
+      if (event.target.tagName === "LI") {
         // Hent værdien fra data-value attributten
-        const value = e.target.getAttribute("data-value");
+        const value = event.target.getAttribute("data-value");
 
-        // Opdater den aktive sorteringsfilter med den valgte værdi
+        // Opdater activeSortFilte med den valgte værdi
         activeSortFilter = value;
 
-        // Opdater teksten på dropdown-toggle knappen
-        selectedOption.textContent = e.target.textContent;
+        // Opdater teksten på dropdown cta
+        selectedOption.textContent = event.target.textContent;
 
         // Skjul dropdown-menuen
         dropdownOptions.classList.remove("show");
 
-        // Kald applyFilters for at opdatere produktvisningen
+        // applyFilters for at opdatere produkterne der vises
         applyFilters();
       }
     });
 
     // Luk dropdown-menuen hvis brugeren klikker udenfor
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", function (event) {
       // Tjek om det klikkede element er udenfor dropdown-containeren
-      if (!customDropdown.contains(e.target)) {
+      if (!customDropdown.contains(event.target)) {
         // Skjul dropdown-menuen
         dropdownOptions.classList.remove("show");
       }
@@ -311,7 +308,7 @@
     // Gå igennem alle kategoriknapper og tilføj klik-event
     categoryButtons.forEach(function (btn) {
       btn.addEventListener("click", function () {
-        // Fjern "active" class fra alle knapper, så kun én er aktiv
+        // Fjern "active" class fra alle buttons short hand b, så kun en enektl er aktiv
         categoryButtons.forEach(function (b) {
           b.classList.remove("active");
         });
@@ -319,7 +316,7 @@
         // Tilføj "active" til den klikkede knap
         btn.classList.add("active");
 
-        // Opdater den valgte kategori baseret på knap-id
+        // Opdater den valgte kategori baseret på knappens id
         activeCategoryFilter = btn.id;
 
         // Kør filterfunktionen med ny kategori
@@ -339,8 +336,10 @@
   });
 
   // Luk dropdown hvis brugeren klikker udenfor
-  document.addEventListener("click", function (e) {
-    if (!document.getElementById("price_filter_dropdown").contains(e.target)) {
+  document.addEventListener("click", function (event) {
+    if (
+      !document.getElementById("price_filter_dropdown").contains(event.target)
+    ) {
       priceFilterBox.classList.remove("show");
     }
   });

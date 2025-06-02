@@ -43,25 +43,22 @@
 </section>
 
 <script is="client">
-  // Eksisterende JavaScript forbliver uændret
-
-  // Find kurv-ikonet, kurv-menuen og lukke-knappen
   const basket = document.querySelector(".basket_icon");
   const basketMenu = document.querySelector(".cart_container");
   const basketClose = document.querySelector(".x");
 
-  // Når man klikker på kurv-ikonet, vis kurven (få den til at glide ind)
+  // Når man klikker på kurv-ikonet, vis kurven via class animation
   basket?.addEventListener("click", () => {
     basketMenu.classList.add("active");
     basketMenu.classList.remove("inactive");
   });
 
-  // Når man klikker på krydset (x), luk kurven (få den til at glide væk)
+  // når du klikker på krydset (x), luk kurven
   basketClose?.addEventListener("click", () => {
     basketMenu.classList.add("inactive");
     basketMenu.classList.remove("active");
   });
-  // Tjek om der er gemt varer i localStorage – hvis ikke, lav en tom kurv
+  // tjek om der er gemt varer i localstorage
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   // Funktion der opdaterer indholdet i visningen af kurven
@@ -71,16 +68,14 @@
     // Tøm det gamle indhold
     cartSub.innerHTML = "";
 
-    // Den samlede pris uden rabat
     let subtotal = 0;
-    // Den samlede rabat
     let discountTotal = 0;
 
     // Loop igennem hver vare i kurven
     cart.forEach((item, index) => {
       // Hent info om varen – og sørg for at quantity altid er sat til noget (default 1)
       const { img, title, title2, price, Old_price, quantity = 1 } = item;
-      // Lav prisen om til et tal (hvis det fx er en tekst)
+      // Lav prisen om til et tal hvis det fx er en tekst
       const currentPrice = parseFloat(price);
       // Samme med gammel pris – hvis den findes
       const oldPrice = Old_price ? parseFloat(Old_price) : null;
@@ -103,7 +98,7 @@
     ${title2 ? `<h6 class="product_subtitle">${title2}</h6>` : ""}
     <div>
        <div class="amount_grid">
-        <p class="p_quantity">${quantity} stk.</p>
+        <p_p class="p_quantity">${quantity} stk.</p>
               <div class="amount_grid">
         <button class="quantity-up" data-index="${index}">▲</button>
         <button class="quantity-down" data-index="${index}">▼</button>
@@ -176,24 +171,24 @@
       updateCartDisplay();
     }
 
-    // Hvis man klikker på en enkelt slet-knap
+    // klikker på enkel slet-knap
     if (event.target.classList.contains("delete-item")) {
-      // __________________________
-      // Fjern en enkelt vare baseret på dens index
+      // Fjern enkel vare baseret på dens index
       const index = parseInt(event.target.getAttribute("data-index"));
       if (!isNaN(index)) {
         cart.splice(index, 1);
         updateCartDisplay();
       }
-      // __________________________
     }
 
-    // __________________________
     // Hvis man klikker på pil OP (quantity-up)
     if (event.target.classList.contains("quantity-up")) {
       const index = parseInt(event.target.getAttribute("data-index"));
+      // Hent værdien fra data-index, og ænrer det om til et tal
       if (!isNaN(index)) {
+        // Tjek at om det ikke er NaN
         cart[index].quantity += 1;
+        // Fjern 1 vare fra kurven
         updateCartDisplay();
       }
     }
@@ -206,7 +201,6 @@
         updateCartDisplay();
       }
     }
-    // __________________________
   });
 
   // Find header-elementet så vi kan beregne hvor højt kurven skal sidde
@@ -222,7 +216,6 @@
   };
   // Når man scroller – flyt kurven op hvis man er scrollet forbi headeren
   window.addEventListener("scroll", () => {
-    // Hvor langt ned vi er scrollet
     const scrollY = window.scrollY;
     const headerHeight = header.offsetHeight;
 
@@ -236,10 +229,8 @@
     }
   });
 
-  // Når vinduet ændrer størrelse, genberegn top-position for kurven
   window.addEventListener("resize", setCartTop);
 
-  // Når siden er færdig med at loade:
   document.addEventListener("DOMContentLoaded", () => {
     updateCartDisplay();
     setCartTop();
@@ -424,6 +415,8 @@
 
   :global(.p_quantity) {
     font-weight: 300;
+    font-family: "Montserrat", sans-serif;
+    white-space: nowrap;
     opacity: 90%;
   }
   :global(.h6_Old_price) {
