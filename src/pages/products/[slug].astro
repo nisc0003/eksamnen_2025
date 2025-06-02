@@ -53,43 +53,54 @@ const showDefault = !product.soldout;
           {product.category}, {product.category2}
         </p>
       </div>
-      <div>
-        {
-          showDefault && (
-            <>
-              <p class="price">{product.price},-</p>
-            </>
-          )
-        }{
-          showSoldOut && (
-            <>
-              <p class="price">{product.price},-</p>
-              <p>{product.Old_price}</p>
-              <p>{product.discount_percentage}DKK</p>
-            </>
-          )
-        }
+      {
+        showDefault && (
+          <>
+            <div class="price_box">
+              <div>
+                <p class="price_text">Starting at</p>
+                <h6>{product.price},-</h6>
+              </div>
+              <div>
+                {product.Old_price && <p class="old_price">used to be</p>}
+                <h6 class="old_price">{product.Old_price}</h6>
+              </div>
+            </div>
+            <button
+              class="cta1 add-to-cart"
+              data-product={JSON.stringify({
+                img: product.img,
+                title: product.title,
+                title2: product.title2,
+                price: product.price,
+                Old_price: product.Old_price,
+                discount_percentage: product.discount_percentage,
+                soldout: product.soldout,
+                category: product.category,
+                category2: product.category2,
+                type: product.type,
+                path: product.path,
+              })}
+            >
+              Add to basket
+            </button>
+          </>
+        )
+      }
 
-        <button
-          class="cta1 add-to-cart"
-          data-product={JSON.stringify({
-            img: product.img,
-            title: product.title,
-            title2: product.title2,
-            price: product.price,
-            Old_price: product.Old_price,
-            discount_percentage: product.discount_percentage,
-            soldout: product.soldout,
-            category: product.category,
-            category2: product.category2,
-            type: product.type,
-            path: product.path,
-          })}
-        >
-          Add to basket
-        </button>
-      </div>
-      ) }
+      {
+        showSoldOut && (
+          <>
+            <div class="price_box">
+              <div>
+                <p class="price_text">Udsolgt</p>
+                <h6 class="sold_out_h6">{product.price}DKK</h6>
+              </div>
+            </div>
+            <button class="cta_none">Udsolgt</button>
+          </>
+        )
+      }
     </article>
   </section>
 </Layout>
